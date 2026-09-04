@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sofa Loaf — Actionscope</title>
+  <meta name="description" content="Sofa Loaf builds Actionscope, a free GitHub Action that shows where your GitHub Actions minutes go. Org pilots available.">
+  <meta name="theme-color" content="#f6efe4">
+  <link rel="canonical" href="https://sofa-loaf.github.io/28to3/">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <meta property="og:title" content="Sofa Loaf — Actionscope">
+  <meta property="og:description" content="See where your GitHub Actions minutes go. Free Action now. $49 org pilot.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sofa-loaf.github.io/28to3/">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,620;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:ital,wght@0,400;0,600;0,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="#top" aria-label="Sofa Loaf home">
+        <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+          <rect width="64" height="64" rx="16" fill="#1C1915"/>
+          <path fill="#E8A25A" d="M14 38c0-8 8-14 18-14s18 6 18 14v6H14v-6z"/>
+          <path fill="#C9843A" d="M16 36c1.5-6 8-10 16-10s14.5 4 16 10H16z"/>
+          <ellipse cx="32" cy="26" rx="11" ry="6" fill="#F3C27A"/>
+          <rect x="12" y="42" width="40" height="7" rx="3" fill="#8B5A2B"/>
+        </svg>
+        Sofa Loaf
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav id="site-nav" class="nav-links" aria-label="Primary">
+        <a href="#product">Product</a>
+        <a href="#install">Install</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#contact">Contact</a>
+        <a href="https://github.com/Sofa-Loaf/actionscope">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero wrap" id="top">
+      <div class="hero-grid">
+        <div>
+          <p class="eyebrow">Actionscope by Sofa Loaf</p>
+          <h1>See where GitHub Actions minutes go.</h1>
+          <p class="lede">The invoice is a lump sum. A 12-second job still burns a full minute. macOS can cost 10× Linux. Actionscope writes a per-run Job Summary before anyone leaves the workflow.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#install">Install the free Action</a>
+            <a class="button button-ghost" href="https://github.com/Sofa-Loaf/actionscope/releases/latest">Latest release</a>
+          </div>
+          <p class="fine-print">Public product site for Sofa Loaf. No login. Pin <code>Sofa-Loaf/actionscope@v0.1.0</code>.</p>
+        </div>
+        <aside class="summary-card" aria-label="Example Job Summary">
+          <div class="summary-top">
+            <div>
+              <p class="summary-kicker">Job Summary</p>
+              <p class="summary-total">14 quota minutes</p>
+            </div>
+            <div class="os-pills" aria-hidden="true">
+              <span class="pill">Linux 1×</span>
+              <span class="pill">Windows 2×</span>
+              <span class="pill">macOS 10×</span>
+            </div>
+          </div>
+          <div class="job-row">
+            <div class="job-name">lint</div>
+            <div class="job-meta">ubuntu · 12s</div>
+            <div class="job-cost">ceil 1 min × 1 = <strong>1</strong></div>
+          </div>
+          <div class="job-row">
+            <div class="job-name">test</div>
+            <div class="job-meta">windows · 1m 4s</div>
+            <div class="job-cost">ceil 2 min × 2 = <strong>4</strong></div>
+          </div>
+          <div class="job-row macos">
+            <div class="job-name">build</div>
+            <div class="job-meta">macos · 48s</div>
+            <div class="job-cost">ceil 1 min × 10 = <strong>10</strong></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="product">
+      <div class="wrap">
+        <p class="eyebrow">The problem</p>
+        <h2>Actions spend is easy to run up and hard to explain.</h2>
+        <p class="section-lede">Teams find out after finance asks, or after a workflow quietly eats the plan’s included minutes. There is no built-in “which job did this?” view at the moment a run finishes.</p>
+        <div class="stats">
+          <div class="stat">
+            <strong>1 min</strong>
+            <span>Minimum charge, even for a 12-second job</span>
+          </div>
+          <div class="stat">
+            <strong>2×</strong>
+            <span>Windows multiplier vs Linux included minutes</span>
+          </div>
+          <div class="stat">
+            <strong>10×</strong>
+            <span>macOS multiplier vs Linux included minutes</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <p class="eyebrow">Who it’s for</p>
+        <h2>Engineering teams already burning Actions dollars.</h2>
+        <div class="problem-grid">
+          <article class="card">
+            <h3>Private repos, real CI</h3>
+            <p>Startups and mid-size companies with Windows + macOS jobs, retries, and a surprise quota reset. Not a dedicated FinOps team watching the billing dashboard.</p>
+          </article>
+          <article class="card">
+            <h3>Free Action, this run</h3>
+            <p>Add one step. Actionscope estimates quota-equivalent minutes for the current workflow and writes a Job Summary. No extra auth beyond <code>GITHUB_TOKEN</code>.</p>
+          </article>
+          <article class="card">
+            <h3>Paid App, later</h3>
+            <p>History, “this workflow costs X / month”, budgets, and org roll-up ship as a GitHub App. That is the commercial product — not a paid Marketplace Action.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="install">
+      <div class="wrap">
+        <p class="eyebrow">Install</p>
+        <h2>One step. Free forever as an Action.</h2>
+        <p class="section-lede">Add it as a last step so other jobs have finished, or accept a partial estimate for jobs still running.</p>
+        <div class="card install-box">
+          <div class="install-head">
+            <p>Copy into your workflow</p>
+            <button class="copy-btn" type="button" data-copy>Copy</button>
+          </div>
+          <pre><code data-snippet>- name: Actionscope
+  uses: Sofa-Loaf/actionscope@v0.1.0</code></pre>
+        </div>
+        <div class="cta-row" style="margin-top: 1.2rem;">
+          <a class="button button-primary" href="https://github.com/Sofa-Loaf/actionscope">View the repository</a>
+          <a class="button button-ghost" href="https://github.com/Sofa-Loaf/actionscope/releases/latest">v0.1.0 release notes</a>
+        </div>
+        <div class="steps" style="margin-top: 1.6rem;">
+          <article class="step">
+            <span class="step-num">1</span>
+            <h3>Pin the Action</h3>
+            <p>Use <code>Sofa-Loaf/actionscope@v0.1.0</code>. The nested path <code>actionscope/action@v0.1.0</code> still works if you already pinned it.</p>
+          </article>
+          <article class="step">
+            <span class="step-num">2</span>
+            <h3>Let it read jobs</h3>
+            <p>The default token is enough. If permissions are locked down, grant <code>actions: read</code> so the Jobs API can be called.</p>
+          </article>
+          <article class="step">
+            <span class="step-num">3</span>
+            <h3>Read the summary</h3>
+            <p>Each job is rounded up to the next whole minute, then multiplied by OS: Linux 1×, Windows 2×, macOS 10×.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="pricing">
+      <div class="wrap">
+        <p class="eyebrow">Pricing</p>
+        <h2>The Action is free. Revenue is the App and pilots.</h2>
+        <p class="section-lede">GitHub does not allow paid Actions Marketplace listings. Checkout for the org pilot is a Stripe placeholder until a live Payment Link exists.</p>
+        <div class="pricing-grid">
+          <article class="price-card">
+            <span class="badge">Available</span>
+            <h3>Action</h3>
+            <p class="price">$0</p>
+            <ul>
+              <li>Per-run Job Summary</li>
+              <li>Quota-equivalent minutes by job and OS</li>
+              <li>Pin <code>@v0.1.0</code></li>
+            </ul>
+            <a class="button button-ghost" href="#install">Install</a>
+          </article>
+          <article class="price-card featured">
+            <span class="badge">Pilot</span>
+            <h3>Org pilot</h3>
+            <p class="price">$49</p>
+            <ul>
+              <li>One engineering or FinOps buyer</li>
+              <li>Hands-on org attribution before the App is generally available</li>
+              <li>Stripe checkout placeholder</li>
+            </ul>
+            <a class="button button-primary" href="https://buy.stripe.com/test_placeholder_actionscope_org_pilot">Start org pilot</a>
+          </article>
+          <article class="price-card">
+            <span class="badge">Later</span>
+            <h3>Seat</h3>
+            <p class="price">$19</p>
+            <ul>
+              <li>Per seat, with the GitHub App</li>
+              <li>History, trends, and budget alerts</li>
+              <li>Not sold through the Action</li>
+            </ul>
+            <a class="button button-ghost" href="#contact">Ask about seats</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="contact">
+      <div class="wrap">
+        <p class="eyebrow">Company</p>
+        <h2>Sofa Loaf</h2>
+        <p class="section-lede">Sofa Loaf is the business behind Actionscope. This public site is the company homepage for billing, support, and Stripe.</p>
+        <div class="contact-panel">
+          <article class="card">
+            <h3>Support</h3>
+            <p>Email <a href="mailto:hello@sofaloaf.com">hello@sofaloaf.com</a> — placeholder address for John to replace with the live inbox.</p>
+          </article>
+          <article class="card">
+            <h3>Source</h3>
+            <p>Open source Action on GitHub: <a href="https://github.com/Sofa-Loaf/actionscope">Sofa-Loaf/actionscope</a>. Latest release: <a href="https://github.com/Sofa-Loaf/actionscope/releases/latest">v0.1.0</a>.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-row">
+      <p>© 2026 Sofa Loaf. Actionscope is a product of Sofa Loaf.</p>
+      <div class="footer-links">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="https://github.com/Sofa-Loaf/actionscope">GitHub</a>
+        <a href="mailto:hello@sofaloaf.com">hello@sofaloaf.com</a>
+      </div>
+    </div>
+  </footer>
+  <script src="site.js"></script>
+</body>
+</html>
