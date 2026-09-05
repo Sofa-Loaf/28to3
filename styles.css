@@ -773,6 +773,10 @@ h3 {
   grid-template-columns: repeat(3, 1fr);
 }
 
+.product-grid-4 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
 .app-grid {
   grid-template-columns: repeat(2, minmax(16rem, 1fr));
 }
@@ -937,6 +941,10 @@ h3 {
 
 .contact-panel-4 {
   grid-template-columns: repeat(4, 1fr);
+}
+
+.contact-panel-5 {
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .about-origin {
@@ -1265,6 +1273,7 @@ pre {
   .hero-grid,
   .product-grid,
   .product-grid-3,
+  .product-grid-4,
   .problem-grid,
   .steps,
   .pricing-grid,
@@ -1276,6 +1285,7 @@ pre {
   .contact-panel,
   .contact-panel-3,
   .contact-panel-4,
+  .contact-panel-5,
   .convert-grid,
   .calc-layout,
   .app-grid {
@@ -1448,6 +1458,109 @@ pre {
 
 .canvas-foot {
   padding: 0.45rem 0 0.75rem;
+}
+
+.afterglow-page {
+  background:
+    radial-gradient(1100px 480px at 8% -8%, rgba(196, 92, 38, 0.1), transparent 55%),
+    radial-gradient(800px 380px at 100% 0%, rgba(47, 107, 79, 0.08), transparent 48%),
+    var(--paper);
+}
+
+.recorder {
+  background: #1c1915;
+  color: #f6efe4;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  padding: 1.2rem 1.25rem 1.3rem;
+}
+
+.recorder-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.recorder-top .summary-kicker {
+  color: #d8cbb8;
+}
+
+.recorder-led {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0;
+  color: #e8a25a;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.recorder-led span {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: #c45c26;
+  box-shadow: 0 0 0 3px rgba(196, 92, 38, 0.22);
+}
+
+.recorder-label {
+  margin: 1.15rem 0 1rem;
+  font-family: var(--serif);
+  font-size: 1.45rem;
+  letter-spacing: -0.03em;
+}
+
+.recorder-tracks {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.recorder-tracks li {
+  display: grid;
+  grid-template-columns: 6.2rem 1fr;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.55rem 0;
+  border-top: 1px solid #3a342c;
+}
+
+.track-name {
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #d8cbb8;
+}
+
+.track-meter {
+  display: flex;
+  gap: 0.28rem;
+}
+
+.track-meter i {
+  display: block;
+  height: 0.55rem;
+  flex: 1;
+  border-radius: 2px;
+  background: #e8a25a;
+}
+
+.track-meter i.is-dim {
+  background: #3a342c;
+}
+
+.recorder-stamps {
+  margin: 1.1rem 0 0;
+  color: #d8cbb8;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 @media (prefers-reduced-motion: reduce) {
