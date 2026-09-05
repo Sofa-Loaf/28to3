@@ -281,6 +281,22 @@ h3 {
   border-color: var(--ink);
 }
 
+.button:disabled,
+.button[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.48;
+  transform: none;
+  background: var(--ink);
+  color: var(--paper-2);
+}
+
+.button:disabled:hover,
+.button[aria-disabled="true"]:hover {
+  transform: none;
+  background: var(--ink);
+  color: var(--paper-2);
+}
+
 .fine-print {
   margin: 0;
   color: var(--muted);
@@ -758,7 +774,7 @@ h3 {
 }
 
 .app-grid {
-  grid-template-columns: repeat(3, minmax(16rem, 1fr));
+  grid-template-columns: repeat(2, minmax(16rem, 1fr));
 }
 
 .product-card {
