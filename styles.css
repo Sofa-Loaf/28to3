@@ -290,6 +290,7 @@ h3 {
 .card,
 .summary-card,
 .price-card,
+.product-card,
 .step,
 .stat {
   background: var(--paper-2);
@@ -739,11 +740,118 @@ h3 {
   color: var(--muted);
 }
 
+.product-grid,
 .problem-grid,
 .steps,
 .pricing-grid {
   display: grid;
   gap: 1rem;
+}
+
+.product-grid {
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+}
+
+.product-card {
+  padding: 1.3rem 1.25rem 1.4rem;
+}
+
+.product-card.featured,
+.price-card.featured {
+  border-color: #d8b48a;
+  background:
+    linear-gradient(180deg, #fff7ea, #fffaf2);
+}
+
+.product-tag {
+  margin: -0.15rem 0 0.75rem;
+  color: var(--copper-deep);
+  font-weight: 650;
+}
+
+.product-card p {
+  color: var(--ink-soft);
+}
+
+.product-card ul,
+.soph-price-grid .price-card ul {
+  margin: 0 0 1.2rem;
+  padding-left: 1.1rem;
+  color: var(--ink-soft);
+}
+
+.product-card li + li {
+  margin-top: 0.35rem;
+}
+
+.soph-desk {
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.soph-desk-bar {
+  padding: 1.1rem 1.2rem;
+  background: var(--ink);
+  color: var(--paper-2);
+}
+
+.soph-desk-bar .summary-kicker {
+  color: #d8cbb8;
+}
+
+.soph-desk-bar .gh-workflow {
+  margin: 0.15rem 0 0;
+}
+
+.soph-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  padding: 1rem 1.15rem 0.2rem;
+}
+
+.soph-tool {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0.7rem 1.15rem;
+  border-radius: 14px;
+  background: #f3e7d4;
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.soph-tool.is-on {
+  background: var(--ink);
+  color: var(--paper-2);
+}
+
+.soph-page {
+  padding: 1rem 1.2rem 1.3rem;
+}
+
+.soph-page-title {
+  margin: 0 0 0.45rem;
+  font-family: var(--serif);
+  font-size: 1.25rem;
+}
+
+.soph-page p {
+  color: var(--ink-soft);
+}
+
+.soph-price-grid {
+  grid-template-columns: 1.1fr 0.9fr;
+}
+
+.contact-panel-3 {
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
 .problem-grid {
@@ -910,13 +1018,16 @@ pre {
 
 @media (max-width: 900px) {
   .hero-grid,
+  .product-grid,
   .problem-grid,
   .steps,
   .pricing-grid,
+  .soph-price-grid,
   .stats,
   .stats-4,
   .dossier,
   .contact-panel,
+  .contact-panel-3,
   .convert-grid {
     grid-template-columns: 1fr;
   }
