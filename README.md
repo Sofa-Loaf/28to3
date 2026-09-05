@@ -39,6 +39,7 @@ GitHub Pages is deployed from `main` by [`.github/workflows/pages.yml`](.github/
 | --- | --- |
 | Home | `index.html` |
 | Job Summary demo | `demo.html` |
+| Minutes calculator | `apps/minutes-calculator.html` |
 | Sample Minute Teardown | `teardown-sample.html` |
 | SophPDF Debloat | `sophpdf.html` |
 | Soph Explorer Debloat | `soph-explorer.html` |
