@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Live demo canvas — 28to3.me</title>
+  <meta name="description" content="Blank stage for live 28to3.me client meetings. Not a product.">
+  <meta name="theme-color" content="#f6efe4">
+  <link rel="canonical" href="https://sofa-loaf.github.io/28to3/apps/canvas.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <meta property="og:title" content="Live demo canvas — 28to3.me">
+  <meta property="og:description" content="Ask for it. Watch it land. Blank scratch stage for live client meetings. Not a product.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sofa-loaf.github.io/28to3/apps/canvas.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,620&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:ital,wght@0,400;0,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body class="canvas-page">
+  <a class="skip-link" href="#canvas">Skip to canvas</a>
+  <header class="canvas-bar">
+    <p class="canvas-brand"><a href="../index.html">28to3.me</a> · Live demo canvas</p>
+    <p class="canvas-line">Ask for it. Watch it land.</p>
+    <p class="canvas-stamp">Last updated <time id="last-updated" datetime="2026-09-05T16:00:00Z">2026-09-05</time></p>
+  </header>
+
+  <main id="main" class="canvas-main">
+    <!--
+      LIVE CLIENT MEETING STAGE
+      Open this page on a shared screen. Ask “what do you want?”
+      Drop a small web app into #canvas. Deploy via GitHub Pages.
+      Do not ship finished-looking widgets here. Blank is the feature.
+    -->
+    <div id="canvas" class="demo-stage" data-demo-root>
+      <!-- mount client demo here -->
+    </div>
+  </main>
+
+  <footer class="canvas-foot">
+    <p>Not a product. Scratch stage for meetings.</p>
+  </footer>
+
+  <script>
+    (function () {
+      var canvas = document.getElementById("canvas");
+      if (!canvas) return;
+
+      // mount client demo here
+    })();
+  </script>
+</body>
+</html>

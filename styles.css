@@ -758,7 +758,7 @@ h3 {
 }
 
 .app-grid {
-  grid-template-columns: minmax(16rem, 22rem);
+  grid-template-columns: repeat(2, minmax(16rem, 1fr));
 }
 
 .product-card {
@@ -1261,7 +1261,8 @@ pre {
   .contact-panel-3,
   .contact-panel-4,
   .convert-grid,
-  .calc-layout {
+  .calc-layout,
+  .app-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1330,6 +1331,82 @@ pre {
     grid-template-columns: 1fr;
     gap: 0.2rem;
   }
+}
+
+.canvas-page {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+}
+
+.canvas-bar,
+.canvas-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 1.1rem;
+  width: min(var(--max), calc(100% - 2rem));
+  margin-inline: auto;
+}
+
+.canvas-bar {
+  padding: 0.85rem 0 0.7rem;
+}
+
+.canvas-brand,
+.canvas-line,
+.canvas-stamp,
+.canvas-foot p {
+  margin: 0;
+}
+
+.canvas-brand {
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.canvas-brand a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.canvas-brand a:hover {
+  color: var(--copper);
+}
+
+.canvas-line {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+}
+
+.canvas-stamp,
+.canvas-foot {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-family: var(--mono);
+}
+
+.canvas-main {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+  padding: 0 1rem 0.6rem;
+}
+
+.demo-stage {
+  flex: 1;
+  min-height: calc(100vh - 7.5rem);
+  min-height: calc(100dvh - 7.5rem);
+  width: 100%;
+  border: 1px dashed #d8cbb8;
+  border-radius: 18px;
+  background: var(--paper-2);
+}
+
+.canvas-foot {
+  padding: 0.45rem 0 0.75rem;
 }
 
 @media (prefers-reduced-motion: reduce) {
