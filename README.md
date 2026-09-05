@@ -1,10 +1,14 @@
-# Sofa Loaf — Actionscope site
+# 28to3.me — Actionscope site
 
-Public landing page for **Sofa Loaf** and **Actionscope**. This repository is the company website Stripe can match to the business name.
+Public landing page for **28to3.me**, the seller of **Actionscope**. Stripe should match the business / seller name **28to3.me** (not Sofa Loaf).
 
-- Product: [Actionscope](https://github.com/Sofa-Loaf/actionscope) — see where GitHub Actions minutes go
-- Install: `uses: Sofa-Loaf/actionscope@v0.1.0`
+**28to3.me sells Actionscope — GitHub Actions minute visibility.**
+
+- Product: [Actionscope](https://github.com/Sofa-Loaf/actionscope)
+- Install (GitHub org only): `uses: Sofa-Loaf/actionscope@v0.1.0`
 - Latest release: https://github.com/Sofa-Loaf/actionscope/releases/latest
+
+The GitHub org **Sofa-Loaf** appears only in repository URLs and the Action install snippet.
 
 ## URLs
 
@@ -19,9 +23,9 @@ GitHub Pages is deployed from `main` by [`.github/workflows/pages.yml`](.github/
 
 If the first workflow run needs Pages enabled in the UI: **Settings → Pages → Source: GitHub Actions**.
 
-## Placeholders for John
+## Placeholders
 
-- Support email on the site: `hello@sofaloaf.com`
+- Support email on the site: `hello@28to3.me`
 - Org pilot checkout: `https://buy.stripe.com/test_placeholder_actionscope_org_pilot`
 
 ## Local preview
