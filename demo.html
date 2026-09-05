@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Job Summary demo — 28to3.me / Actionscope</title>
+  <meta name="description" content="Static demo of the Actionscope GitHub Actions Job Summary. 28to3.me sells the $49 org pilot.">
+  <meta name="theme-color" content="#f6efe4">
+  <link rel="canonical" href="https://sofa-loaf.github.io/28to3/demo.html">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <meta property="og:title" content="Job Summary demo — 28to3.me / Actionscope">
+  <meta property="og:description" content="See the Actionscope Job Summary mock, then get the $49 org pilot from 28to3.me.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sofa-loaf.github.io/28to3/demo.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,620;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:ital,wght@0,400;0,600;0,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="index.html" aria-label="28to3.me home">
+        <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+          <rect width="64" height="64" rx="16" fill="#1C1915"/>
+          <text x="32" y="41" text-anchor="middle" font-family="Georgia, serif" font-size="22" font-weight="700" fill="#F6EFE4">28</text>
+        </svg>
+        28to3.me
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav id="site-nav" class="nav-links" aria-label="Primary">
+        <a href="index.html#product">Product</a>
+        <a href="demo.html" aria-current="page">Demo</a>
+        <a href="index.html#install">Install</a>
+        <a href="index.html#pricing">Pricing</a>
+        <a href="index.html#contact">Contact</a>
+        <a href="https://github.com/Sofa-Loaf/actionscope">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero wrap" id="top">
+      <p class="eyebrow">Static Job Summary demo</p>
+      <h1>This is what Actionscope writes into the run.</h1>
+      <p class="lede">A realistic mock of the GitHub Actions Job Summary — This run, Jobs, and how the estimate is calculated. The Action is free. 28to3.me sells the $49 org pilot.</p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="https://buy.stripe.com/8x2dRa7woa65dOA6uz0co00">Get org pilot — $49</a>
+        <a class="button button-ghost" href="#summary-mock">Jump to the mock</a>
+      </div>
+      <p class="fine-print">Sample CI data, not a live workflow. Pin <code>Sofa-Loaf/actionscope@v0.1.2</code>.</p>
+    </section>
+
+    <section class="section section-alt" id="summary-mock" aria-labelledby="summary-mock-heading">
+      <div class="wrap">
+        <p class="eyebrow">GitHub Actions · Job Summary</p>
+        <h2 id="summary-mock-heading">Actionscope on a mixed-OS CI run.</h2>
+        <p class="section-lede">Same estimate rules as the Action: each job ceils to a whole minute, then Linux 1×, Windows 2×, macOS 10×. The 48-second macOS job is 10 quota minutes.</p>
+
+        <figure class="gh-run" aria-label="Mock GitHub Actions Job Summary">
+          <figcaption class="gh-run-chrome">
+            <div class="gh-run-title">
+              <span class="gh-check" aria-hidden="true">✓</span>
+              <div>
+                <p class="gh-workflow">CI <span class="gh-run-id">#1842</span></p>
+                <p class="gh-repo">acme/checkout-api · Job summary</p>
+              </div>
+            </div>
+            <div class="os-pills" aria-hidden="true">
+              <span class="pill">Linux 1×</span>
+              <span class="pill">Windows 2×</span>
+              <span class="pill">macOS 10×</span>
+            </div>
+          </figcaption>
+
+          <article class="gh-summary">
+            <header class="gh-summary-head">
+              <p class="summary-kicker">Actionscope</p>
+              <p class="summary-total">~14 quota minutes</p>
+              <p>Estimated <strong>quota-equivalent minutes</strong> for this workflow run. This is a lens on where included minutes go — <strong>not an invoice</strong>.</p>
+            </header>
+
+            <h3>This run</h3>
+            <div class="table-scroll">
+              <table class="meta-table">
+                <tbody>
+                  <tr>
+                    <th scope="row">Workflow</th>
+                    <td>CI</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Run</th>
+                    <td>#1842</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Jobs included</th>
+                    <td>3</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Combined wall-clock</th>
+                    <td>2m 4s</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Estimated minutes</th>
+                    <td><strong>~14</strong></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>Jobs</h3>
+            <div class="table-scroll">
+              <table class="jobs-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Job</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Duration</th>
+                    <th scope="col">Runner</th>
+                    <th scope="col">Multiplier</th>
+                    <th scope="col">Est. minutes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">lint</th>
+                    <td><span class="status status-success">success</span></td>
+                    <td>12s</td>
+                    <td>linux</td>
+                    <td>1×</td>
+                    <td>1</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">test</th>
+                    <td><span class="status status-success">success</span></td>
+                    <td>1m 4s</td>
+                    <td>windows</td>
+                    <td>2×</td>
+                    <td>4</td>
+                  </tr>
+                  <tr class="macos">
+                    <th scope="row">build</th>
+                    <td><span class="status status-success">success</span></td>
+                    <td>48s</td>
+                    <td>macos</td>
+                    <td>10×</td>
+                    <td><strong>10</strong></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="runner-hint">Minutes by runner: 10 min on macos, 4 min on windows, 1 min on linux.</p>
+
+            <h3>How this estimate is calculated</h3>
+            <ol class="estimate-steps">
+              <li>Each job’s wall-clock time is rounded <strong>up to the next whole minute</strong> (a 12-second job counts as 1).</li>
+              <li>That minute count is multiplied by the runner OS used for included-minute quota: Linux <strong>1×</strong>, Windows <strong>2×</strong>, macOS <strong>10×</strong>.</li>
+              <li>Jobs that never started contribute <strong>0</strong>. Jobs still running use a <strong>partial</strong> duration through now.</li>
+            </ol>
+            <p>Public repositories and typical self-hosted runners are often not billed the same way. Larger runners, custom SKUs, and storage are out of scope.</p>
+
+            <footer class="gh-summary-foot">
+              <p>Invite an org pilot from <strong>28to3.me</strong> — the seller of Actionscope.</p>
+              <a class="button button-primary" href="https://buy.stripe.com/8x2dRa7woa65dOA6uz0co00">Get org pilot — $49</a>
+            </footer>
+          </article>
+        </figure>
+        <p class="fine-print mock-note">Static mock for 28to3.me. Numbers match the homepage example: lint 12s on Linux, test 1m 4s on Windows, build 48s on macOS.</p>
+      </div>
+    </section>
+
+    <section class="section" id="pilot" aria-labelledby="pilot-heading">
+      <div class="wrap convert-grid">
+        <div>
+          <p class="eyebrow">Org pilot from 28to3.me</p>
+          <h2 id="pilot-heading">A $49 path from this run to org attribution.</h2>
+          <p class="section-lede">The free Action stops at this Job Summary. The org pilot is for one GitHub organization — which workflows burned the minutes — before $19 App seats.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="https://buy.stripe.com/8x2dRa7woa65dOA6uz0co00">Get org pilot — $49</a>
+            <a class="button button-ghost" href="index.html#install">Install free Action</a>
+          </div>
+        </div>
+        <section class="pilot-gets" aria-labelledby="demo-pilot-gets-heading">
+          <h2 id="demo-pilot-gets-heading">What you get in the pilot</h2>
+          <ul>
+            <li>Org attribution for one GitHub organization — which workflows burned the minutes.</li>
+            <li>Minutes visibility on this run: quota-equivalent minutes by job and OS.</li>
+            <li>A path to $19 App seats when history, budgets, and org roll-up ship.</li>
+          </ul>
+        </section>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="install">
+      <div class="wrap">
+        <p class="eyebrow">Install</p>
+        <h2>Pin the free Action, then read the summary.</h2>
+        <p class="section-lede">Add it as a last step so other jobs have finished, or accept a partial estimate for jobs still running.</p>
+        <div class="card install-box">
+          <div class="install-head">
+            <p>Copy into your workflow</p>
+            <button class="copy-btn" type="button" data-copy>Copy</button>
+          </div>
+          <pre><code data-snippet>- name: Actionscope
+  uses: Sofa-Loaf/actionscope@v0.1.2</code></pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-row">
+      <p>© 2026 28to3.me. 28to3.me sells Actionscope.</p>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="demo.html" aria-current="page">Demo</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="https://github.com/Sofa-Loaf/actionscope">GitHub</a>
+        <a href="mailto:hello@28to3.me">hello@28to3.me</a>
+      </div>
+    </div>
+  </footer>
+  <script src="site.js"></script>
+</body>
+</html>

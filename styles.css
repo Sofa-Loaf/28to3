@@ -128,6 +128,11 @@ a:hover {
   color: var(--ink);
 }
 
+.nav-links a[aria-current="page"] {
+  color: var(--ink);
+  font-weight: 650;
+}
+
 .nav-toggle {
   display: none;
   border: 0;
@@ -345,6 +350,200 @@ h3 {
   color: var(--copper-deep);
 }
 
+.summary-card-link {
+  margin-top: 0.85rem;
+}
+
+.convert-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.convert-grid .pilot-gets {
+  max-width: none;
+}
+
+.gh-run {
+  margin: 0;
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.gh-run-chrome {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem 1.2rem;
+  background: var(--ink);
+  color: var(--paper-2);
+}
+
+.gh-run-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.gh-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--forest);
+  color: #e7f2ea;
+  font-weight: 700;
+}
+
+.gh-workflow,
+.gh-repo {
+  margin: 0;
+}
+
+.gh-workflow {
+  font-family: var(--serif);
+  font-size: 1.25rem;
+}
+
+.gh-run-id {
+  color: #e8a25a;
+  font-family: var(--mono);
+  font-size: 0.95rem;
+}
+
+.gh-repo {
+  color: #d8cbb8;
+  font-size: 0.92rem;
+}
+
+.gh-run-chrome .pill {
+  background: #2a241d;
+  color: #f6efe4;
+}
+
+.gh-summary {
+  padding: 1.3rem 1.25rem 1.4rem;
+}
+
+.gh-summary-head {
+  margin-bottom: 1.4rem;
+}
+
+.gh-summary-head p:last-child {
+  margin: 0.7rem 0 0;
+  color: var(--ink-soft);
+  max-width: 40rem;
+}
+
+.gh-summary h3 {
+  margin: 1.5rem 0 0.7rem;
+}
+
+.table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.meta-table,
+.jobs-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.98rem;
+}
+
+.meta-table th,
+.meta-table td,
+.jobs-table th,
+.jobs-table td {
+  padding: 0.65rem 0.75rem;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.meta-table th {
+  width: 12rem;
+  color: var(--muted);
+  font-weight: 650;
+}
+
+.jobs-table thead th {
+  color: var(--muted);
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: #f3e7d4;
+}
+
+.jobs-table tbody th {
+  font-weight: 650;
+}
+
+.jobs-table td:last-child,
+.jobs-table th:last-child {
+  text-align: right;
+}
+
+.status {
+  display: inline-block;
+  padding: 0.12rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.status-success {
+  background: var(--forest-soft);
+  color: var(--forest);
+}
+
+.jobs-table tr.macos td:last-child,
+.jobs-table tr.macos th {
+  color: var(--copper-deep);
+}
+
+.runner-hint,
+.estimate-steps {
+  color: var(--ink-soft);
+}
+
+.estimate-steps {
+  margin: 0 0 1rem;
+  padding-left: 1.2rem;
+}
+
+.estimate-steps li + li {
+  margin-top: 0.45rem;
+}
+
+.gh-summary-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.85rem;
+  margin-top: 1.5rem;
+  padding-top: 1.15rem;
+  border-top: 1px solid var(--line);
+}
+
+.gh-summary-foot p {
+  margin: 0;
+  color: var(--ink-soft);
+  max-width: 28rem;
+}
+
+.mock-note {
+  margin-top: 1rem;
+}
+
 .section {
   padding: 4rem 0;
 }
@@ -550,8 +749,22 @@ pre {
   .steps,
   .pricing-grid,
   .stats,
-  .contact-panel {
+  .contact-panel,
+  .convert-grid {
     grid-template-columns: 1fr;
+  }
+
+  .gh-run-chrome {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .meta-table th {
+    width: auto;
+  }
+
+  .jobs-table {
+    min-width: 36rem;
   }
 
   .hero {
