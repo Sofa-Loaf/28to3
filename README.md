@@ -5,7 +5,7 @@ Public landing page for **28to3.me**, the seller of **Actionscope**. Stripe shou
 **28to3.me sells Actionscope — GitHub Actions minute visibility.**
 
 - Product: [Actionscope](https://github.com/Sofa-Loaf/actionscope)
-- Install (GitHub org only): `uses: Sofa-Loaf/actionscope@v0.1.1`
+- Install (GitHub org only): `uses: Sofa-Loaf/actionscope@v0.1.2`
 - Latest release: https://github.com/Sofa-Loaf/actionscope/releases/latest
 
 The GitHub org **Sofa-Loaf** appears only in repository URLs and the Action install snippet.
