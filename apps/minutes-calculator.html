@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Minutes calculator — 28to3.me</title>
+  <meta name="description" content="Client-side GitHub Actions minutes calculator. Wall time to rounded minutes, included-minute burn, and list-price $. Estimates, not an invoice. Sold by 28to3.me.">
+  <meta name="theme-color" content="#f6efe4">
+  <link rel="canonical" href="https://sofa-loaf.github.io/28to3/apps/minutes-calculator.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <meta property="og:title" content="Minutes calculator — 28to3.me">
+  <meta property="og:description" content="A 12-second job still burns 1 rounded minute. Linux 1×, Windows 2×, macOS 10×. Estimates at GitHub list price — not an invoice.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sofa-loaf.github.io/28to3/apps/minutes-calculator.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,620;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:ital,wght@0,400;0,600;0,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="../index.html" aria-label="28to3.me home">
+        <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+          <rect width="64" height="64" rx="16" fill="#1C1915"/>
+          <text x="32" y="41" text-anchor="middle" font-family="Georgia, serif" font-size="22" font-weight="700" fill="#F6EFE4">28</text>
+        </svg>
+        28to3.me
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav id="site-nav" class="nav-links" aria-label="Primary">
+        <a href="../index.html#products">Products</a>
+        <a href="../demo.html">Demo</a>
+        <a href="../teardown-sample.html">Teardown</a>
+        <a href="../index.html#apps" aria-current="page">Web Apps</a>
+        <a href="../index.html#install">Install</a>
+        <a href="../index.html#pricing">Pricing</a>
+        <a href="../sophpdf.html">SophPDF</a>
+        <a href="../soph-explorer.html">Explorer</a>
+        <a href="../about.html">About</a>
+        <a href="../index.html#contact">Contact</a>
+        <a href="https://github.com/Sofa-Loaf/actionscope">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero wrap" id="top">
+      <p class="eyebrow">Web Apps · 28to3.me</p>
+      <h1>Minutes calculator</h1>
+      <p class="lede">One job. Wall duration + OS. GitHub rounds each started job <strong>up to the next whole minute</strong>. A <strong>12-second job still burns 1 rounded minute</strong>.</p>
+      <p class="fine-print">Client-side only. Same list prices as Actionscope v0.1.3 and the site demo. <strong>Estimates, not an invoice.</strong></p>
+    </section>
+
+    <section class="section section-alt" id="calculator" aria-labelledby="calculator-heading">
+      <div class="wrap calc-layout">
+        <form class="card calc-form" id="minutes-form" novalidate>
+          <h2 id="calculator-heading">Inputs</h2>
+          <p class="section-lede">Seconds (<code>12</code>) or <code>mm:ss</code> (<code>1:04</code>). Standard hosted runners.</p>
+
+          <div class="calc-field">
+            <label for="wall">Wall duration</label>
+            <input id="wall" name="wall" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="12" placeholder="12 or 1:04" aria-describedby="wall-hint">
+            <p class="field-hint" id="wall-hint">Examples: <code>12</code>, <code>90</code>, <code>0:12</code>, <code>1:04</code>.</p>
+          </div>
+
+          <fieldset class="calc-field">
+            <legend>OS / runner</legend>
+            <div class="os-options" role="radiogroup" aria-label="OS / runner">
+              <label class="os-option">
+                <input type="radio" name="os" value="linux" checked>
+                <span>Linux <code>1×</code></span>
+              </label>
+              <label class="os-option">
+                <input type="radio" name="os" value="windows">
+                <span>Windows <code>2×</code></span>
+              </label>
+              <label class="os-option">
+                <input type="radio" name="os" value="macos">
+                <span>macOS <code>10×</code></span>
+              </label>
+            </div>
+            <p class="field-hint">Larger runners cannot use included minutes and use different SKUs. This page prices standard <code>actions_linux</code> / <code>actions_windows</code> / <code>actions_macos</code> only.</p>
+          </fieldset>
+        </form>
+
+        <div class="card calc-out" id="calc-out" aria-live="polite">
+          <p class="summary-kicker">Estimate</p>
+          <p class="summary-total" id="out-dollars">$0.0060</p>
+          <p class="summary-sub" id="out-sub">1 rounded min · 1 included min · Linux 1×</p>
+          <p class="calc-quirk" id="out-quirk"><strong>Quirk:</strong> 12s wall still bills <strong>1</strong> rounded minute.</p>
+          <dl class="calc-dl">
+            <div>
+              <dt>Wall</dt>
+              <dd id="out-wall">12s</dd>
+            </div>
+            <div>
+              <dt>Rounded billed minutes</dt>
+              <dd id="out-rounded">1</dd>
+            </div>
+            <div>
+              <dt>Included-minute burn</dt>
+              <dd id="out-included">1 <span class="muted">(Linux 1×)</span></dd>
+            </div>
+            <div>
+              <dt>Est. $ (list)</dt>
+              <dd id="out-rate">1 × $0.0060 = <strong>$0.0060</strong></dd>
+            </div>
+            <div>
+              <dt>SKU</dt>
+              <dd id="out-sku"><code>actions_linux</code></dd>
+            </div>
+          </dl>
+          <p class="runner-hint" id="out-rates">List prices used (2026-09-05, <a href="https://docs.github.com/en/billing/reference/actions-runner-pricing">GitHub runner pricing</a>): <code>actions_linux</code> $0.0060/min, <code>actions_windows</code> $0.0100/min, <code>actions_macos</code> $0.0620/min. Included-minute multipliers: Linux 1×, Windows 2×, macOS 10×.</p>
+          <p class="fine-print"><strong>Estimates, not an invoice.</strong> Public repos, self-hosted runners, and larger-runner SKUs are out of scope.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="pin" aria-labelledby="pin-heading">
+      <div class="wrap">
+        <p class="eyebrow">Free Action</p>
+        <h2 id="pin-heading">Pin Actionscope, then book the artifact if you need names.</h2>
+        <p class="section-lede">This page is a one-job estimate. The Action writes the same columns on a real run. $49 on Stripe is a booking fee for a <a href="../teardown-sample.html">Minute Teardown</a> — not a software seat.</p>
+        <div class="card install-box">
+          <div class="install-head">
+            <p>Pin the free Action</p>
+            <button class="copy-btn" type="button" data-copy>Copy</button>
+          </div>
+          <pre><code data-snippet>- name: Actionscope
+  uses: Sofa-Loaf/actionscope@v0.1.3</code></pre>
+        </div>
+        <div class="cta-row" style="margin-top: 1.2rem;">
+          <a class="button button-primary" href="https://buy.stripe.com/8x2dRa7woa65dOA6uz0co00">Book Minute Teardown — $49</a>
+          <a class="button button-ghost" href="../teardown-sample.html">See sample Minute Teardown</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-row">
+      <p>© 2026 28to3.me. 28to3.me sells Actionscope and Soph* Debloat.</p>
+      <div class="footer-links">
+        <a href="../index.html">Home</a>
+        <a href="../index.html#products">Products</a>
+        <a href="../index.html#apps">Web Apps</a>
+        <a href="../demo.html">Demo</a>
+        <a href="../teardown-sample.html">Teardown</a>
+        <a href="../about.html">About</a>
+        <a href="../privacy.html">Privacy</a>
+        <a href="../terms.html">Terms</a>
+        <a href="https://github.com/Sofa-Loaf/actionscope">GitHub</a>
+        <a href="mailto:hello@28to3.me">hello@28to3.me</a>
+      </div>
+    </div>
+  </footer>
+  <script src="../site.js"></script>
+  <script>
+(function () {
+  var RATES = {
+    linux: { sku: "actions_linux", label: "Linux", multiplier: 1, perMin: 0.006 },
+    windows: { sku: "actions_windows", label: "Windows", multiplier: 2, perMin: 0.01 },
+    macos: { sku: "actions_macos", label: "macOS", multiplier: 10, perMin: 0.062 }
+  };
+
+  function parseWall(raw) {
+    var text = String(raw || "").trim();
+    if (!text) return { error: "Enter wall duration (seconds or mm:ss)." };
+
+    var mmss = text.match(/^(\d{1,3}):([0-5]\d)$/);
+    if (mmss) {
+      return { seconds: parseInt(mmss[1], 10) * 60 + parseInt(mmss[2], 10) };
+    }
+
+    if (/^\d+$/.test(text)) {
+      return { seconds: parseInt(text, 10) };
+    }
+
+    return { error: "Use seconds (12) or mm:ss (1:04)." };
+  }
+
+  function formatWall(seconds) {
+    if (seconds < 60) return seconds + "s";
+    var m = Math.floor(seconds / 60);
+    var s = seconds % 60;
+    return s ? m + "m " + s + "s" : m + "m";
+  }
+
+  function money(n) {
+    return "$" + n.toFixed(4);
+  }
+
+  function setText(id, value) {
+    var el = document.getElementById(id);
+    if (el) el.textContent = value;
+  }
+
+  function setHtml(id, value) {
+    var el = document.getElementById(id);
+    if (el) el.innerHTML = value;
+  }
+
+  function render() {
+    var wallEl = document.getElementById("wall");
+    var parsed = parseWall(wallEl ? wallEl.value : "");
+    var osEl = document.querySelector("input[name=os]:checked");
+    var os = osEl ? osEl.value : "linux";
+    var rate = RATES[os] || RATES.linux;
+    var out = document.getElementById("calc-out");
+
+    if (parsed.error) {
+      if (out) out.classList.add("is-invalid");
+      setText("out-dollars", "—");
+      setText("out-sub", parsed.error);
+      setHtml("out-quirk", "<strong>Quirk:</strong> a 12-second job still burns 1 rounded minute.");
+      setText("out-wall", "—");
+      setText("out-rounded", "—");
+      setHtml("out-included", "—");
+      setHtml("out-rate", "—");
+      setHtml("out-sku", "<code>" + rate.sku + "</code>");
+      return;
+    }
+
+    if (out) out.classList.remove("is-invalid");
+    var seconds = parsed.seconds;
+    var rounded = seconds === 0 ? 0 : Math.ceil(seconds / 60);
+    var included = rounded * rate.multiplier;
+    var dollars = rounded * rate.perMin;
+    var quirk = seconds > 0 && seconds < 60
+      ? "<strong>Quirk:</strong> " + formatWall(seconds) + " wall still bills <strong>1</strong> rounded minute."
+      : "<strong>Quirk:</strong> a 12-second job still burns 1 rounded minute. GitHub ceils each started job to a whole minute.";
+
+    setText("out-dollars", money(dollars));
+    setText("out-sub", rounded + " rounded min · " + included + " included min · " + rate.label + " " + rate.multiplier + "×");
+    setHtml("out-quirk", quirk);
+    setText("out-wall", formatWall(seconds));
+    setText("out-rounded", String(rounded));
+    setHtml("out-included", included + " <span class=\"muted\">(" + rate.label + " " + rate.multiplier + "×)</span>");
+    setHtml("out-rate", rounded + " × " + money(rate.perMin) + " = <strong>" + money(dollars) + "</strong>");
+    setHtml("out-sku", "<code>" + rate.sku + "</code>");
+  }
+
+  document.getElementById("minutes-form").addEventListener("input", render);
+  document.getElementById("minutes-form").addEventListener("change", render);
+  document.getElementById("minutes-form").addEventListener("submit", function (event) {
+    event.preventDefault();
+    render();
+  });
+  render();
+})();
+  </script>
+</body>
+</html>

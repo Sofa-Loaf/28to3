@@ -1,0 +1,297 @@
+:root {
+  --jass-bg: #0b0b0b;
+  --jass-ink: #f4f1ee;
+  --jass-muted: #b8b0aa;
+  --jass-red: #d51212;
+  --jass-red-deep: #8c0c0c;
+  --jass-line: #2a2a2a;
+  --jass-pad: #161616;
+  --jass-sans: "Source Sans 3", "Segoe UI", sans-serif;
+  --jass-display: "Anton", Impact, "Arial Black", sans-serif;
+  --jass-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--jass-bg);
+  color: var(--jass-ink);
+}
+
+body.jass {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--jass-sans);
+  font-size: 1.05rem;
+  line-height: 1.45;
+}
+
+a {
+  color: var(--jass-red);
+}
+
+a:hover {
+  color: #ff4d4d;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -3rem;
+  z-index: 20;
+  padding: 0.6rem 0.9rem;
+  background: var(--jass-ink);
+  color: var(--jass-bg);
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+.jass-wrap {
+  width: min(40rem, calc(100% - 1.5rem));
+  margin-inline: auto;
+}
+
+.jass-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  align-items: baseline;
+  padding: 0.85rem 0 0.4rem;
+  font-size: 0.92rem;
+  color: var(--jass-muted);
+}
+
+.jass-top a {
+  color: inherit;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.jass-top a:hover {
+  color: var(--jass-red);
+}
+
+.jass-hero {
+  padding: 0.4rem 0 0.8rem;
+  text-align: center;
+}
+
+.jass-gloves {
+  display: flex;
+  justify-content: center;
+  gap: 0.35rem;
+  margin: 0 0 0.35rem;
+  font-size: 2.4rem;
+  line-height: 1;
+}
+
+.jass-hero h1 {
+  margin: 0;
+  font-family: var(--jass-display);
+  font-size: clamp(2.8rem, 14vw, 4.6rem);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  line-height: 0.95;
+}
+
+.jass-hero p {
+  margin: 0.45rem 0 0;
+  color: var(--jass-muted);
+}
+
+.jass-board {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.4rem 0 1rem;
+}
+
+.jass-phase {
+  margin: 0;
+  text-align: center;
+  font-family: var(--jass-display);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 1.15rem;
+  color: var(--jass-red);
+}
+
+.jass-board.is-rest .jass-phase {
+  color: var(--jass-muted);
+}
+
+.jass-board.is-done .jass-phase {
+  color: var(--jass-ink);
+}
+
+.jass-clock {
+  margin: 0.15rem 0 0;
+  text-align: center;
+  font-family: var(--jass-mono);
+  font-weight: 500;
+  font-size: clamp(4.2rem, 22vw, 7.2rem);
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  font-variant-numeric: tabular-nums;
+}
+
+.jass-meta {
+  margin: 0.45rem 0 0;
+  text-align: center;
+  color: var(--jass-muted);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.jass-controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.55rem;
+  margin: 1.15rem 0 0;
+}
+
+.jass-btn {
+  min-height: 3.4rem;
+  border: 0;
+  border-radius: 8px;
+  font: inherit;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.jass-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.jass-btn-start {
+  background: var(--jass-red);
+  color: #fff;
+}
+
+.jass-btn-start:hover:not(:disabled) {
+  background: #f01818;
+}
+
+.jass-btn-pause {
+  background: #2a2a2a;
+  color: var(--jass-ink);
+}
+
+.jass-btn-reset {
+  background: #111;
+  color: var(--jass-ink);
+  border: 1px solid var(--jass-line);
+}
+
+.jass-settings {
+  margin: 0 0 1.2rem;
+  padding: 1rem 1rem 1.1rem;
+  background: var(--jass-pad);
+  border: 1px solid var(--jass-line);
+  border-radius: 12px;
+}
+
+.jass-settings h2 {
+  margin: 0 0 0.75rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--jass-muted);
+}
+
+.jass-fields {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.jass-field label,
+.jass-field span {
+  display: block;
+  margin: 0 0 0.3rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.jass-field input,
+.jass-field select,
+.jass-field textarea {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid #3a3a3a;
+  border-radius: 8px;
+  background: #0f0f0f;
+  color: var(--jass-ink);
+  font: inherit;
+}
+
+.jass-field textarea {
+  min-height: 4.6rem;
+  resize: vertical;
+  font-family: var(--jass-mono);
+}
+
+.jass-field input:disabled,
+.jass-field select:disabled,
+.jass-field textarea:disabled {
+  opacity: 0.55;
+}
+
+.jass-hint {
+  margin: 0.35rem 0 0;
+  color: var(--jass-muted);
+  font-size: 0.88rem;
+}
+
+.jass-error {
+  margin: 0.65rem 0 0;
+  color: #ff8a8a;
+  font-weight: 700;
+}
+
+.jass-error[hidden] {
+  display: none;
+}
+
+.jass-foot {
+  padding: 0.7rem 0 1.1rem;
+  color: var(--jass-muted);
+  font-size: 0.88rem;
+  text-align: center;
+}
+
+.jass-foot p {
+  margin: 0;
+}
+
+@media (max-width: 520px) {
+  .jass-controls {
+    grid-template-columns: 1fr;
+  }
+
+  .jass-btn {
+    min-height: 3.7rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jass-btn-start:hover:not(:disabled) {
+    background: var(--jass-red);
+  }
+}
