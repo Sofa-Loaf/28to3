@@ -601,6 +601,129 @@ h3 {
   gap: 1rem;
 }
 
+.stats-4 {
+  grid-template-columns: repeat(4, 1fr);
+  margin-bottom: 1.6rem;
+}
+
+.dossier {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.dossier p {
+  margin: 0.4rem 0 0;
+  color: var(--ink-soft);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.teardown-doc {
+  margin: 0;
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.teardown-letterhead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem 1.2rem;
+  background: var(--ink);
+  color: var(--paper-2);
+}
+
+.teardown-letterhead .summary-kicker {
+  color: #d8cbb8;
+}
+
+.teardown-letterhead .gh-workflow {
+  margin: 0.15rem 0 0;
+}
+
+.teardown-letterhead-meta {
+  margin: 0.25rem 0 0;
+  color: #d8cbb8;
+  font-size: 0.92rem;
+}
+
+.teardown-letterhead .pill {
+  background: #2a241d;
+  color: #f6efe4;
+}
+
+.teardown-doc-body {
+  padding: 1.3rem 1.25rem 1.4rem;
+}
+
+.teardown-table {
+  min-width: 68rem;
+}
+
+.muted-inline {
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.change-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: change;
+}
+
+.change-list > li {
+  position: relative;
+  margin: 0 0 1rem;
+  padding: 1.2rem 1.2rem 1.25rem 4rem;
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  counter-increment: change;
+}
+
+.change-list > li::before {
+  content: counter(change);
+  position: absolute;
+  left: 1.15rem;
+  top: 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 50%;
+  background: #f3e7d4;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.change-list h3 {
+  margin: 0 0 0.4rem;
+  font-size: 1.15rem;
+}
+
+.change-list p {
+  margin: 0;
+  color: var(--ink-soft);
+}
+
 .stat {
   padding: 1.2rem 1.15rem;
 }
@@ -791,9 +914,16 @@ pre {
   .steps,
   .pricing-grid,
   .stats,
+  .stats-4,
+  .dossier,
   .contact-panel,
   .convert-grid {
     grid-template-columns: 1fr;
+  }
+
+  .teardown-letterhead {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .gh-run-chrome {

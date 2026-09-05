@@ -9,7 +9,7 @@ Positioning: **macOS or wide Windows matrices on private repos with surprise bil
 - Product: [Actionscope](https://github.com/Sofa-Loaf/actionscope)
 - Install (GitHub org only): `uses: Sofa-Loaf/actionscope@v0.1.3`
 - Latest release: https://github.com/Sofa-Loaf/actionscope/releases/latest
-- Org pilot: **$49 Stripe booking fee** for a human deliverable — one org, one week, one artifact (“these workflows/jobs/OSes ate the minutes; here’s what to change”)
+- Org pilot: **$49 Stripe booking fee** for a **Minute Teardown** — one org, one week, one artifact (“these workflows/jobs/OSes ate the minutes; here’s what to change”). Sample: [teardown-sample.html](teardown-sample.html)
 
 The GitHub org **Sofa-Loaf** appears only in repository URLs and the Action install snippet.
 
@@ -28,6 +28,7 @@ GitHub Pages is deployed from `main` by [`.github/workflows/pages.yml`](.github/
 | --- | --- |
 | Home | `index.html` |
 | Job Summary demo | `demo.html` |
+| Sample Minute Teardown | `teardown-sample.html` |
 | Privacy | `privacy.html` |
 | Terms | `terms.html` |
 
@@ -41,7 +42,7 @@ If the first workflow run needs Pages enabled in the UI: **Settings → Pages �
 
 - Seller / business name on Stripe and this site: **28to3.me**
 - Org pilot checkout: https://buy.stripe.com/8x2dRa7woa65dOA6uz0co00
-- $49 is a **booking fee** for the one-week human artifact, not a software seat or App license
+- $49 is a **booking fee** for a Minute Teardown (one-week human artifact), not a software seat or App license
 
 ## Local preview
 
