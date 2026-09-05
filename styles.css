@@ -194,7 +194,31 @@ h3 {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
-  margin-bottom: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.pilot-gets {
+  margin: 0 0 1.15rem;
+  padding: 0.95rem 1.1rem 1rem;
+  max-width: 38rem;
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.pilot-gets h2 {
+  margin: 0 0 0.55rem;
+  font-size: 1.15rem;
+}
+
+.pilot-gets ul {
+  margin: 0;
+  padding-left: 1.15rem;
+  color: var(--ink-soft);
+}
+
+.pilot-gets li + li {
+  margin-top: 0.4rem;
 }
 
 .button {
