@@ -23,14 +23,14 @@ GitHub Pages is deployed from `main` by [`.github/workflows/pages.yml`](.github/
 
 If the first workflow run needs Pages enabled in the UI: **Settings → Pages → Source: GitHub Actions**.
 
-## Placeholders
+## Support
 
 - Support email on the site: `hello@28to3.me`
 
 ## Stripe
 
 - Seller / business name on Stripe and this site: **28to3.me**
-- Org pilot checkout (live Payment Link): https://buy.stripe.com/8x2dRa7woa65dOA6uz0co00
+- Org pilot checkout: https://buy.stripe.com/8x2dRa7woa65dOA6uz0co00
 
 ## Local preview
 
