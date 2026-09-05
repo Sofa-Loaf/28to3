@@ -919,6 +919,24 @@ h3 {
   grid-template-columns: repeat(4, 1fr);
 }
 
+.about-origin {
+  max-width: 40rem;
+}
+
+.origin-line {
+  margin: 0 0 1rem;
+  font-family: var(--serif);
+  font-size: clamp(1.45rem, 3vw, 2.1rem);
+  font-weight: 620;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+.about-origin .section-lede {
+  margin-bottom: 0.85rem;
+}
+
 .problem-grid {
   grid-template-columns: repeat(3, 1fr);
 }

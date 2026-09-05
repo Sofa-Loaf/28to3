@@ -18,6 +18,12 @@ Public landing page for **28to3.me**, the seller of **Actionscope**, **SophPDF D
 
 The GitHub org **Sofa-Loaf** appears only in repository URLs and the Action install snippet.
 
+## About / brand origin
+
+**Named after the greatest sports comeback. Coming back from 0.**
+
+28to3.me is named for **28–3** — Super Bowl LI. The name is that score. The shop is a start-over (rebuild after a wipe), not a claim that the website is the greatest comeback. Short copy lives on the homepage `#about` section and [about.html](about.html).
+
 ## URLs
 
 | URL | Status |
@@ -36,6 +42,7 @@ GitHub Pages is deployed from `main` by [`.github/workflows/pages.yml`](.github/
 | Sample Minute Teardown | `teardown-sample.html` |
 | SophPDF Debloat | `sophpdf.html` |
 | Soph Explorer Debloat | `soph-explorer.html` |
+| About / brand origin | `about.html` |
 | Privacy | `privacy.html` |
 | Terms | `terms.html` |
 
