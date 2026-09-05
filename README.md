@@ -1,6 +1,6 @@
 # 28to3.me — public product surface
 
-Public landing page for **28to3.me**, the seller of **Actionscope**, **SophPDF Debloat**, and **Soph Explorer Debloat**. Stripe should match the business / seller name **28to3.me** (not Sofa Loaf).
+Public landing page for **28to3.me**, the seller of **Actionscope**, **Afterglow**, **SophPDF Debloat**, and **Soph Explorer Debloat**. Stripe should match the business / seller name **28to3.me** (not Sofa Loaf).
 
 **28to3.me is the public product surface for Sofa-Loaf ships.**
 
@@ -11,6 +11,7 @@ Public landing page for **28to3.me**, the seller of **Actionscope**, **SophPDF D
 | [Actionscope](https://github.com/Sofa-Loaf/actionscope) | GitHub Actions minute visibility. Private repos with **macOS or a wide Windows matrix** and surprise bills. Linux-only CI and enterprise Billing API shops are out of scope. | Free Action. **$49 Stripe booking fee** for a **Minute Teardown** (one org, one week). $19 App seats later. | Public: `Sofa-Loaf/actionscope` |
 | [SophPDF Debloat](sophpdf.html) | Easy, lite PDF editor without the bloat. Everyday editing for office admins / older office workers: open, annotate, fill forms, sign, print. Same **Soph* Debloat** family as Soph Explorer Debloat. | **$29 one-time** when Stripe exists (stub/CTA only — do not invent a Payment Link). | [Sofa-Loaf/pdf-editor](https://github.com/Sofa-Loaf/pdf-editor) is **private**, so download may be limited. Landing files in that repo (`docs/landing`) are not a public URL yet. |
 | [Soph Explorer Debloat](soph-explorer.html) | Free, lite, fast Windows file explorer — fast search, PDF preview by default — for office users who hate Explorer bloat. Same **Soph* Debloat** family as SophPDF Debloat. | **Free forever.** No Stripe. | Public: [Sofa-Loaf/soph-explorer](https://github.com/Sofa-Loaf/soph-explorer) |
+| [Afterglow](apps/afterglow.html) | After you leave a place, leave a quiet residue — voice, still, or one line. No feed. No likes. Not reviews. Field-recorder aesthetic. **Android / Play first; iOS later.** | **Free.** No Stripe. | Public: [Sofa-Loaf/afterglow](https://github.com/Sofa-Loaf/afterglow) |
 | [Minute Cheat Sheet](apps/minute-cheat-sheet.html) | One-page PDF (+ print-friendly HTML) of Actions minute quirks: 12s still bills 1 rounded minute; Linux 1× / Windows 2× / macOS 10×; Job Summary columns; pin `@v0.1.3`. | **$0.99 one-time**. Stripe product name: **Minute Cheat Sheet — $0.99**. | This repo: `apps/minute-cheat-sheet.html`, `apps/minute-cheat-sheet.pdf`, `apps/thanks-cheat-sheet.html` |
 
 - Install Actionscope (GitHub org only): `uses: Sofa-Loaf/actionscope@v0.1.3`
@@ -50,6 +51,7 @@ GitHub Pages is deployed from `main` by [`.github/workflows/pages.yml`](.github/
 | Sample Minute Teardown | `teardown-sample.html` |
 | SophPDF Debloat | `sophpdf.html` |
 | Soph Explorer Debloat | `soph-explorer.html` |
+| Afterglow | `apps/afterglow.html` |
 | About / brand origin | `about.html` |
 | Privacy | `privacy.html` |
 | Terms | `terms.html` |
@@ -67,6 +69,7 @@ If the first workflow run needs Pages enabled in the UI: **Settings → Pages �
 - $49 is a **booking fee** for a Minute Teardown (one-week human artifact), not a software seat or App license
 - SophPDF Debloat: **$29 one-time** when a Stripe Payment Link exists. Do not invent a link; the site uses a stub/email CTA until one is pasted in.
 - Soph Explorer Debloat: **free forever**. Do not add Stripe.
+- Afterglow: **free**. Do not add Stripe.
 - Minute Cheat Sheet: **$0.99 one-time**. Stripe product name: **Minute Cheat Sheet — $0.99**. Payment Link: https://buy.stripe.com/28E28s03W7XXh0MbOT0co01. Success URL: https://28to3.me/apps/thanks-cheat-sheet.html
 
 ## Local preview
