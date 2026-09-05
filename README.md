@@ -21,6 +21,13 @@ The GitHub org **Sofa-Loaf** appears only in repository URLs and the Action inst
 
 GitHub Pages is deployed from `main` by [`.github/workflows/pages.yml`](.github/workflows/pages.yml) (GitHub Actions). The site is static HTML/CSS plus a small copy-to-clipboard script. No password wall.
 
+| Page | Path |
+| --- | --- |
+| Home | `index.html` |
+| Job Summary demo | `demo.html` |
+| Privacy | `privacy.html` |
+| Terms | `terms.html` |
+
 If the first workflow run needs Pages enabled in the UI: **Settings → Pages → Source: GitHub Actions**.
 
 ## Support
