@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jass Boxing — 28to3.me</title>
+  <meta name="description" content="Jass Boxing round timer. Voice and bell. Demo web app from 28to3.me — not a boxing product.">
+  <meta name="theme-color" content="#0b0b0b">
+  <link rel="canonical" href="https://sofa-loaf.github.io/28to3/apps/jass-boxing.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <meta property="og:title" content="Jass Boxing — 28to3.me">
+  <meta property="og:description" content="Rounds. Work. Rest. Bell. Demo web app · 28to3.me">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sofa-loaf.github.io/28to3/apps/jass-boxing.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@500&family=Source+Sans+3:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="jass-boxing.css">
+</head>
+<body class="jass">
+  <a class="skip-link" href="#jass-board">Skip to timer</a>
+  <header class="jass-wrap jass-top">
+    <a href="../index.html">28to3.me</a>
+    <span>Demo web app</span>
+  </header>
+
+  <div class="jass-wrap jass-hero">
+    <p class="jass-gloves" aria-hidden="true">
+      <span>🥊</span>
+      <svg viewBox="0 0 64 64" width="42" height="42" aria-hidden="true">
+        <rect x="8" y="18" width="28" height="28" rx="10" fill="#d51212"/>
+        <rect x="28" y="28" width="22" height="16" rx="6" fill="#8c0c0c"/>
+        <rect x="46" y="31" width="10" height="10" rx="3" fill="#f4f1ee"/>
+      </svg>
+    </p>
+    <h1>Jass Boxing</h1>
+    <p>Rounds. Work. Rest. Bell.</p>
+  </div>
+
+  <main class="jass-wrap jass-board" id="jass-board">
+    <p class="jass-phase" id="jass-phase">ROUND</p>
+    <p class="jass-clock" id="jass-clock" aria-live="polite">3:00</p>
+    <p class="jass-meta" id="jass-meta">1 / 3</p>
+    <div class="jass-controls">
+      <button class="jass-btn jass-btn-start" id="jass-start" type="button">Start</button>
+      <button class="jass-btn jass-btn-pause" id="jass-pause" type="button" disabled>Pause</button>
+      <button class="jass-btn jass-btn-reset" id="jass-reset" type="button">Reset</button>
+    </div>
+  </main>
+
+  <form class="jass-wrap jass-settings" id="jass-settings">
+    <h2>Settings</h2>
+    <div class="jass-fields">
+      <label class="jass-field">
+        <span>Rounds</span>
+        <input id="rounds" name="rounds" type="number" min="1" max="12" step="1" value="3" inputmode="numeric">
+      </label>
+      <label class="jass-field">
+        <span>Round duration</span>
+        <select id="round-minutes" name="roundMinutes">
+          <option value="1">1 minute</option>
+          <option value="2">2 minutes</option>
+          <option value="3" selected>3 minutes</option>
+        </select>
+      </label>
+      <label class="jass-field">
+        <span>Rest</span>
+        <select id="rest-seconds" name="restSeconds">
+          <option value="30">30 seconds</option>
+          <option value="45">45 seconds</option>
+          <option value="60" selected>1 minute</option>
+          <option value="90">1 minute 30</option>
+          <option value="120">2 minutes</option>
+        </select>
+      </label>
+      <label class="jass-field">
+        <span>Per-round override</span>
+        <textarea id="overrides" name="overrides" placeholder="Optional. 3, 3, 2, 2"></textarea>
+        <p class="jass-hint">One value per round, 1–3 minutes. Blank uses the default. Example: <code>3, 2, 2</code></p>
+      </label>
+    </div>
+    <p class="jass-error" id="jass-error" hidden></p>
+  </form>
+
+  <footer class="jass-wrap jass-foot">
+    <p>Demo web app · 28to3.me</p>
+  </footer>
+  <script src="jass-boxing.js"></script>
+</body>
+</html>
