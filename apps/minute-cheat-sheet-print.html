@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Minute Cheat Sheet — 28to3.me</title>
+  <meta name="description" content="One-page GitHub Actions minute cheat sheet from 28to3.me. 12-second jobs still bill 1 rounded minute. Linux 1×, Windows 2×, macOS 10×. Estimates, not an invoice.">
+  <meta name="theme-color" content="#f6efe4">
+  <link rel="canonical" href="https://sofa-loaf.github.io/28to3/apps/minute-cheat-sheet-print.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <style>
+    :root {
+      --paper: #f6efe4;
+      --paper-2: #fffaf2;
+      --ink: #1c1915;
+      --ink-soft: #3d3832;
+      --muted: #6d655b;
+      --line: #e4d8c6;
+      --copper: #c45c26;
+      --copper-deep: #9a3f14;
+      --forest: #2f6b4f;
+      --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+      --sans: "Segoe UI", "Source Sans 3", Helvetica, Arial, sans-serif;
+      --mono: ui-monospace, "IBM Plex Mono", "SF Mono", Menlo, Consolas, monospace;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: var(--sans);
+    }
+
+    body {
+      font-size: 11.5px;
+      line-height: 1.35;
+    }
+
+    .sheet {
+      width: min(8.5in, calc(100% - 1.2rem));
+      margin: 0.7rem auto 1.2rem;
+      padding: 0.55in 0.5in 0.48in;
+      background: var(--paper-2);
+      border: 1px solid var(--line);
+    }
+
+    .screen-bar {
+      width: min(8.5in, calc(100% - 1.2rem));
+      margin: 0.7rem auto 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem 0.8rem;
+      align-items: baseline;
+      font-size: 0.88rem;
+    }
+
+    .screen-bar a { color: var(--copper-deep); }
+    .screen-bar p { margin: 0; color: var(--muted); }
+
+    header.letterhead {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: flex-end;
+      padding-bottom: 0.55rem;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .mark {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+    }
+
+    .mark-box {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      background: var(--ink);
+      color: var(--paper);
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: 22px;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+    }
+
+    .kicker {
+      margin: 0 0 0.15rem;
+      color: var(--copper-deep);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .meta {
+      text-align: right;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .meta strong { color: var(--ink); }
+
+    .lede {
+      margin: 0.55rem 0 0.65rem;
+      color: var(--ink-soft);
+      font-size: 12px;
+    }
+
+    h2 {
+      margin: 0 0 0.28rem;
+      font-family: var(--serif);
+      font-size: 13px;
+      letter-spacing: -0.02em;
+    }
+
+    section { margin: 0 0 0.55rem; }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.55rem 0.7rem;
+    }
+
+    .quirk {
+      padding: 0.4rem 0.5rem;
+      border-left: 3px solid var(--copper);
+      background: #fff7ea;
+    }
+
+    .quirk p { margin: 0; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 10.5px;
+    }
+
+    th, td {
+      padding: 0.22rem 0.28rem;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    thead th {
+      color: var(--muted);
+      font-size: 8.5px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      background: #f3e7d4;
+    }
+
+    .num, td:last-child, th:last-child { text-align: right; }
+
+    tbody th { font-weight: 650; }
+
+    tr.macos th, tr.macos .hot { color: var(--copper-deep); }
+
+    tr.total th, tr.total td {
+      background: #fff7ea;
+      border-bottom: 0;
+      font-weight: 700;
+    }
+
+    code {
+      font-family: var(--mono);
+      font-size: 0.92em;
+    }
+
+    ol, ul {
+      margin: 0;
+      padding-left: 1.1rem;
+    }
+
+    li + li { margin-top: 0.18rem; }
+
+    .rates td:first-child { font-family: var(--mono); font-size: 10px; }
+
+    .foot {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.8rem;
+      margin-top: 0.45rem;
+      padding-top: 0.4rem;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .foot strong { color: var(--ink); }
+    .foot a { color: var(--copper-deep); }
+
+    .pin {
+      padding: 0.38rem 0.5rem;
+      background: var(--ink);
+      color: #f6efe4;
+      font-family: var(--mono);
+      font-size: 11px;
+    }
+
+    .note { margin: 0.25rem 0 0; color: var(--muted); font-size: 10px; }
+
+    @media print {
+      @page { size: letter; margin: 0.42in 0.48in; }
+      html, body { background: #fff; }
+      .screen-bar { display: none; }
+      .sheet {
+        width: auto;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        background: #fff;
+      }
+    }
+  </style>
+</head>
+<body>
+  <p class="screen-bar">
+    <a href="minute-cheat-sheet.html">Product page</a>
+    <a href="thanks-cheat-sheet.html">Download PDF</a>
+    <span>Print this page for a one-page sheet.</span>
+  </p>
+  <article class="sheet">
+    <header class="letterhead">
+      <div class="mark">
+        <div class="mark-box" aria-hidden="true">28</div>
+        <div>
+          <p class="kicker">28to3.me · Actionscope v0.1.3</p>
+          <h1>Minute Cheat Sheet</h1>
+        </div>
+      </div>
+      <p class="meta">
+        $0.99 one-time · seller <strong>28to3.me</strong><br>
+        Estimates, not an invoice.<br>
+        Rates dated 2026-09-05
+      </p>
+    </header>
+
+    <p class="lede">Private-repo Actions bills are a lump sum. This page is the per-job math Actionscope writes into a Job Summary — wall, rounded minutes, SKU, list-price $, included-minute burn.</p>
+
+    <div class="grid-2">
+      <section class="quirk">
+        <h2>12 seconds still bills 1 minute</h2>
+        <p>GitHub rounds <strong>each started job up to the next whole minute</strong>. A 12-second <code>lint</code> is 1 rounded minute. This is not <code>ceil(combined wall)</code>. Jobs that never started are 0.</p>
+      </section>
+      <section class="quirk">
+        <h2>Included-minute burn</h2>
+        <p>Standard hosted runners only: <strong>Linux 1×</strong> · <strong>Windows 2×</strong> · <strong>macOS 10×</strong> per rounded minute. Larger runners cannot use included minutes (burn = 0).</p>
+      </section>
+    </div>
+
+    <div class="grid-2">
+      <section>
+        <h2>Est. $ (list) — same rates as the Action / site</h2>
+        <table class="rates">
+          <thead>
+            <tr>
+              <th scope="col">SKU</th>
+              <th scope="col">OS</th>
+              <th scope="col" class="num">Per rounded min</th>
+              <th scope="col" class="num">Included</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>actions_linux</td>
+              <td>Linux</td>
+              <td class="num">$0.0060</td>
+              <td class="num">1×</td>
+            </tr>
+            <tr>
+              <td>actions_windows</td>
+              <td>Windows</td>
+              <td class="num">$0.0100</td>
+              <td class="num">2×</td>
+            </tr>
+            <tr class="macos">
+              <td>actions_macos</td>
+              <td>macOS</td>
+              <td class="num hot">$0.0620</td>
+              <td class="num">10×</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="note">Est. $ = rounded minutes × list rate. Label it an estimate. Source: GitHub Actions runner pricing, 2026-09-05. Public repos, self-hosted, and larger-runner SKUs are out of scope here.</p>
+      </section>
+      <section>
+        <h2>How to read Job Summary columns</h2>
+        <ol>
+          <li><strong>Wall time</strong> — <code>completed_at − started_at</code> (running jobs use now).</li>
+          <li><strong>Rounded min</strong> — ceil each started job to a whole minute.</li>
+          <li><strong>Runner SKU</strong> — from job labels / runner name; match the usage-report SKU.</li>
+          <li><strong>Est. $ (list)</strong> — rounded min × documented per-minute rate. Not an invoice.</li>
+          <li><strong>Included min</strong> — plan-minute burn: Linux 1, Windows 2, macOS 10.</li>
+        </ol>
+      </section>
+    </div>
+
+    <section>
+      <h2>Worked example — same numbers as the site Job Summary demo</h2>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Job</th>
+            <th scope="col">Wall</th>
+            <th scope="col" class="num">Rounded min</th>
+            <th scope="col">Runner SKU</th>
+            <th scope="col" class="num">Est. $ (list)</th>
+            <th scope="col" class="num">Included min</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">lint</th>
+            <td>12s</td>
+            <td class="num">1</td>
+            <td><code>actions_linux</code></td>
+            <td class="num">$0.0060</td>
+            <td class="num">1</td>
+          </tr>
+          <tr>
+            <th scope="row">test</th>
+            <td>1m 4s</td>
+            <td class="num">2</td>
+            <td><code>actions_windows</code></td>
+            <td class="num">$0.0200</td>
+            <td class="num">4</td>
+          </tr>
+          <tr class="macos">
+            <th scope="row">build</th>
+            <td>48s</td>
+            <td class="num">1</td>
+            <td><code>actions_macos</code></td>
+            <td class="num hot"><strong>$0.0620</strong></td>
+            <td class="num">10</td>
+          </tr>
+          <tr class="total">
+            <th scope="row">Total</th>
+            <td>2m 4s</td>
+            <td class="num">4</td>
+            <td></td>
+            <td class="num">$0.0880</td>
+            <td class="num">14</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="note">48s macOS is $0.0620 and 10 included minutes. Combined wall is 2m 4s; billed rounded minutes are 4 because each job ceils on its own.</p>
+    </section>
+
+    <section>
+      <h2>Pin the free Action</h2>
+      <p class="pin">- name: Actionscope<br>  uses: Sofa-Loaf/actionscope@v0.1.3</p>
+      <p class="note">The nested path <code>actionscope/action@v0.1.3</code> still works if you already pinned it. Default <code>GITHUB_TOKEN</code> is enough; lock-down workflows need <code>actions: read</code>.</p>
+    </section>
+
+    <footer class="foot">
+      <p>Need names on your org? <strong>$49</strong> books a Minute Teardown — one org, one week, one written artifact. Not a software seat. $19 App seats later, not live. <a href="https://sofa-loaf.github.io/28to3/teardown-sample.html">Sample</a> · <a href="https://sofa-loaf.github.io/28to3/">28to3.me</a></p>
+      <p>hello@28to3.me</p>
+    </footer>
+  </article>
+</body>
+</html>

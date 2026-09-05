@@ -21,6 +21,21 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://sofa-loaf.github.io/28to3/apps/minute-cheat-sheet.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sofa-loaf.github.io/28to3/apps/minute-cheat-sheet-print.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://sofa-loaf.github.io/28to3/apps/thanks-cheat-sheet.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
     <loc>https://sofa-loaf.github.io/28to3/apps/canvas.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
