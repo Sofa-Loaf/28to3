@@ -61,34 +61,35 @@
               <li>For private repos with macOS or a wide Windows matrix — not Linux-only CI, not enterprise Billing API shops.</li>
             </ul>
           </section>
-          <p class="fine-print">Public site for 28to3.me. No login. Pin <code>Sofa-Loaf/actionscope@v0.1.2</code>.</p>
+          <p class="fine-print">Public site for 28to3.me. No login. Pin <code>Sofa-Loaf/actionscope@v0.1.3</code>.</p>
         </div>
         <aside class="summary-card" aria-label="Example Job Summary">
           <div class="summary-top">
             <div>
               <p class="summary-kicker">Job Summary</p>
-              <p class="summary-total">14 quota minutes</p>
+              <p class="summary-total">Est. $0.0880</p>
+              <p class="summary-sub">4 rounded min · 14 included min</p>
             </div>
             <div class="os-pills" aria-hidden="true">
-              <span class="pill">Linux 1×</span>
-              <span class="pill">Windows 2×</span>
-              <span class="pill">macOS 10×</span>
+              <span class="pill">wall</span>
+              <span class="pill">SKU</span>
+              <span class="pill">list $</span>
             </div>
           </div>
           <div class="job-row">
             <div class="job-name">lint</div>
-            <div class="job-meta">ubuntu · 12s</div>
-            <div class="job-cost">ceil 1 min × 1 = <strong>1</strong></div>
+            <div class="job-meta">12s · 1 rounded · <code>actions_linux</code></div>
+            <div class="job-cost"><strong>$0.0060</strong> · 1 incl.</div>
           </div>
           <div class="job-row">
             <div class="job-name">test</div>
-            <div class="job-meta">windows · 1m 4s</div>
-            <div class="job-cost">ceil 2 min × 2 = <strong>4</strong></div>
+            <div class="job-meta">1m 4s · 2 rounded · <code>actions_windows</code></div>
+            <div class="job-cost"><strong>$0.0200</strong> · 4 incl.</div>
           </div>
           <div class="job-row macos">
             <div class="job-name">build</div>
-            <div class="job-meta">macos · 48s</div>
-            <div class="job-cost">ceil 1 min × 10 = <strong>10</strong></div>
+            <div class="job-meta">48s · 1 rounded · <code>actions_macos</code></div>
+            <div class="job-cost"><strong>$0.0620</strong> · 10 incl.</div>
           </div>
           <p class="fine-print summary-card-link"><a href="demo.html">Open the full Job Summary demo</a></p>
         </aside>
@@ -128,7 +129,7 @@
           </article>
           <article class="card">
             <h3>Free Action, this run</h3>
-            <p>Add one step. Actionscope estimates quota-equivalent minutes for the current workflow and writes a Job Summary. No extra auth beyond <code>GITHUB_TOKEN</code>.</p>
+            <p>Add one step. Actionscope writes a Job Summary with wall time, rounded minutes, runner SKU, list-price $, and included-minute burn. No extra auth beyond <code>GITHUB_TOKEN</code>.</p>
           </article>
           <article class="card">
             <h3>Human artifact, then the App</h3>
@@ -149,17 +150,17 @@
             <button class="copy-btn" type="button" data-copy>Copy</button>
           </div>
           <pre><code data-snippet>- name: Actionscope
-  uses: Sofa-Loaf/actionscope@v0.1.2</code></pre>
+  uses: Sofa-Loaf/actionscope@v0.1.3</code></pre>
         </div>
         <div class="cta-row" style="margin-top: 1.2rem;">
           <a class="button button-primary" href="https://github.com/Sofa-Loaf/actionscope">View the repository</a>
-          <a class="button button-ghost" href="https://github.com/Sofa-Loaf/actionscope/releases/latest">v0.1.2 release notes</a>
+          <a class="button button-ghost" href="https://github.com/Sofa-Loaf/actionscope/releases/latest">v0.1.3 release notes</a>
         </div>
         <div class="steps" style="margin-top: 1.6rem;">
           <article class="step">
             <span class="step-num">1</span>
             <h3>Pin the Action</h3>
-            <p>Use <code>Sofa-Loaf/actionscope@v0.1.2</code>. The nested path <code>actionscope/action@v0.1.2</code> still works if you already pinned it.</p>
+            <p>Use <code>Sofa-Loaf/actionscope@v0.1.3</code>. The nested path <code>actionscope/action@v0.1.3</code> still works if you already pinned it.</p>
           </article>
           <article class="step">
             <span class="step-num">2</span>
@@ -169,7 +170,7 @@
           <article class="step">
             <span class="step-num">3</span>
             <h3>Read the summary</h3>
-            <p>Each job is rounded up to the next whole minute, then multiplied by OS: Linux 1×, Windows 2×, macOS 10×.</p>
+            <p>Wall time, rounded minutes, runner SKU, $ at GitHub list price, and included-minute burn — paste-next-to-usage-report, not an invoice.</p>
           </article>
         </div>
       </div>
@@ -187,8 +188,8 @@
             <p class="price">$0</p>
             <ul>
               <li>Per-run Job Summary</li>
-              <li>Quota-equivalent minutes by job and OS</li>
-              <li>Pin <code>@v0.1.2</code></li>
+              <li>Wall time, SKU, list-price $, included-minute burn</li>
+              <li>Pin <code>@v0.1.3</code></li>
             </ul>
             <a class="button button-ghost" href="#install">Install</a>
           </article>
@@ -231,7 +232,7 @@
           </article>
           <article class="card">
             <h3>Source</h3>
-            <p>Open source Action on GitHub: <a href="https://github.com/Sofa-Loaf/actionscope">Sofa-Loaf/actionscope</a>. Latest release: <a href="https://github.com/Sofa-Loaf/actionscope/releases/latest">v0.1.2</a>.</p>
+            <p>Open source Action on GitHub: <a href="https://github.com/Sofa-Loaf/actionscope">Sofa-Loaf/actionscope</a>. Latest release: <a href="https://github.com/Sofa-Loaf/actionscope/releases/latest">v0.1.3</a>.</p>
           </article>
         </div>
       </div>

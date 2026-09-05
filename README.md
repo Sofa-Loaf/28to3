@@ -7,7 +7,7 @@ Public landing page for **28to3.me**, the seller of **Actionscope**. Stripe shou
 Positioning: **macOS or wide Windows matrices on private repos with surprise bills.** Linux-only CI and enterprise Billing API shops are out of scope.
 
 - Product: [Actionscope](https://github.com/Sofa-Loaf/actionscope)
-- Install (GitHub org only): `uses: Sofa-Loaf/actionscope@v0.1.2`
+- Install (GitHub org only): `uses: Sofa-Loaf/actionscope@v0.1.3`
 - Latest release: https://github.com/Sofa-Loaf/actionscope/releases/latest
 - Org pilot: **$49 Stripe booking fee** for a human deliverable — one org, one week, one artifact (“these workflows/jobs/OSes ate the minutes; here’s what to change”)
 

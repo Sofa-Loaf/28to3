@@ -325,6 +325,12 @@ h3 {
   font-size: 1.7rem;
 }
 
+.summary-sub {
+  margin: 0.2rem 0 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
 .os-pills {
   display: flex;
   flex-wrap: wrap;
@@ -356,6 +362,14 @@ h3 {
 .job-meta,
 .job-cost {
   color: var(--muted);
+}
+
+.job-meta code,
+.jobs-table code,
+.runner-hint code,
+.mock-note code {
+  font-family: var(--mono);
+  font-size: 0.86em;
 }
 
 .job-cost strong {
@@ -491,6 +505,10 @@ h3 {
   font-weight: 650;
 }
 
+.jobs-table {
+  min-width: 44rem;
+}
+
 .jobs-table thead th {
   color: var(--muted);
   font-size: 0.82rem;
@@ -504,8 +522,15 @@ h3 {
 }
 
 .jobs-table td:last-child,
-.jobs-table th:last-child {
+.jobs-table th:last-child,
+.jobs-table .num {
   text-align: right;
+}
+
+.jobs-table .jobs-total th,
+.jobs-table .jobs-total td {
+  border-bottom: 0;
+  background: #fff7ea;
 }
 
 .status {
@@ -521,8 +546,8 @@ h3 {
   color: var(--forest);
 }
 
-.jobs-table tr.macos td:last-child,
-.jobs-table tr.macos th {
+.jobs-table tr.macos th,
+.jobs-table tr.macos .num strong {
   color: var(--copper-deep);
 }
 
@@ -781,7 +806,7 @@ pre {
   }
 
   .jobs-table {
-    min-width: 36rem;
+    min-width: 44rem;
   }
 
   .hero {
