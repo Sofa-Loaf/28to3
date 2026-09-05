@@ -1,2 +1,37 @@
-# 28to3
-Sofa Loaf — Actionscope product site (28to3.me)
+# 28to3.me — Actionscope site
+
+Public landing page for **28to3.me**, the seller of **Actionscope**. Stripe should match the business / seller name **28to3.me** (not Sofa Loaf).
+
+**28to3.me sells Actionscope — GitHub Actions minute visibility.**
+
+- Product: [Actionscope](https://github.com/Sofa-Loaf/actionscope)
+- Install (GitHub org only): `uses: Sofa-Loaf/actionscope@v0.1.0`
+- Latest release: https://github.com/Sofa-Loaf/actionscope/releases/latest
+
+The GitHub org **Sofa-Loaf** appears only in repository URLs and the Action install snippet.
+
+## URLs
+
+| URL | Status |
+| --- | --- |
+| https://sofa-loaf.github.io/28to3/ | GitHub Pages (this repo) |
+| https://28to3.me | Custom domain — **DNS / Cloudflare out of scope** (ops sets records separately) |
+
+## Pages
+
+GitHub Pages is deployed from `main` by [`.github/workflows/pages.yml`](.github/workflows/pages.yml) (GitHub Actions). The site is static HTML/CSS plus a small copy-to-clipboard script. No password wall.
+
+If the first workflow run needs Pages enabled in the UI: **Settings → Pages → Source: GitHub Actions**.
+
+## Placeholders
+
+- Support email on the site: `hello@28to3.me`
+- Org pilot checkout: `https://buy.stripe.com/test_placeholder_actionscope_org_pilot`
+
+## Local preview
+
+Open `index.html` in a browser, or serve the repo root:
+
+```bash
+python3 -m http.server 8080
+```
