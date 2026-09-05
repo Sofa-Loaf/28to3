@@ -4,9 +4,12 @@ Public landing page for **28to3.me**, the seller of **Actionscope**. Stripe shou
 
 **28to3.me sells Actionscope — GitHub Actions minute visibility.**
 
+Positioning: **macOS or wide Windows matrices on private repos with surprise bills.** Linux-only CI and enterprise Billing API shops are out of scope.
+
 - Product: [Actionscope](https://github.com/Sofa-Loaf/actionscope)
 - Install (GitHub org only): `uses: Sofa-Loaf/actionscope@v0.1.2`
 - Latest release: https://github.com/Sofa-Loaf/actionscope/releases/latest
+- Org pilot: **$49 Stripe booking fee** for a human deliverable — one org, one week, one artifact (“these workflows/jobs/OSes ate the minutes; here’s what to change”)
 
 The GitHub org **Sofa-Loaf** appears only in repository URLs and the Action install snippet.
 
@@ -38,6 +41,7 @@ If the first workflow run needs Pages enabled in the UI: **Settings → Pages �
 
 - Seller / business name on Stripe and this site: **28to3.me**
 - Org pilot checkout: https://buy.stripe.com/8x2dRa7woa65dOA6uz0co00
+- $49 is a **booking fee** for the one-week human artifact, not a software seat or App license
 
 ## Local preview
 
