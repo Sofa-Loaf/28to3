@@ -50,14 +50,14 @@
         <a class="button button-primary" href="https://buy.stripe.com/8x2dRa7woa65dOA6uz0co00">Get org pilot — $49</a>
         <a class="button button-ghost" href="#summary-mock">Jump to the mock</a>
       </div>
-      <p class="fine-print">Sample CI data, not a live workflow. Pin <code>Sofa-Loaf/actionscope@v0.1.2</code>.</p>
+      <p class="fine-print">Sample CI data, not a live workflow. Pin <code>Sofa-Loaf/actionscope@v0.1.3</code>.</p>
     </section>
 
     <section class="section section-alt" id="summary-mock" aria-labelledby="summary-mock-heading">
       <div class="wrap">
         <p class="eyebrow">GitHub Actions · Job Summary</p>
         <h2 id="summary-mock-heading">Actionscope on a mixed-OS CI run.</h2>
-        <p class="section-lede">Same estimate rules as the Action: each job ceils to a whole minute, then Linux 1×, Windows 2×, macOS 10×. The 48-second macOS job is 10 quota minutes.</p>
+        <p class="section-lede">Same finance columns as the Action: wall time, rounded minutes, runner SKU, $ at GitHub list price, and included-minute burn. The 48-second macOS job is $0.0620 at list price.</p>
 
         <figure class="gh-run" aria-label="Mock GitHub Actions Job Summary">
           <figcaption class="gh-run-chrome">
@@ -69,17 +69,17 @@
               </div>
             </div>
             <div class="os-pills" aria-hidden="true">
-              <span class="pill">Linux 1×</span>
-              <span class="pill">Windows 2×</span>
-              <span class="pill">macOS 10×</span>
+              <span class="pill">$0.0880 list</span>
+              <span class="pill">4 rounded</span>
+              <span class="pill">14 included</span>
             </div>
           </figcaption>
 
           <article class="gh-summary">
             <header class="gh-summary-head">
               <p class="summary-kicker">Actionscope</p>
-              <p class="summary-total">~14 quota minutes</p>
-              <p>Estimated <strong>quota-equivalent minutes</strong> for this workflow run. This is a lens on where included minutes go — <strong>not an invoice</strong>.</p>
+              <p class="summary-total">Est. $0.0880 list</p>
+              <p>Per-job <strong>estimate</strong> for this workflow run at GitHub list price. <strong>Not an invoice.</strong> Finance can paste the job table next to GitHub’s usage report (SKU, rounded minutes, $).</p>
             </header>
 
             <h3>This run</h3>
@@ -99,12 +99,20 @@
                     <td>3</td>
                   </tr>
                   <tr>
-                    <th scope="row">Combined wall-clock</th>
+                    <th scope="row">Combined wall time</th>
                     <td>2m 4s</td>
                   </tr>
                   <tr>
-                    <th scope="row">Estimated minutes</th>
-                    <td><strong>~14</strong></td>
+                    <th scope="row">Rounded minutes</th>
+                    <td>4</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Est. $ (list price)</th>
+                    <td><strong>$0.0880</strong></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Included-minute burn</th>
+                    <td>14</td>
                   </tr>
                 </tbody>
               </table>
@@ -117,10 +125,11 @@
                   <tr>
                     <th scope="col">Job</th>
                     <th scope="col">Status</th>
-                    <th scope="col">Duration</th>
-                    <th scope="col">Runner</th>
-                    <th scope="col">Multiplier</th>
-                    <th scope="col">Est. minutes</th>
+                    <th scope="col">Wall time</th>
+                    <th scope="col">Rounded min</th>
+                    <th scope="col">Runner SKU</th>
+                    <th scope="col">Est. $ (list)</th>
+                    <th scope="col">Included min</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -128,38 +137,52 @@
                     <th scope="row">lint</th>
                     <td><span class="status status-success">success</span></td>
                     <td>12s</td>
-                    <td>linux</td>
-                    <td>1×</td>
-                    <td>1</td>
+                    <td class="num">1</td>
+                    <td><code>actions_linux</code></td>
+                    <td class="num">$0.0060</td>
+                    <td class="num">1</td>
                   </tr>
                   <tr>
                     <th scope="row">test</th>
                     <td><span class="status status-success">success</span></td>
                     <td>1m 4s</td>
-                    <td>windows</td>
-                    <td>2×</td>
-                    <td>4</td>
+                    <td class="num">2</td>
+                    <td><code>actions_windows</code></td>
+                    <td class="num">$0.0200</td>
+                    <td class="num">4</td>
                   </tr>
                   <tr class="macos">
                     <th scope="row">build</th>
                     <td><span class="status status-success">success</span></td>
                     <td>48s</td>
-                    <td>macos</td>
-                    <td>10×</td>
-                    <td><strong>10</strong></td>
+                    <td class="num">1</td>
+                    <td><code>actions_macos</code></td>
+                    <td class="num"><strong>$0.0620</strong></td>
+                    <td class="num">10</td>
+                  </tr>
+                  <tr class="jobs-total">
+                    <th scope="row">Total</th>
+                    <td></td>
+                    <td><strong>2m 4s</strong></td>
+                    <td class="num"><strong>4</strong></td>
+                    <td></td>
+                    <td class="num"><strong>$0.0880</strong></td>
+                    <td class="num"><strong>14</strong></td>
                   </tr>
                 </tbody>
               </table>
             </div>
-            <p class="runner-hint">Minutes by runner: 10 min on macos, 4 min on windows, 1 min on linux.</p>
+            <p class="runner-hint">List prices used (2026-09-05, <a href="https://docs.github.com/en/billing/reference/actions-runner-pricing">GitHub runner pricing</a>): <code>actions_linux</code> $0.0060/min, <code>actions_windows</code> $0.0100/min, <code>actions_macos</code> $0.0620/min.</p>
 
-            <h3>How this estimate is calculated</h3>
+            <h3>How these columns are calculated</h3>
             <ol class="estimate-steps">
-              <li>Each job’s wall-clock time is rounded <strong>up to the next whole minute</strong> (a 12-second job counts as 1).</li>
-              <li>That minute count is multiplied by the runner OS used for included-minute quota: Linux <strong>1×</strong>, Windows <strong>2×</strong>, macOS <strong>10×</strong>.</li>
-              <li>Jobs that never started contribute <strong>0</strong>. Jobs still running use a <strong>partial</strong> duration through now.</li>
+              <li><strong>Wall time</strong> is observed <code>completed_at − started_at</code> (jobs still running use now).</li>
+              <li><strong>Rounded minutes</strong> follow GitHub billing: each started job rounds <strong>up to the next whole minute</strong>.</li>
+              <li><strong>Runner SKU</strong> is inferred from job labels / runner name so it can be matched to the usage-report SKU.</li>
+              <li><strong>Est. $ (list)</strong> = rounded minutes × the documented per-minute rate for that SKU.</li>
+              <li><strong>Included-minute burn</strong> is plan-minute consumption for standard hosted runners only. Larger runners cannot use included minutes.</li>
             </ol>
-            <p>Public repositories and typical self-hosted runners are often not billed the same way. Larger runners, custom SKUs, and storage are out of scope.</p>
+            <p>Jobs that never started contribute <strong>0</strong>. Public repositories and typical self-hosted runners are often not billed the same way. Custom images and storage are out of scope.</p>
 
             <footer class="gh-summary-foot">
               <p>The free Action stops here. Book the one-week artifact from <strong>28to3.me</strong> — the seller of Actionscope.</p>
@@ -167,7 +190,7 @@
             </footer>
           </article>
         </figure>
-        <p class="fine-print mock-note">Static mock for 28to3.me. Numbers match the homepage example: lint 12s on Linux, test 1m 4s on Windows, build 48s on macOS.</p>
+        <p class="fine-print mock-note">Static mock for 28to3.me. Numbers match the homepage example and Actionscope v0.1.3: lint 12s <code>actions_linux</code> $0.0060, test 1m 4s <code>actions_windows</code> $0.0200, build 48s <code>actions_macos</code> $0.0620.</p>
       </div>
     </section>
 
@@ -205,7 +228,7 @@
             <button class="copy-btn" type="button" data-copy>Copy</button>
           </div>
           <pre><code data-snippet>- name: Actionscope
-  uses: Sofa-Loaf/actionscope@v0.1.2</code></pre>
+  uses: Sofa-Loaf/actionscope@v0.1.3</code></pre>
         </div>
       </div>
     </section>
