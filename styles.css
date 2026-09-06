@@ -1417,6 +1417,9 @@ pre {
 .canvas-sample {
   margin: 0;
   margin-left: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
 }
 
 .canvas-sample-link {

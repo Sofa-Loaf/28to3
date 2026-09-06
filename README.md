@@ -52,6 +52,7 @@ GitHub Pages is deployed from `main` by [`.github/workflows/pages.yml`](.github/
 | SophPDF Debloat | `sophpdf.html` |
 | Soph Explorer Debloat | `soph-explorer.html` |
 | Afterglow | `apps/afterglow.html` |
+| Afterglow web prototype | `apps/afterglow-demo.html` |
 | About / brand origin | `about.html` |
 | Privacy | `privacy.html` |
 | Terms | `terms.html` |
