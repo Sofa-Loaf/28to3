@@ -492,13 +492,21 @@
       })
       .forEach(function (item) {
         var near = distance(state.you, item) <= RADIUS_M;
+        var hit = svgEl("circle", {
+          cx: String(item.x),
+          cy: String(item.y),
+          r: "1.8",
+          fill: "transparent",
+          "data-pin": item.id,
+          style: "cursor:pointer"
+        });
         var pin = svgEl("circle", {
           cx: String(item.x),
           cy: String(item.y),
-          r: near ? "0.7" : "0.55",
-          fill: near ? "#c45c26" : "#5a4c3c",
-          stroke: near ? "#e8a25a" : "#3a3228",
-          "stroke-width": "0.18",
+          r: near ? "0.85" : "0.7",
+          fill: near ? "#c45c26" : "#8a7d6b",
+          stroke: near ? "#e8a25a" : "#6b5340",
+          "stroke-width": "0.2",
           "data-pin": item.id,
           style: "cursor:pointer"
         });
@@ -508,7 +516,8 @@
           " · " +
           formatMeters(metersAway(item)) +
           (near ? " · in the gate" : " · outside the gate");
-        pin.appendChild(tip);
+        hit.appendChild(tip);
+        svg.appendChild(hit);
         svg.appendChild(pin);
       });
 
