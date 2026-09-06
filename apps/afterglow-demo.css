@@ -126,18 +126,20 @@ body.ag-demo {
   text-transform: uppercase;
 }
 
-.ag-glow-word {
-  margin: 0 0 0.25rem;
-  font-family: var(--ag-serif);
-  font-size: clamp(2.4rem, 7vw, 4.2rem);
-  font-weight: 600;
-  letter-spacing: -0.03em;
-  line-height: 1.05;
-  color: var(--ag-amber-soft);
-  text-shadow:
-    0 0 10px rgba(232, 184, 109, 0.85),
-    0 0 28px rgba(232, 184, 109, 0.45),
-    0 0 56px rgba(232, 184, 109, 0.22);
+.ag-hero h1 {
+  margin: 0 0 0.15rem;
+}
+
+.ag-header-wordmark {
+  display: block;
+  width: min(28rem, 100%);
+  max-height: 6.4rem;
+  height: auto;
+  object-fit: contain;
+  object-position: left center;
+  filter:
+    drop-shadow(0 0 14px rgba(232, 184, 109, 0.28))
+    drop-shadow(0 0 36px rgba(232, 184, 109, 0.12));
 }
 
 .ag-tagline {
@@ -577,10 +579,7 @@ body.ag-demo {
 @media (prefers-reduced-motion: reduce) {
   .ag-rec-led.is-live span,
   .ag-you-dot,
-  .ag-glow-word {
-    animation: none;
-    text-shadow: none;
-    box-shadow: none;
+  .ag-header-wordmark {
     filter: none;
   }
 }
