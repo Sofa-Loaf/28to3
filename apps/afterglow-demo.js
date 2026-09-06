@@ -1,7 +1,24 @@
 (function () {
   "use strict";
 
-  var RADIUS_M = 15;
+  /**
+   * Locked doctrine for this web prototype. Do not add a feed, likes,
+   * comments, stars, place ranking, or reviews.
+   * GPS is the trigger. 15 m / ~50 ft is the access gate. Pins stay exact.
+   * Plays are listen stubs; sort by plays when any nearby whisper has ≥1.
+   */
+  var DOCTRINE = {
+    gpsTrigger: true,
+    radiusM: 15,
+    radiusFt: 50,
+    precisePins: true,
+    reviews: false,
+    playsAreListens: true,
+    sortByPlaysWhenHeard: true
+  };
+
+  var RADIUS_M = DOCTRINE.radiusM;
+  var SNAP_M = 400;
   var LINE_MAX = 80;
   var VOICE_MAX_S = 12;
   var STORAGE_KEY = "afterglow-web-prototype-v1";
@@ -202,6 +219,7 @@
 
   var els = {};
   var restored = false;
+  var watchId = null;
   var state = {
     stageId: "hotel",
     you: { x: 16, y: 14 },
@@ -284,6 +302,9 @@
         state.you = { x: parsed.you.x, y: parsed.you.y };
         restored = true;
       }
+      if (parsed && (parsed.source === "geo" || parsed.source === "demo")) {
+        state.source = parsed.source;
+      }
     } catch (err) {
       state.geoNote = "This browser would not keep the demo tape.";
     }
@@ -297,7 +318,8 @@
           locals: state.locals,
           plays: state.plays,
           stageId: state.stageId,
-          you: state.you
+          you: state.you,
+          source: state.source
         })
       );
     } catch (err) {
@@ -355,12 +377,22 @@
     );
   }
 
+  function inGate(item) {
+    return item && item.stageId === state.stageId && distance(state.you, item) <= RADIUS_M;
+  }
+
+  function metersAway(item) {
+    return distance(state.you, item);
+  }
+
+  function formatMeters(meters) {
+    if (meters < 1) return "right here";
+    return Math.round(meters) + " m";
+  }
+
   function nearby() {
-    var here = state.you;
-    var list = allAfterglows().filter(function (item) {
-      return item.stageId === state.stageId && distance(here, item) <= RADIUS_M;
-    });
-    var anyPlays = list.some(function (item) {
+    var list = allAfterglows().filter(inGate);
+    var anyPlays = DOCTRINE.sortByPlaysWhenHeard && list.some(function (item) {
       return item.plays >= 1;
     });
     list.sort(function (a, b) {
@@ -368,6 +400,12 @@
       return b.createdAt - a.createdAt;
     });
     return list;
+  }
+
+  function findItem(id) {
+    return allAfterglows().filter(function (item) {
+      return item.id === id;
+    })[0] || null;
   }
 
   function setStatus(text) {
@@ -388,6 +426,7 @@
       btn.textContent = stage.name;
       btn.setAttribute("aria-pressed", id === state.stageId ? "true" : "false");
       btn.addEventListener("click", function () {
+        stopWatch();
         goToStage(id, stage.start, "demo");
       });
       els.spots.appendChild(btn);
@@ -453,16 +492,24 @@
       })
       .forEach(function (item) {
         var near = distance(state.you, item) <= RADIUS_M;
-        svg.appendChild(
-          svgEl("circle", {
-            cx: String(item.x),
-            cy: String(item.y),
-            r: near ? "0.7" : "0.55",
-            fill: near ? "#c45c26" : "#5a4c3c",
-            stroke: near ? "#e8a25a" : "#3a3228",
-            "stroke-width": "0.18"
-          })
-        );
+        var pin = svgEl("circle", {
+          cx: String(item.x),
+          cy: String(item.y),
+          r: near ? "0.7" : "0.55",
+          fill: near ? "#c45c26" : "#5a4c3c",
+          stroke: near ? "#e8a25a" : "#3a3228",
+          "stroke-width": "0.18",
+          "data-pin": item.id,
+          style: "cursor:pointer"
+        });
+        var tip = svgEl("title");
+        tip.textContent =
+          item.placeHint +
+          " · " +
+          formatMeters(metersAway(item)) +
+          (near ? " · in the gate" : " · outside the gate");
+        pin.appendChild(tip);
+        svg.appendChild(pin);
       });
 
     var you = svgEl("circle", {
@@ -490,18 +537,22 @@
     var count = nearby().length;
     var source =
       state.source === "geo"
-        ? "browser place, snapped to the nearest demo pin"
-        : "demo spot — click the stage or pick a pin";
-    els.here.innerHTML =
-      "You are at <strong>" +
+        ? "GPS trigger · this place, mapped onto the nearest demo pin"
+        : "demo stand-in for GPS · click the stage or pick a pin";
+    els.here.textContent =
+      "You are at " +
       stage.name +
-      "</strong> · earshot 15 m / ~50 ft · " +
+      " · 15 m / ~50 ft gate · " +
       count +
       (count === 1 ? " whisper" : " whispers") +
-      " in range. Pins stay precise. " +
+      " in earshot. Pins stay exact. " +
       source +
       ".";
     els.stageMeta.textContent = stage.hint + (state.geoNote ? " " + state.geoNote : "");
+    if (els.geo) {
+      els.geo.classList.toggle("is-on", state.source === "geo");
+      els.geo.textContent = state.source === "geo" ? "GPS trigger · live" : "GPS trigger";
+    }
   }
 
   function renderList() {
@@ -510,9 +561,19 @@
     if (!items.length) {
       els.empty.hidden = false;
       els.empty.textContent =
-        "Nothing in earshot. Walk closer — click the stage, or leave the first whisper here.";
+        "Nothing inside the 15 m gate. Walk closer — GPS or a click on the stage — or leave the first whisper here.";
     } else {
       els.empty.hidden = true;
+    }
+
+    if (els.sort) {
+      var anyPlays = items.some(function (item) {
+        return item.plays >= 1;
+      });
+      els.sort.hidden = !items.length;
+      els.sort.textContent = anyPlays
+        ? "Sorted by plays — listens, not a score. Not a ranking of the place."
+        : "No plays yet. Newest first. Plays are listens, not reviews.";
     }
 
     items.forEach(function (item) {
@@ -535,6 +596,8 @@
       meta.textContent =
         item.placeHint +
         " · " +
+        formatMeters(metersAway(item)) +
+        " · " +
         ageLabel(item.createdAt) +
         " · " +
         item.plays +
@@ -553,10 +616,8 @@
   }
 
   function renderHear() {
-    var item = allAfterglows().filter(function (entry) {
-      return entry.id === state.hearingId;
-    })[0];
-    if (!item || distance(state.you, item) > RADIUS_M) {
+    var item = findItem(state.hearingId);
+    if (!inGate(item)) {
       els.hear.hidden = true;
       els.hear.innerHTML = "";
       return;
@@ -578,10 +639,16 @@
     meta.textContent =
       "at " +
       item.placeHint +
+      " · pin " +
+      item.x.toFixed(1) +
+      "," +
+      item.y.toFixed(1) +
+      " · " +
+      formatMeters(metersAway(item)) +
       " · " +
       item.plays +
-      (item.plays === 1 ? " play" : " plays") +
-      " · no comments · no likes";
+      (item.plays === 1 ? " listen" : " listens") +
+      " · not a review";
 
     els.hear.appendChild(kicker);
     els.hear.appendChild(title);
@@ -620,7 +687,7 @@
 
     var note = document.createElement("p");
     note.className = "ag-note";
-    note.textContent = "No comments. No likes. Not a review. Leave it as you found it.";
+    note.textContent = "A whisper. No comments. No likes. Not a review. Leave it as you found it.";
     els.hear.appendChild(note);
 
     var move = document.createElement("button");
@@ -651,24 +718,22 @@
       y: clamp(point.y, 0.8, stage.heightM - 0.8)
     };
     state.source = source || "demo";
-    if (state.hearingId) {
-      var heard = allAfterglows().filter(function (item) {
-        return item.id === state.hearingId;
-      })[0];
-      if (!heard || heard.stageId !== id || distance(state.you, heard) > RADIUS_M) {
-        state.hearingId = null;
-      }
+    if (state.hearingId && !inGate(findItem(state.hearingId))) {
+      state.hearingId = null;
     }
     saveStore();
     render();
   }
 
   function hear(id) {
-    var item = allAfterglows().filter(function (entry) {
-      return entry.id === id;
-    })[0];
-    if (!item || distance(state.you, item) > RADIUS_M) {
-      setStatus("That whisper is outside earshot. Walk closer.");
+    var item = findItem(id);
+    if (!inGate(item)) {
+      var away = item ? Math.round(metersAway(item)) : 0;
+      setStatus(
+        item
+          ? away + " m away — outside the 15 m gate. Walk closer. The pin stays exact."
+          : "That whisper is outside the gate."
+      );
       return;
     }
     state.plays[item.id] = playsFor(item) + 1;
@@ -690,10 +755,25 @@
   }
 
   function onStageClick(event) {
+    var pinId = event.target && event.target.getAttribute && event.target.getAttribute("data-pin");
+    if (pinId) {
+      var pinItem = findItem(pinId);
+      if (!pinItem) return;
+      if (inGate(pinItem)) {
+        hear(pinId);
+        return;
+      }
+      setStatus(
+        Math.round(metersAway(pinItem)) +
+          " m away — outside the 15 m gate. Click the stage to walk. The pin stays exact."
+      );
+      return;
+    }
     var point = pointFromEvent(event);
     if (!point) return;
-    goToStage(state.stageId, point, state.source === "geo" ? "geo" : "demo");
-    setStatus("You stood here. Only residue inside 15 m can be heard.");
+    stopWatch();
+    goToStage(state.stageId, { x: point.x, y: point.y }, "demo");
+    setStatus("You stood here. The 15 m gate is the access. Pins stay exact.");
   }
 
   function stopVoice(keepUrl) {
@@ -860,7 +940,8 @@
           locals: probe,
           plays: state.plays,
           stageId: state.stageId,
-          you: state.you
+          you: state.you,
+          source: state.source
         })
       );
       state.locals = probe;
@@ -900,47 +981,91 @@
     } catch (err) {
       /* ignore */
     }
+    stopWatch();
     goToStage("hotel", STAGES.hotel.start, "demo");
     setStatus("Demo tape cleared. Sample whispers are back.");
   }
 
-  function useGeo() {
-    if (!navigator.geolocation) {
-      setStatus("This browser has no geolocation. Use the sample spots.");
+  function nearestStage(here) {
+    var nearest = null;
+    var nearestM = Infinity;
+    Object.keys(STAGES).forEach(function (id) {
+      var stage = STAGES[id];
+      var meters = haversine(here, stage.origin);
+      if (meters < nearestM) {
+        nearestM = meters;
+        nearest = stage;
+      }
+    });
+    return { stage: nearest, meters: nearestM };
+  }
+
+  function applyGeo(pos, fromWatch) {
+    var here = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+    var found = nearestStage(here);
+    if (!found.stage || found.meters > SNAP_M) {
+      if (fromWatch) return;
+      state.geoNote = "GPS is on, but you are not near a demo pin. Sample stands stand in.";
+      saveStore();
+      render();
+      setStatus("GPS trigger heard you, not near a demo pin. Hotel, train, venue, and Niagara stay as stands.");
       return;
     }
-    setStatus("Listening for this place…");
-    navigator.geolocation.getCurrentPosition(
+    var stand = offsetToStagePoint(found.stage, here.lat, here.lng);
+    if (
+      fromWatch &&
+      state.source === "geo" &&
+      state.stageId === found.stage.id &&
+      distance(state.you, stand) < 1
+    ) {
+      return;
+    }
+    state.geoNote =
+      "GPS trigger · " +
+      found.stage.name +
+      " · " +
+      Math.round(found.meters) +
+      " m from the sample origin. Pin is exact.";
+    goToStage(found.stage.id, stand, "geo");
+    setStatus("GPS trigger. You are here. Only the 15 m gate can hear.");
+  }
+
+  function startWatch() {
+    if (!DOCTRINE.gpsTrigger || !navigator.geolocation || watchId != null) return;
+    watchId = navigator.geolocation.watchPosition(
       function (pos) {
-        var here = { lat: pos.coords.latitude, lng: pos.coords.longitude };
-        var nearest = null;
-        var nearestM = Infinity;
-        Object.keys(STAGES).forEach(function (id) {
-          var stage = STAGES[id];
-          var meters = haversine(here, stage.origin);
-          if (meters < nearestM) {
-            nearestM = meters;
-            nearest = stage;
-          }
-        });
-        if (!nearest || nearestM > 400) {
-          state.geoNote = "You are not near a demo pin, so the sample spots stay.";
-          state.source = "demo";
-          saveStore();
-          render();
-          setStatus("Not near a demo pin. Hotel, train, venue, and Niagara stay as sample spots.");
-          return;
-        }
-        state.geoNote = "Snapped to " + nearest.name + " (" + Math.round(nearestM) + " m from the pin).";
-        goToStage(nearest.id, offsetToStagePoint(nearest, here.lat, here.lng), "geo");
-        setStatus("Using this place, mapped onto the nearest demo pin.");
+        applyGeo(pos, true);
       },
       function () {
-        state.geoNote = "Location was not allowed. Sample spots stay.";
-        render();
-        setStatus("Location was not allowed. Click the stage or pick a sample spot.");
+        /* keep the last stand */
       },
-      { enableHighAccuracy: false, maximumAge: 30000, timeout: 8000 }
+      { enableHighAccuracy: true, maximumAge: 5000, timeout: 12000 }
+    );
+  }
+
+  function stopWatch() {
+    if (watchId == null || !navigator.geolocation) return;
+    navigator.geolocation.clearWatch(watchId);
+    watchId = null;
+  }
+
+  function useGeo() {
+    if (!navigator.geolocation) {
+      setStatus("This browser has no GPS. Click the stage — that stand-in is the trigger.");
+      return;
+    }
+    setStatus("GPS trigger — listening for this place…");
+    navigator.geolocation.getCurrentPosition(
+      function (pos) {
+        applyGeo(pos, false);
+        startWatch();
+      },
+      function () {
+        state.geoNote = "GPS was not allowed. Click the stage to stand in for the trigger.";
+        render();
+        setStatus("GPS was not allowed. A click on the stage stands in.");
+      },
+      { enableHighAccuracy: true, maximumAge: 10000, timeout: 8000 }
     );
   }
 
@@ -965,6 +1090,7 @@
     els.thumb = $("ag-thumb");
     els.geo = $("ag-geo");
     els.reset = $("ag-reset");
+    els.sort = $("ag-sort");
 
     els.stage.addEventListener("click", onStageClick);
     els.form.addEventListener("submit", leaveAfterglow);
@@ -992,9 +1118,11 @@
     }
     render();
     els.lineCount.textContent = "0/" + LINE_MAX;
-    setStatus("Whispers from the past. Stand somewhere. Only 15 m can hear.");
+    setStatus("Whispers from the past. GPS is the trigger. The 15 m gate is the access.");
     if (!restored && navigator.geolocation) {
       useGeo();
+    } else if (restored && state.source === "geo") {
+      startWatch();
     }
   });
 })();

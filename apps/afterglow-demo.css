@@ -140,6 +140,23 @@ body.ag-demo {
   line-height: 1.45;
 }
 
+.ag-doctrine {
+  margin: 0.65rem 0 0;
+  color: var(--ag-amber);
+  font-family: var(--ag-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.ag-sort {
+  margin: 0 0 0.7rem;
+  color: var(--ag-dust);
+  font-family: var(--ag-mono);
+  font-size: 0.72rem;
+  line-height: 1.4;
+}
+
 .ag-shell {
   width: min(1180px, calc(100% - 2rem));
   margin: 1.2rem auto 2rem;
@@ -292,8 +309,10 @@ body.ag-demo {
   border-color: var(--ag-tape);
 }
 
-.ag-btn-quiet:hover {
-  border-color: var(--ag-ink);
+.ag-btn-quiet:hover,
+.ag-btn-quiet.is-on {
+  border-color: var(--ag-amber);
+  color: var(--ag-amber);
 }
 
 .ag-btn:disabled {
