@@ -4,34 +4,34 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Afterglow web prototype — 28to3.me</title>
-  <meta name="description" content="Web prototype of Afterglow. Demo data. Walk into a 15 m earshot. Leave one line. No likes. Not reviews. Android/Play app in progress. Free. 28to3.me.">
-  <meta name="theme-color" content="#14110e">
+  <meta name="description" content="Whispers left where you stood. Web prototype of Afterglow. Demo data. Walk into a 15 m earshot. Leave one line. No likes. Not reviews. Android/Play first. Free. 28to3.me.">
+  <meta name="theme-color" content="#050505">
   <link rel="canonical" href="https://sofa-loaf.github.io/28to3/apps/afterglow-demo.html">
-  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/afterglow/afterglow-app-icon.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/afterglow/afterglow-app-icon.png">
   <meta property="og:title" content="Afterglow web prototype — 28to3.me">
-  <meta property="og:description" content="Whispers from the past. 15 m earshot. Demo data. Android/Play app in progress. Free.">
+  <meta property="og:description" content="Whispers left where you stood. 15 m earshot. Demo data. Android/Play first. Free.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://sofa-loaf.github.io/28to3/apps/afterglow-demo.html">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:image" content="https://sofa-loaf.github.io/28to3/apps/assets/afterglow/afterglow-play-feature.png">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,620;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:ital,wght@0,400;0,600;0,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Fraunces:opsz,wght@9..144,500;9..144,620;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:ital,wght@0,400;0,600;0,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="afterglow-demo.css">
 </head>
 <body class="ag-demo">
   <a class="skip-link" href="#nearby">Skip to nearby afterglows</a>
-  <p class="ag-banner">Web prototype · demo data · Android/Play app in progress · Free · 28to3.me</p>
+  <p class="ag-banner">Web prototype · demo data · Android/Play first · Free · 28to3.me</p>
 
   <header class="ag-top">
     <a class="ag-brand" href="../index.html" aria-label="28to3.me home">
-      <svg class="ag-mark" viewBox="0 0 64 64" aria-hidden="true">
-        <rect width="64" height="64" rx="16" fill="#efe6d6"/>
-        <text x="32" y="41" text-anchor="middle" font-family="Georgia, serif" font-size="22" font-weight="700" fill="#14110e">28</text>
-      </svg>
+      <img class="ag-mark" src="assets/afterglow/afterglow-app-icon.png" alt="" width="64" height="64">
       28to3.me
     </a>
     <nav class="ag-links" aria-label="Afterglow">
       <a href="afterglow.html">Product</a>
+      <a href="afterglow.html#privacy">Privacy</a>
       <a href="afterglow-demo.html" aria-current="page">Web prototype</a>
       <a href="canvas.html">Canvas</a>
       <a href="https://github.com/Sofa-Loaf/afterglow">GitHub</a>
@@ -40,7 +40,8 @@
 
   <section class="ag-hero">
     <p class="ag-kicker">Field recorder · whispers from the past</p>
-    <h1>Afterglow</h1>
+    <h1 class="ag-glow-word">Afterglow</h1>
+    <p class="ag-tagline">Whispers left where you stood.</p>
     <p class="ag-lede">GPS is the trigger. Residue only plays inside the 15 m / ~50 ft gate. The pin stays exact. Plays are listens. No feed. No likes. Not reviews.</p>
     <p class="ag-doctrine">Locked · GPS trigger · 15 m gate · precise pins · not reviews · sort by plays</p>
   </section>
@@ -108,9 +109,13 @@
   </main>
 
   <footer class="ag-foot">
-    <p>Client-side only. localStorage. No backend. No Stripe. No multi-user sync.</p>
+    <p>Client-side only. localStorage. No backend. No Stripe. No multi-user sync. Android / Play first.</p>
     <p>
       <a href="afterglow.html">Product page</a>
+      ·
+      <a href="afterglow.html#privacy">Privacy</a>
+      ·
+      <a href="https://github.com/Sofa-Loaf/afterglow">Sofa-Loaf/afterglow</a>
       ·
       <button id="ag-reset" type="button">Clear this browser’s demo</button>
     </p>

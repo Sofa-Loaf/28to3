@@ -455,10 +455,10 @@
       height: "4",
       patternUnits: "userSpaceOnUse"
     });
-    grid.appendChild(svgEl("path", { d: "M 4 0 L 0 0 0 4", fill: "none", stroke: "#2c241c", "stroke-width": "0.12" }));
+    grid.appendChild(svgEl("path", { d: "M 4 0 L 0 0 0 4", fill: "none", stroke: "#1c1a16", "stroke-width": "0.12" }));
     defs.appendChild(grid);
     svg.appendChild(defs);
-    svg.appendChild(svgEl("rect", { x: "0", y: "0", width: String(stage.widthM), height: String(stage.heightM), fill: "#1a1511" }));
+    svg.appendChild(svgEl("rect", { x: "0", y: "0", width: String(stage.widthM), height: String(stage.heightM), fill: "#080808" }));
     svg.appendChild(svgEl("rect", { x: "0", y: "0", width: String(stage.widthM), height: String(stage.heightM), fill: "url(#ag-grid)" }));
 
     stage.landmarks.forEach(function (mark) {
@@ -466,7 +466,7 @@
         svgEl("text", {
           x: String(mark.x),
           y: String(mark.y - 1.2),
-          fill: "#6b5340",
+          fill: "#5a5348",
           "font-size": "1.5",
           "font-family": "IBM Plex Mono, ui-monospace, monospace",
           "text-anchor": "middle"
@@ -479,8 +479,8 @@
         cx: String(state.you.x),
         cy: String(state.you.y),
         r: String(RADIUS_M),
-        fill: "rgba(232, 162, 90, 0.08)",
-        stroke: "#d4a574",
+        fill: "rgba(232, 184, 109, 0.07)",
+        stroke: "#e8b86d",
         "stroke-width": "0.28",
         "stroke-dasharray": "0.8 0.7"
       })
@@ -500,12 +500,24 @@
           "data-pin": item.id,
           style: "cursor:pointer"
         });
+        if (near) {
+          svg.appendChild(
+            svgEl("circle", {
+              class: "ag-pin-halo",
+              cx: String(item.x),
+              cy: String(item.y),
+              r: "1.7",
+              fill: "rgba(232, 184, 109, 0.16)",
+              "data-pin": item.id
+            })
+          );
+        }
         var pin = svgEl("circle", {
           cx: String(item.x),
           cy: String(item.y),
           r: near ? "0.85" : "0.7",
-          fill: near ? "#c45c26" : "#8a7d6b",
-          stroke: near ? "#e8a25a" : "#6b5340",
+          fill: near ? "#e8b86d" : "#3a342c",
+          stroke: near ? "#ffd4a0" : "#2a2620",
           "stroke-width": "0.2",
           "data-pin": item.id,
           style: "cursor:pointer"
@@ -521,12 +533,21 @@
         svg.appendChild(pin);
       });
 
+    svg.appendChild(
+      svgEl("circle", {
+        class: "ag-pin-halo",
+        cx: String(state.you.x),
+        cy: String(state.you.y),
+        r: "2.1",
+        fill: "rgba(232, 184, 109, 0.14)"
+      })
+    );
     var you = svgEl("circle", {
       class: "ag-you-dot",
       cx: String(state.you.x),
       cy: String(state.you.y),
       r: "0.85",
-      fill: "#e8a25a"
+      fill: "#e8b86d"
     });
     svg.appendChild(you);
     svg.appendChild(
@@ -535,7 +556,7 @@
         cy: String(state.you.y),
         r: "1.5",
         fill: "none",
-        stroke: "rgba(232, 162, 90, 0.45)",
+        stroke: "rgba(232, 184, 109, 0.5)",
         "stroke-width": "0.2"
       })
     );
