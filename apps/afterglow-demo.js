@@ -201,6 +201,7 @@
   ];
 
   var els = {};
+  var restored = false;
   var state = {
     stageId: "hotel",
     you: { x: 16, y: 14 },
@@ -281,6 +282,7 @@
       if (parsed && parsed.you && STAGES[parsed.stageId]) {
         state.stageId = parsed.stageId;
         state.you = { x: parsed.you.x, y: parsed.you.y };
+        restored = true;
       }
     } catch (err) {
       state.geoNote = "This browser would not keep the demo tape.";
@@ -991,5 +993,8 @@
     render();
     els.lineCount.textContent = "0/" + LINE_MAX;
     setStatus("Whispers from the past. Stand somewhere. Only 15 m can hear.");
+    if (!restored && navigator.geolocation) {
+      useGeo();
+    }
   });
 })();
