@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Afterglow web prototype — 28to3.me</title>
+  <meta name="description" content="Web prototype of Afterglow. Demo data. Walk into a 15 m earshot. Leave one line. No likes. Not reviews. Android/Play app in progress. Free. 28to3.me.">
+  <meta name="theme-color" content="#14110e">
+  <link rel="canonical" href="https://sofa-loaf.github.io/28to3/apps/afterglow-demo.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <meta property="og:title" content="Afterglow web prototype — 28to3.me">
+  <meta property="og:description" content="Whispers from the past. 15 m earshot. Demo data. Android/Play app in progress. Free.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sofa-loaf.github.io/28to3/apps/afterglow-demo.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,620;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:ital,wght@0,400;0,600;0,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="afterglow-demo.css">
+</head>
+<body class="ag-demo">
+  <a class="skip-link" href="#nearby">Skip to nearby afterglows</a>
+  <p class="ag-banner">Web prototype · demo data · Android/Play app in progress · Free · 28to3.me</p>
+
+  <header class="ag-top">
+    <a class="ag-brand" href="../index.html" aria-label="28to3.me home">
+      <svg class="ag-mark" viewBox="0 0 64 64" aria-hidden="true">
+        <rect width="64" height="64" rx="16" fill="#efe6d6"/>
+        <text x="32" y="41" text-anchor="middle" font-family="Georgia, serif" font-size="22" font-weight="700" fill="#14110e">28</text>
+      </svg>
+      28to3.me
+    </a>
+    <nav class="ag-links" aria-label="Afterglow">
+      <a href="afterglow.html">Product</a>
+      <a href="afterglow-demo.html" aria-current="page">Web prototype</a>
+      <a href="canvas.html">Canvas</a>
+      <a href="https://github.com/Sofa-Loaf/afterglow">GitHub</a>
+    </nav>
+  </header>
+
+  <section class="ag-hero">
+    <p class="ag-kicker">Field recorder · whispers from the past</p>
+    <h1>Afterglow</h1>
+    <p class="ag-lede">GPS is the trigger. Residue only plays inside the 15 m / ~50 ft gate. The pin stays exact. Plays are listens. No feed. No likes. Not reviews.</p>
+    <p class="ag-doctrine">Locked · GPS trigger · 15 m gate · precise pins · not reviews · sort by plays</p>
+  </section>
+
+  <main id="main" class="ag-shell">
+    <section class="ag-panel" aria-labelledby="stage-heading">
+      <p class="ag-kicker" id="stage-heading">Location stage</p>
+      <div class="ag-spots" id="ag-spots"></div>
+      <p class="ag-stage-meta" id="ag-stage-meta">Pick a sample spot, or click the stage to stand somewhere.</p>
+      <div class="ag-stage-wrap">
+        <svg id="ag-stage" class="ag-stage" role="img" aria-label="Location stage"></svg>
+      </div>
+      <ul class="ag-legend">
+        <li><i class="you"></i> you are here</li>
+        <li><i class="pin"></i> in earshot</li>
+        <li><i class="far"></i> too far to hear</li>
+      </ul>
+      <div class="ag-geo-row">
+        <button class="ag-btn ag-btn-quiet" id="ag-geo" type="button">GPS trigger</button>
+      </div>
+    </section>
+
+    <div class="ag-col">
+      <section class="ag-panel" id="nearby" aria-labelledby="nearby-heading">
+        <p class="ag-kicker">In earshot</p>
+        <h2 id="nearby-heading">Nearby afterglows</h2>
+        <p class="ag-here" id="ag-here">You are here.</p>
+        <p class="ag-sort" id="ag-sort" hidden></p>
+        <p class="ag-empty" id="ag-empty">Nothing inside the 15 m gate. Walk closer — or leave the first whisper.</p>
+        <ul class="ag-list" id="ag-list"></ul>
+        <div class="ag-hear" id="ag-hear" hidden></div>
+      </section>
+
+      <section class="ag-panel" aria-labelledby="leave-heading">
+        <p class="ag-kicker">Want to leave an afterglow?</p>
+        <h2 id="leave-heading">Leave one here</h2>
+        <p class="ag-status" id="ag-status">One line is required. Voice and still are optional stubs.</p>
+        <form class="ag-form" id="ag-form">
+          <label for="ag-line">One line</label>
+          <input id="ag-line" name="line" type="text" maxlength="80" required autocomplete="off" placeholder="One line. Then leave it.">
+          <p class="ag-hint"><span id="ag-line-count">0/80</span> · required for the web prototype</p>
+
+          <label for="ag-voice-start">Voice stub</label>
+          <div class="ag-voice-row">
+            <button class="ag-btn ag-btn-quiet" id="ag-voice-start" type="button">Record</button>
+            <button class="ag-btn ag-btn-quiet" id="ag-voice-stop" type="button" disabled>Stop</button>
+            <p class="ag-rec-led" id="ag-rec-led" hidden><span></span><span id="ag-rec-label"> rec</span></p>
+          </div>
+          <div id="ag-voice-fallback">
+            <label for="ag-voice-text">Voice as text</label>
+            <textarea id="ag-voice-text" name="voiceText" maxlength="160" placeholder="If the mic will not run, leave the voice as text."></textarea>
+          </div>
+
+          <label for="ag-still">Still</label>
+          <input class="ag-file" id="ag-still" name="still" type="file" accept="image/*">
+          <img class="ag-thumb" id="ag-thumb" alt="">
+          <p class="ag-hint">Optional. No face required. Stays on this browser.</p>
+
+          <div class="ag-form-actions">
+            <button class="ag-btn ag-btn-tape" type="submit">Leave it</button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <footer class="ag-foot">
+    <p>Client-side only. localStorage. No backend. No Stripe. No multi-user sync.</p>
+    <p>
+      <a href="afterglow.html">Product page</a>
+      ·
+      <button id="ag-reset" type="button">Clear this browser’s demo</button>
+    </p>
+  </footer>
+  <script src="afterglow-demo.js"></script>
+</body>
+</html>
