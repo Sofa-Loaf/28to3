@@ -1,0 +1,314 @@
+/* Afterglow landing — near-black brand. Scoped to body.afterglow-page. */
+
+html:has(body.afterglow-page) {
+  background: #050505;
+}
+
+body.afterglow-page {
+  --paper: #050505;
+  --paper-2: #101010;
+  --ink: #d8cbb8;
+  --ink-soft: #b5a894;
+  --muted: #8a8074;
+  --line: #221e18;
+  --copper: #e8b86d;
+  --copper-deep: #e8b86d;
+  --honey: #ffd4a0;
+  --forest: #c9a36a;
+  --forest-soft: #1a1610;
+  --shadow: 0 22px 60px rgba(0, 0, 0, 0.55);
+  --ag-void: #050505;
+  --ag-raise: #12110f;
+  --ag-amber: #e8b86d;
+  --ag-amber-soft: #ffd4a0;
+  color: var(--ink);
+  background:
+    radial-gradient(900px 420px at 50% -8%, rgba(232, 184, 109, 0.1), transparent 58%),
+    radial-gradient(700px 360px at 100% 18%, rgba(232, 184, 109, 0.04), transparent 50%),
+    var(--ag-void);
+}
+
+.afterglow-page a {
+  color: var(--ag-amber);
+}
+
+.afterglow-page a:hover {
+  color: var(--ag-amber-soft);
+}
+
+.afterglow-page .skip-link {
+  background: var(--ag-amber);
+  color: #0a0804;
+}
+
+.afterglow-page .site-header {
+  background: rgba(5, 5, 5, 0.78);
+  border-bottom-color: transparent;
+}
+
+.afterglow-page .site-header.is-scrolled {
+  border-bottom-color: var(--line);
+}
+
+.afterglow-page .brand {
+  color: var(--ink);
+}
+
+.afterglow-page .nav-links a {
+  color: var(--muted);
+}
+
+.afterglow-page .nav-links a:hover,
+.afterglow-page .nav-toggle:hover,
+.afterglow-page .nav-links a[aria-current="page"] {
+  color: var(--ag-amber);
+}
+
+.afterglow-page .nav-toggle {
+  color: var(--ink);
+}
+
+.afterglow-page .eyebrow {
+  color: var(--ag-amber);
+}
+
+.afterglow-page .lede,
+.afterglow-page .section-lede {
+  color: var(--ink-soft);
+}
+
+.afterglow-page .button-primary {
+  background: var(--ag-amber);
+  color: #0a0804;
+  box-shadow: 0 0 0 0 rgba(232, 184, 109, 0);
+}
+
+.afterglow-page .button-primary:hover {
+  background: var(--ag-amber-soft);
+  color: #0a0804;
+  box-shadow: 0 0 28px rgba(232, 184, 109, 0.28);
+}
+
+.afterglow-page .button-ghost {
+  color: var(--ink);
+  border-color: #3a342c;
+}
+
+.afterglow-page .button-ghost:hover {
+  color: var(--ag-amber);
+  border-color: var(--ag-amber);
+}
+
+.afterglow-page .card,
+.afterglow-page .price-card,
+.afterglow-page .product-card {
+  background: var(--ag-raise);
+  border-color: var(--line);
+  box-shadow: none;
+}
+
+.afterglow-page .price-card.featured,
+.afterglow-page .product-card.featured {
+  border-color: rgba(232, 184, 109, 0.28);
+  background:
+    linear-gradient(180deg, rgba(232, 184, 109, 0.07), transparent 42%),
+    var(--ag-raise);
+}
+
+.afterglow-page .badge {
+  background: rgba(232, 184, 109, 0.1);
+  color: var(--ag-amber);
+}
+
+.afterglow-page .section-alt {
+  background: #080808;
+  border-block-color: var(--line);
+}
+
+.afterglow-page .fine-print,
+.afterglow-page .price-note {
+  color: var(--muted);
+}
+
+.afterglow-page .fine-print a {
+  color: var(--ag-amber);
+}
+
+.afterglow-page code {
+  color: var(--ag-amber-soft);
+}
+
+.afterglow-page .site-footer {
+  border-top-color: var(--line);
+}
+
+.afterglow-page .footer-links a {
+  color: var(--muted);
+}
+
+.afterglow-page .footer-links a:hover,
+.afterglow-page .footer-links a[aria-current="page"] {
+  color: var(--ag-amber);
+}
+
+.afterglow-page .hero {
+  padding-top: 3.4rem;
+}
+
+.afterglow-page .ag-wordmark {
+  display: block;
+  width: min(34rem, 100%);
+  max-height: 8.6rem;
+  height: auto;
+  object-fit: contain;
+  object-position: left center;
+  margin: 0 0 0.15rem;
+  filter:
+    drop-shadow(0 0 18px rgba(232, 184, 109, 0.28))
+    drop-shadow(0 0 42px rgba(232, 184, 109, 0.12));
+}
+
+.afterglow-page .ag-tagline {
+  margin: 0 0 1.1rem;
+  color: var(--ag-amber-soft);
+  font-family: var(--serif);
+  font-size: clamp(1.2rem, 2.4vw, 1.55rem);
+  font-style: italic;
+  letter-spacing: 0.01em;
+  text-shadow: 0 0 22px rgba(232, 184, 109, 0.22);
+}
+
+.afterglow-page .ag-icon-plate {
+  display: grid;
+  justify-items: center;
+  gap: 1.1rem;
+  padding: 1.5rem 1.3rem 1.4rem;
+  background: #0a0a0a;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.afterglow-page .ag-icon-plate img {
+  width: min(16rem, 72%);
+  border-radius: 28%;
+  filter:
+    drop-shadow(0 0 22px rgba(232, 184, 109, 0.28))
+    drop-shadow(0 0 48px rgba(232, 184, 109, 0.12));
+}
+
+.afterglow-page .ag-icon-meta {
+  margin: 0;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.afterglow-page .ag-feature {
+  margin: 0 auto 0.4rem;
+  width: min(var(--max), calc(100% - 2rem));
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #000;
+}
+
+.afterglow-page .ag-feature img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.afterglow-page .privacy-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.4rem;
+}
+
+.afterglow-page .privacy-grid h3 {
+  color: var(--ag-amber);
+}
+
+.afterglow-page .privacy-grid p,
+.afterglow-page .card p {
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+.afterglow-page .doctrine-list {
+  margin: 0;
+  padding: 1.1rem 1.2rem 1.15rem 1.4rem;
+  background: #0a0a0a;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  color: var(--ink-soft);
+}
+
+.afterglow-page .doctrine-list li + li {
+  margin-top: 0.45rem;
+}
+
+.afterglow-page .recorder {
+  background: #0a0a0a;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  box-shadow: none;
+}
+
+.afterglow-page .recorder-top .summary-kicker,
+.afterglow-page .track-name,
+.afterglow-page .recorder-stamps {
+  color: var(--muted);
+}
+
+.afterglow-page .recorder-led {
+  color: var(--ag-amber);
+}
+
+.afterglow-page .recorder-led span {
+  background: var(--ag-amber);
+  box-shadow: 0 0 0 3px rgba(232, 184, 109, 0.18), 0 0 16px rgba(232, 184, 109, 0.45);
+}
+
+.afterglow-page .recorder-tracks li {
+  border-top-color: var(--line);
+}
+
+.afterglow-page .track-meter i {
+  background: var(--ag-amber);
+  box-shadow: 0 0 10px rgba(232, 184, 109, 0.35);
+}
+
+.afterglow-page .track-meter i.is-dim {
+  background: #2a2620;
+  box-shadow: none;
+}
+
+@media (max-width: 900px) {
+  .afterglow-page .privacy-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .afterglow-page .nav-links {
+    background: #101010;
+    border-color: var(--line);
+    box-shadow: var(--shadow);
+  }
+
+  .afterglow-page .ag-wordmark {
+    max-height: 6.4rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .afterglow-page .button-primary,
+  .afterglow-page .ag-wordmark,
+  .afterglow-page .ag-icon-plate img {
+    filter: none;
+    box-shadow: none;
+    text-shadow: none;
+  }
+}

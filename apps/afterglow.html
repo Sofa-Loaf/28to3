@@ -4,19 +4,22 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Afterglow — 28to3.me</title>
-  <meta name="description" content="Afterglow is free. Android and Play first. GPS drops a precise pin. Inside ~50ft / 15m you hear whispers — residue ranked by plays, never a rating of the place. Not reviews. Sold by 28to3.me.">
-  <meta name="theme-color" content="#f6efe4">
+  <meta name="description" content="Whispers left where you stood. Afterglow is free. Android and Play first. GPS drops a precise pin. Inside ~50ft / 15m you hear residue ranked by plays — never a rating of the place. Not reviews.">
+  <meta name="theme-color" content="#050505">
   <link rel="canonical" href="https://sofa-loaf.github.io/28to3/apps/afterglow.html">
-  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/afterglow/afterglow-app-icon.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/afterglow/afterglow-app-icon.png">
   <meta property="og:title" content="Afterglow — 28to3.me">
-  <meta property="og:description" content="Free. Android and Play first. GPS pin. ~50ft / 15m listen radius. Residue ranked by plays — never rate the place. Not reviews. Field-recorder whispers.">
+  <meta property="og:description" content="Whispers left where you stood. Free. Android and Play first. Precise pin. ~50ft / 15m listen gate. Not reviews.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://sofa-loaf.github.io/28to3/apps/afterglow.html">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:image" content="https://sofa-loaf.github.io/28to3/apps/assets/afterglow/afterglow-play-feature.png">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,620;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:ital,wght@0,400;0,600;0,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="afterglow.css">
 </head>
 <body class="afterglow-page">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -24,8 +27,8 @@
     <div class="wrap nav">
       <a class="brand" href="../index.html" aria-label="28to3.me home">
         <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
-          <rect width="64" height="64" rx="16" fill="#1C1915"/>
-          <text x="32" y="41" text-anchor="middle" font-family="Georgia, serif" font-size="22" font-weight="700" fill="#F6EFE4">28</text>
+          <rect width="64" height="64" rx="16" fill="#101010"/>
+          <text x="32" y="41" text-anchor="middle" font-family="Georgia, serif" font-size="22" font-weight="700" fill="#E8B86D">28</text>
         </svg>
         28to3.me
       </a>
@@ -40,6 +43,7 @@
         <a href="../sophpdf.html">SophPDF</a>
         <a href="../soph-explorer.html">Explorer</a>
         <a href="afterglow.html" aria-current="page">Afterglow</a>
+        <a href="#privacy">Privacy</a>
         <a href="../about.html">About</a>
         <a href="#get">Get it</a>
         <a href="../index.html#contact">Contact</a>
@@ -52,21 +56,21 @@
       <div class="hero-grid">
         <div>
           <p class="eyebrow">Sold by 28to3.me · Free · Android / Play first</p>
-          <h1>Afterglow</h1>
-          <p class="lede">GPS drops a pin when you leave. Inside ~50ft / 15m you hear the whispers — residue ranked by plays, never a rating of the place. Not reviews. Then move on. Free. Android and Play first. iOS later.</p>
+          <h1>
+            <img class="ag-wordmark" src="assets/afterglow/afterglow-wordmark.png" alt="Afterglow" width="969" height="404">
+          </h1>
+          <p class="ag-tagline">Whispers left where you stood.</p>
+          <p class="lede">GPS drops a precise pin when you leave. Inside ~50ft / 15m you hear the whispers — residue ranked by plays, never a rating of the place. Not reviews. No feed. Then move on. Free. Android and Play first. iOS later.</p>
           <div class="hero-actions">
             <a class="button button-primary" href="https://github.com/Sofa-Loaf/afterglow">Get it on GitHub</a>
             <a class="button button-ghost" href="afterglow-demo.html">Try the web prototype</a>
-            <a class="button button-ghost" href="../index.html#products">All products</a>
+            <a class="button button-ghost" href="#privacy">Privacy</a>
           </div>
-          <p class="fine-print">Free. No Stripe. GPS trigger. Pin is precise. Listen radius ~50ft / 15m. Rank residue by plays — never rate the place. Not reviews. Play listing next — iOS later. Source: <a href="https://github.com/Sofa-Loaf/afterglow">Sofa-Loaf/afterglow</a>. Meeting demo: <a href="afterglow-demo.html">web prototype</a>.</p>
+          <p class="fine-print">Free. No Stripe. GPS trigger. Pin is precise. Listen radius ~50ft / 15m. Rank residue by plays — never rate the place. Not reviews. No Yelp, likes, or comments. Play listing next — iOS later. Source: <a href="https://github.com/Sofa-Loaf/afterglow">Sofa-Loaf/afterglow</a>. Meeting demo: <a href="afterglow-demo.html">web prototype</a>.</p>
         </div>
-        <aside class="recorder" aria-label="Afterglow field recorder">
-          <div class="recorder-top">
-            <p class="summary-kicker">Field recorder · whispers</p>
-            <p class="recorder-led" aria-hidden="true"><span></span> rec</p>
-          </div>
-          <p class="recorder-label">hear it only here</p>
+        <aside class="ag-icon-plate" aria-label="Afterglow app icon">
+          <img src="assets/afterglow/afterglow-app-icon.png" alt="" width="1024" height="1024">
+          <p class="ag-icon-meta">Android / Play first · iOS later</p>
           <ol class="recorder-tracks">
             <li>
               <span class="track-name">gps pin</span>
@@ -81,10 +85,13 @@
               <span class="track-meter" aria-hidden="true"><i></i><i></i><i class="is-dim"></i><i class="is-dim"></i><i class="is-dim"></i></span>
             </li>
           </ol>
-          <p class="recorder-stamps">Free · Android / Play first · not reviews</p>
         </aside>
       </div>
     </section>
+
+    <figure class="ag-feature">
+      <img src="assets/afterglow/afterglow-play-feature.png" alt="Afterglow — Whispers left where you stood." width="1280" height="720">
+    </figure>
 
     <section class="section section-alt" id="what">
       <div class="wrap">
@@ -98,21 +105,52 @@
           </article>
           <article class="card">
             <h3>~50ft / 15m</h3>
-            <p>Listen radius is about fifty feet — fifteen meters. Inside, whispers. Outside, quiet.</p>
+            <p>Listen radius is about fifty feet — fifteen meters. Inside, whispers. Outside, quiet. The radius is the access gate, not a blur on the pin.</p>
           </article>
           <article class="card">
             <h3>Plays, not ratings</h3>
-            <p>Residue ranks by how often it is heard. Never rate the place. Not reviews.</p>
+            <p>When a landmark gathers residue, plays will rank the whispers. Never rate the place. Not reviews. No stars, likes, or comments.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="section" id="get">
+    <section class="section" id="privacy">
+      <div class="wrap">
+        <p class="eyebrow">Privacy</p>
+        <h2>Ephemeral. Anonymous. Not sold. No feed.</h2>
+        <p class="section-lede">Afterglow asks for sensors only to leave a whisper or stand at a pin. There is no account. Nothing here is a social graph. Play Data safety matches this page.</p>
+        <div class="privacy-grid">
+          <article class="card">
+            <h3>Location</h3>
+            <p>GPS is the trigger. The pin is precise — exact lat/lng, not a neighborhood blob. Listening is gated to ~50ft / 15m of that pin. Foreground only in v0. No background location. No live map of people.</p>
+          </article>
+          <article class="card">
+            <h3>Microphone</h3>
+            <p>Only when you start an 8–12 second voice note. If you never record, the mic stays off. The take is a whisper at the pin, then it expires.</p>
+          </article>
+          <article class="card">
+            <h3>Camera</h3>
+            <p>Only for a still you choose. A face is not required. If you never take a photo, the camera stays off.</p>
+          </article>
+        </div>
+        <ul class="doctrine-list">
+          <li>Anonymous by default. No email, phone, or login.</li>
+          <li>Short-lived — days to weeks; default 14 days, then purged.</li>
+          <li>Not sold. No ads SDK. No analytics pixel on this landing.</li>
+          <li>No feed. No likes. No comments. Not Yelp. Never rate the place.</li>
+          <li>Plays will rank residue later. The place is never scored.</li>
+          <li>v0 stays on device. If a later build uploads residue, this page updates first.</li>
+        </ul>
+        <p class="fine-print" style="margin-top: 1rem;">Site-wide policy: <a href="../privacy.html">privacy.html</a>. In-repo source: <a href="https://github.com/Sofa-Loaf/afterglow/blob/main/docs/PRIVACY.md">docs/PRIVACY.md</a> on Sofa-Loaf/afterglow.</p>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="get">
       <div class="wrap">
         <p class="eyebrow">Get it from 28to3.me</p>
         <h2>Free. Android and Play first.</h2>
-        <p class="section-lede">No Payment Link. No invented checkout. Afterglow is free. Play listing is next. iOS later. Seller is still <strong>28to3.me</strong>.</p>
+        <p class="section-lede">No Payment Link. No invented checkout. Afterglow is free. Source and builds live on GitHub. Play listing is next. iOS later. Seller is still <strong>28to3.me</strong>.</p>
         <div class="pricing-grid soph-price-grid">
           <article class="price-card featured">
             <span class="badge">Free</span>
@@ -130,7 +168,7 @@
               <a class="button button-primary" href="https://github.com/Sofa-Loaf/afterglow">Open Sofa-Loaf/afterglow</a>
               <a class="button button-ghost" href="afterglow-demo.html">Try the web prototype</a>
             </div>
-            <p class="fine-print" style="margin-top: 0.9rem;">This page lives at <code>apps/afterglow.html</code> on 28to3.me. Web prototype: <code>apps/afterglow-demo.html</code>. Expo sits underneath — you do not need it to use the app.</p>
+            <p class="fine-print" style="margin-top: 0.9rem;">This page lives at <code>apps/afterglow.html</code> on 28to3.me. Brand assets: <code>apps/assets/afterglow/</code>. Web prototype: <code>apps/afterglow-demo.html</code>. Expo sits underneath — you do not need it to use the app.</p>
           </article>
           <article class="price-card">
             <span class="badge">Also sold</span>
@@ -147,7 +185,7 @@
       </div>
     </section>
 
-    <section class="section section-alt" id="also">
+    <section class="section" id="also">
       <div class="wrap">
         <p class="eyebrow">Also from 28to3.me</p>
         <h2>Actionscope is first. The cheat sheet is $0.99.</h2>
@@ -171,10 +209,11 @@
         <a href="../about.html">About</a>
         <a href="afterglow.html" aria-current="page">Afterglow</a>
         <a href="afterglow-demo.html">Web prototype</a>
+        <a href="#privacy">Privacy</a>
         <a href="../sophpdf.html">SophPDF Debloat</a>
         <a href="../soph-explorer.html">Soph Explorer Debloat</a>
         <a href="minute-cheat-sheet.html">Minute Cheat Sheet</a>
-        <a href="../privacy.html">Privacy</a>
+        <a href="../privacy.html">Site privacy</a>
         <a href="../terms.html">Terms</a>
         <a href="https://github.com/Sofa-Loaf/afterglow">GitHub</a>
         <a href="mailto:hello@28to3.me">hello@28to3.me</a>
