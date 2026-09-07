@@ -132,9 +132,10 @@
   function addOs(os, key, minutes, dollars, net, gross, larger) {
     if (!os[key] || !minutes) return;
     var rate = RATES[key];
+    var list = dollars != null ? dollars : minutes * rate.perMin;
     os[key].minutes += minutes;
     os[key].included += minutes * rate.multiplier;
-    os[key].dollars += dollars != null ? dollars : minutes * rate.perMin;
+    os[key].dollars += list;
     os[key].net += net || 0;
     os[key].gross += gross || 0;
     os[key].rows += 1;
@@ -184,19 +185,19 @@
       var minutes = /sec/.test(unit) ? (quantity === 0 ? 0 : Math.ceil(quantity / 60)) : quantity;
       var net = parseNumber(cell(row, ["netamount", "net"]));
       var gross = parseNumber(cell(row, ["grossamount", "gross"]));
-      var unitPrice = parseNumber(cell(row, ["appliedcostperquantity", "priceperunit", "priceperunit"]));
-      var dollars = net != null ? net : gross != null ? gross : unitPrice != null ? minutes * unitPrice : minutes * RATES[osKey].perMin;
+      var unitPrice = parseNumber(cell(row, ["appliedcostperquantity", "priceperunit"]));
+      var list = unitPrice != null ? minutes * unitPrice : minutes * RATES[osKey].perMin;
       var repo = cell(row, ["repository", "repositoryname"]);
       var org = cell(row, ["organization", "owner", "organizationname"]);
       var workflow = workflowName(cell(row, ["workflowpath", "actionsworkflow", "workflow"]));
       var larger = isLargerRunner(sku);
 
-      addOs(os, osKey, minutes, dollars, net, gross, larger);
+      addOs(os, osKey, minutes, list, net, gross, larger);
       lines.push({
         sku: sku,
         os: osKey,
         minutes: minutes,
-        dollars: dollars,
+        dollars: list,
         net: net,
         gross: gross,
         repo: repo,
@@ -208,10 +209,11 @@
       if (workflow || repo) {
         var label = [repo || org, workflow].filter(Boolean).join(" · ") || "unlabeled";
         if (!workflows[label]) {
-          workflows[label] = { label: label, repo: repo, workflow: workflow, minutes: 0, dollars: 0, included: 0, os: {} };
+          workflows[label] = { label: label, repo: repo, workflow: workflow, minutes: 0, dollars: 0, net: 0, included: 0, os: {} };
         }
         workflows[label].minutes += minutes;
-        workflows[label].dollars += dollars;
+        workflows[label].dollars += list;
+        workflows[label].net += net || 0;
         workflows[label].included += minutes * RATES[osKey].multiplier;
         workflows[label].os[osKey] = (workflows[label].os[osKey] || 0) + minutes;
       }
@@ -369,15 +371,16 @@
     };
 
     if (!empty && leader && leader.value > 0) {
-      var share = dollarField === "included"
-        ? Math.round((leader.row.included / totals.included) * 100)
-        : Math.round((leader.row.dollars / (totals.dollars || 1)) * 100);
+      var shareValue = dollarField === "included" ? leader.row.included : (dollarField === "net" ? leader.row.net : leader.row.dollars);
+      var shareTotal = dollarField === "included" ? totals.included : (dollarField === "net" ? totals.net : totals.dollars);
+      var share = shareTotal ? Math.round((shareValue / shareTotal) * 100) : 0;
+      var shareOf = dollarField === "net" ? "report net" : dollarField === "included" ? "included-minute burn" : "list $";
       if (leader.key === "macos") {
         driver.title = "macOS drove the bill.";
-        driver.body = leader.rate.label + " used " + formatMinutes(leader.row.minutes) + " at 10× included-minute burn (" + formatMinutes(leader.row.included) + " included) and " + money4(leader.row.dollars) + " at list. That is about " + share + "% of this paste — even when Linux minutes look larger.";
+        driver.body = leader.rate.label + " used " + formatMinutes(leader.row.minutes) + " at 10× included-minute burn (" + formatMinutes(leader.row.included) + " included) and " + money4(leader.row.dollars) + " at list. That is about " + share + "% of " + shareOf + " — even when Linux minutes look larger.";
       } else if (leader.key === "windows") {
         driver.title = "Windows minutes are doing the damage.";
-        driver.body = "Windows used " + formatMinutes(leader.row.minutes) + " at 2× (" + formatMinutes(leader.row.included) + " included) and " + money4(leader.row.dollars) + " at list — about " + share + "% of this paste. A wide Windows matrix bills twice the included minutes of the same Linux jobs.";
+        driver.body = "Windows used " + formatMinutes(leader.row.minutes) + " at 2× (" + formatMinutes(leader.row.included) + " included) and " + money4(leader.row.dollars) + " at list — about " + share + "% of " + shareOf + ". A wide Windows matrix bills twice the included minutes of the same Linux jobs.";
       } else {
         driver.title = "Linux minutes dominate this paste.";
         driver.body = "Linux is 1×, so " + formatMinutes(linux.minutes) + " is " + formatMinutes(linux.included) + " included and " + money4(linux.dollars) + " at list. If finance still saw a surprise, look for retries, a quota reset, or minutes this report does not break out by job.";
