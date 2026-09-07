@@ -1165,7 +1165,8 @@ pre {
   font-weight: 650;
 }
 
-.calc-field input[type="text"] {
+.calc-field input[type="text"],
+.calc-field textarea {
   width: 100%;
   max-width: 20rem;
   min-height: 46px;
@@ -1178,7 +1179,15 @@ pre {
   font-family: var(--mono);
 }
 
-.calc-field input[type="text"]:focus {
+.calc-field textarea {
+  max-width: none;
+  min-height: 14rem;
+  resize: vertical;
+  line-height: 1.45;
+}
+
+.calc-field input[type="text"]:focus,
+.calc-field textarea:focus {
   outline: 2px solid var(--copper);
   outline-offset: 2px;
 }
@@ -1269,6 +1278,121 @@ pre {
   margin: 0 0 0.75rem;
 }
 
+.billshot-layout {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 1.2rem;
+  align-items: start;
+}
+
+.billshot-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 0 0 1.1rem;
+}
+
+.billshot-label {
+  display: block;
+  margin: 0 0 0.4rem;
+  font-weight: 650;
+}
+
+.billshot-drop {
+  display: block;
+  padding: 1rem 1.05rem;
+  border: 1px dashed #cfc2ae;
+  border-radius: 14px;
+  background: #fff7ea;
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+
+.billshot-drop.is-over {
+  border-color: var(--ink);
+  background: #fffaf2;
+}
+
+.billshot-drop input[type="file"] {
+  display: block;
+  width: 100%;
+  margin: 0 0 0.65rem;
+  font: inherit;
+}
+
+.billshot-preview {
+  margin: 0.75rem 0 0;
+}
+
+.billshot-preview img {
+  width: 100%;
+  max-height: 16rem;
+  object-fit: contain;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fffaf2;
+}
+
+.billshot-preview figcaption {
+  margin: 0.45rem 0 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.billshot-preview.is-hidden,
+.is-hidden {
+  display: none;
+}
+
+.billshot-manual {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.billshot-manual label {
+  margin: 0;
+}
+
+.billshot-manual input[type="text"] {
+  display: block;
+  width: 100%;
+  max-width: none;
+  margin-top: 0.35rem;
+}
+
+.billshot-facts {
+  display: grid;
+  gap: 0.75rem;
+  margin: 1rem 0 0;
+}
+
+.billshot-facts article {
+  padding: 0.75rem 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #fff7ea;
+}
+
+.billshot-facts h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1.05rem;
+}
+
+.billshot-facts p {
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+.billshot-table {
+  min-width: 0;
+  margin: 0.4rem 0 1rem;
+}
+
+#flow-wrap {
+  margin-bottom: 1rem;
+}
+
 @media (max-width: 900px) {
   .hero-grid,
   .product-grid,
@@ -1288,12 +1412,18 @@ pre {
   .contact-panel-5,
   .convert-grid,
   .calc-layout,
+  .billshot-layout,
   .app-grid {
     grid-template-columns: 1fr;
   }
 
-  .calc-field input[type="text"] {
+  .calc-field input[type="text"],
+  .calc-field textarea {
     max-width: none;
+  }
+
+  .billshot-manual {
+    grid-template-columns: 1fr;
   }
 
   .os-option {
