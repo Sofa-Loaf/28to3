@@ -12,6 +12,7 @@ Public landing page for **28to3.me**, the seller of **Actionscope**, **Afterglow
 | [SophPDF Debloat](sophpdf.html) | Easy, lite PDF editor without the bloat. Everyday editing for office admins / older office workers: open, annotate, fill forms, sign, print. Same **Soph* Debloat** family as Soph Explorer Debloat. | **$29 one-time** when Stripe exists (stub/CTA only — do not invent a Payment Link). | [Sofa-Loaf/pdf-editor](https://github.com/Sofa-Loaf/pdf-editor) is **private**, so download may be limited. Landing files in that repo (`docs/landing`) are not a public URL yet. |
 | [Soph Explorer Debloat](soph-explorer.html) | Free, lite, fast Windows file explorer — fast search, PDF preview by default — for office users who hate Explorer bloat. Same **Soph* Debloat** family as SophPDF Debloat. | **Free forever.** No Stripe. | Public: [Sofa-Loaf/soph-explorer](https://github.com/Sofa-Loaf/soph-explorer) |
 | [Afterglow](apps/afterglow.html) | GPS trigger. Precise pin. Listen radius **~50ft / 15m**. Residue ranked by plays — never rate the place. Not reviews. Tagline: *Whispers left where you stood.* Near-black brand. Privacy: [apps/afterglow.html#privacy](apps/afterglow.html#privacy). **Android / Play first; iOS later.** Web prototype: [apps/afterglow-demo.html](apps/afterglow-demo.html). Assets: `apps/assets/afterglow/`. | **Free.** No Stripe. | Public: [Sofa-Loaf/afterglow](https://github.com/Sofa-Loaf/afterglow) |
+| [Billshot](apps/billshot.html) | Free client-side GitHub Actions usage / billing explainer. Paste a usage report (or drop a screenshot and type the minutes). Explains minute rounding (12s still bills 1 min), Linux 1× / Windows 2× / macOS 10×, and what likely drove the bill. | **Free.** No Stripe. | Public: [Sofa-Loaf/billshot](https://github.com/Sofa-Loaf/billshot). Live path: `apps/billshot.html` |
 | [Minute Cheat Sheet](apps/minute-cheat-sheet.html) | One-page PDF (+ print-friendly HTML) of Actions minute quirks: 12s still bills 1 rounded minute; Linux 1× / Windows 2× / macOS 10×; Job Summary columns; pin `@v0.1.3`. | **$0.99 one-time**. Stripe product name: **Minute Cheat Sheet — $0.99**. | This repo: `apps/minute-cheat-sheet.html`, `apps/minute-cheat-sheet.pdf`, `apps/thanks-cheat-sheet.html` |
 
 - Install Actionscope (GitHub org only): `uses: Sofa-Loaf/actionscope@v0.1.3`
@@ -41,6 +42,7 @@ GitHub Pages is deployed from `main` by [`.github/workflows/pages.yml`](.github/
 | --- | --- |
 | Home | `index.html` |
 | Job Summary demo | `demo.html` |
+| Billshot | `apps/billshot.html` |
 | Minutes calculator | `apps/minutes-calculator.html` |
 | Minute Cheat Sheet | `apps/minute-cheat-sheet.html` |
 | Minute Cheat Sheet (print) | `apps/minute-cheat-sheet-print.html` |
@@ -72,6 +74,7 @@ If the first workflow run needs Pages enabled in the UI: **Settings → Pages �
 - SophPDF Debloat: **$29 one-time** when a Stripe Payment Link exists. Do not invent a link; the site uses a stub/email CTA until one is pasted in.
 - Soph Explorer Debloat: **free forever**. Do not add Stripe.
 - Afterglow: **free**. Do not add Stripe.
+- Billshot: **free**. Do not add Stripe. Client-side usage-report explainer only.
 - Minute Cheat Sheet: **$0.99 one-time**. Stripe product name: **Minute Cheat Sheet — $0.99**. Payment Link: https://buy.stripe.com/28E28s03W7XXh0MbOT0co01. Success URL: https://28to3.me/apps/thanks-cheat-sheet.html
 
 ## Local preview

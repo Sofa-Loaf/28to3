@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Billshot — GitHub Actions usage explainer — 28to3.me</title>
+  <meta name="description" content="Free client-side GitHub Actions usage explainer. Paste a usage report. See why 12 seconds still bills 1 minute, Linux 1× / Windows 2× / macOS 10×, and what drove the bill.">
+  <meta name="theme-color" content="#f6efe4">
+  <link rel="canonical" href="https://sofa-loaf.github.io/28to3/apps/billshot.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <meta property="og:title" content="Billshot — GitHub Actions usage explainer — 28to3.me">
+  <meta property="og:description" content="Paste a usage report. Minute rounding, OS multipliers, what drove the bill. Free. Client-side. No Stripe.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sofa-loaf.github.io/28to3/apps/billshot.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,620;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:ital,wght@0,400;0,600;0,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="../index.html" aria-label="28to3.me home">
+        <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+          <rect width="64" height="64" rx="16" fill="#1C1915"/>
+          <text x="32" y="41" text-anchor="middle" font-family="Georgia, serif" font-size="22" font-weight="700" fill="#F6EFE4">28</text>
+        </svg>
+        28to3.me
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav id="site-nav" class="nav-links" aria-label="Primary">
+        <a href="../index.html#products">Products</a>
+        <a href="../demo.html">Demo</a>
+        <a href="../teardown-sample.html">Teardown</a>
+        <a href="../index.html#apps" aria-current="page">Web Apps</a>
+        <a href="../index.html#install">Install</a>
+        <a href="../index.html#pricing">Pricing</a>
+        <a href="../sophpdf.html">SophPDF</a>
+        <a href="../soph-explorer.html">Explorer</a>
+        <a href="../about.html">About</a>
+        <a href="../index.html#contact">Contact</a>
+        <a href="https://github.com/Sofa-Loaf/billshot">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero wrap" id="top">
+      <p class="eyebrow">Web Apps · 28to3.me</p>
+      <h1>Billshot</h1>
+      <p class="lede">Paste a GitHub Actions usage report. Billshot explains the lump sum: a <strong>12-second job still bills 1 minute</strong>, Linux is 1×, Windows is 2×, macOS is 10×, and which OS likely drove the bill.</p>
+      <p class="fine-print">Free. Client-side only. Paste stays in this browser — nothing is uploaded. No account. No Stripe. Source: <a href="https://github.com/Sofa-Loaf/billshot">Sofa-Loaf/billshot</a>. Same list rates as Actionscope v0.1.3. <strong>Estimates, not an invoice.</strong></p>
+    </section>
+
+    <section class="section section-alt" id="explainer" aria-labelledby="explainer-heading">
+      <div class="wrap billshot-layout">
+        <form class="card calc-form billshot-form" id="billshot-form" novalidate>
+          <h2 id="explainer-heading">Usage report</h2>
+          <p class="section-lede">CSV from Billing → Get usage report, Actionscope Job Summary text, or minutes copied off the billing page.</p>
+
+          <div class="calc-field">
+            <label for="report">Paste usage-report text</label>
+            <textarea id="report" name="report" rows="11" spellcheck="false" autocomplete="off" placeholder="date,product,sku,quantity…"></textarea>
+            <p class="field-hint" id="report-hint">Headers with <code>sku</code> and <code>quantity</code> parse as CSV. <code>Linux 280 minutes</code> works too.</p>
+          </div>
+
+          <div class="billshot-actions">
+            <button class="button button-ghost" type="button" id="load-sample">Load sample paste</button>
+            <button class="button button-ghost" type="button" id="clear-report">Clear</button>
+          </div>
+
+          <div class="calc-field">
+            <span class="billshot-label" id="shot-label">Optional screenshot</span>
+            <label class="billshot-drop" id="shot-drop" for="shot">
+              <input id="shot" name="shot" type="file" accept="image/*">
+              <span id="shot-copy">Drop a billing screenshot, or choose a file. Preview only — this page does not read pixels. Type the minutes you can see.</span>
+            </label>
+            <figure class="billshot-preview is-hidden" id="shot-preview">
+              <img id="shot-img" alt="Dropped billing screenshot preview">
+              <figcaption>Preview. Numbers below are typed by you.</figcaption>
+            </figure>
+          </div>
+
+          <fieldset class="calc-field" id="manual-fields">
+            <legend>Manual minutes (no OCR)</legend>
+            <div class="billshot-manual">
+              <label>
+                Linux minutes
+                <input id="manual-linux" name="manual-linux" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" placeholder="280">
+              </label>
+              <label>
+                Windows minutes
+                <input id="manual-windows" name="manual-windows" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" placeholder="42">
+              </label>
+              <label>
+                macOS minutes
+                <input id="manual-macos" name="manual-macos" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" placeholder="27">
+              </label>
+              <label>
+                Billed $ (optional)
+                <input id="manual-total" name="manual-total" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" placeholder="2.09">
+              </label>
+            </div>
+            <p class="field-hint">Used when the paste is empty. If the paste already parses, typed minutes are ignored.</p>
+          </fieldset>
+        </form>
+
+        <div class="card calc-out" id="billshot-out" aria-live="polite">
+          <p class="summary-kicker">What drove the bill</p>
+          <p class="summary-total" id="out-title">Paste a report</p>
+          <p class="summary-sub" id="out-sub">Load the sample to see a mixed-OS month.</p>
+          <p class="calc-quirk" id="out-driver"></p>
+
+          <div class="billshot-facts">
+            <article>
+              <h3 id="out-round-title">12 seconds still bills 1 minute.</h3>
+              <p id="out-round-body">GitHub rounds each started job up to the next whole minute. Usage reports already show those rounded minutes.</p>
+            </article>
+            <article>
+              <h3 id="out-mult-title">Linux 1× · Windows 2× · macOS 10×</h3>
+              <p id="out-mult-body">Included minutes are not wall minutes. Windows burns 2 included minutes per rounded minute. macOS burns 10.</p>
+            </article>
+          </div>
+
+          <dl class="calc-dl" id="out-totals">
+            <div>
+              <dt>Rounded minutes</dt>
+              <dd id="out-minutes">—</dd>
+            </div>
+            <div>
+              <dt>Included-minute burn</dt>
+              <dd id="out-included">—</dd>
+            </div>
+            <div>
+              <dt>Est. $ (list)</dt>
+              <dd id="out-dollars">—</dd>
+            </div>
+            <div>
+              <dt>Report net $</dt>
+              <dd id="out-net">—</dd>
+            </div>
+          </dl>
+
+          <div class="table-scroll">
+            <table class="jobs-table billshot-table" id="os-table">
+              <thead>
+                <tr>
+                  <th scope="col">OS</th>
+                  <th scope="col" class="num">Rounded min</th>
+                  <th scope="col" class="num">Included</th>
+                  <th scope="col" class="num">Est. $</th>
+                </tr>
+              </thead>
+              <tbody id="os-body">
+                <tr><th scope="row">Linux 1×</th><td class="num">—</td><td class="num">—</td><td class="num">—</td></tr>
+                <tr><th scope="row">Windows 2×</th><td class="num">—</td><td class="num">—</td><td class="num">—</td></tr>
+                <tr class="macos"><th scope="row">macOS 10×</th><td class="num">—</td><td class="num">—</td><td class="num">—</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="table-scroll" id="flow-wrap" hidden>
+            <table class="jobs-table billshot-table" id="flow-table">
+              <thead>
+                <tr>
+                  <th scope="col">Named line</th>
+                  <th scope="col" class="num">Minutes</th>
+                  <th scope="col" class="num">Included</th>
+                  <th scope="col" class="num">Est. $</th>
+                </tr>
+              </thead>
+              <tbody id="flow-body"></tbody>
+            </table>
+          </div>
+
+          <p class="runner-hint" id="out-rates">List prices used (same as Actionscope v0.1.3, <a href="https://docs.github.com/en/billing/reference/actions-runner-pricing">GitHub runner pricing</a>): <code>actions_linux</code> $0.0060/min, <code>actions_windows</code> $0.0100/min, <code>actions_macos</code> $0.0620/min. Included-minute multipliers: Linux 1×, Windows 2×, macOS 10×.</p>
+          <p class="fine-print" id="out-notes"><strong>Estimates, not an invoice.</strong> Public repos, self-hosted runners, and larger-runner SKUs are out of scope for included minutes.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="next" aria-labelledby="next-heading">
+      <div class="wrap">
+        <p class="eyebrow">Next, if you need names</p>
+        <h2 id="next-heading">Billshot explains the lump. Actionscope names the jobs.</h2>
+        <p class="section-lede">This page does not pin an Action or book a review. Soft next steps from 28to3.me when you want per-run columns or a written teardown.</p>
+        <div class="card install-box">
+          <div class="install-head">
+            <p>Pin the free Action</p>
+            <button class="copy-btn" type="button" data-copy>Copy</button>
+          </div>
+          <pre><code data-snippet>- name: Actionscope
+  uses: Sofa-Loaf/actionscope@v0.1.3</code></pre>
+        </div>
+        <div class="cta-row" style="margin-top: 1.2rem;">
+          <a class="button button-ghost" href="../index.html#install">Actionscope @v0.1.3</a>
+          <a class="button button-ghost" href="https://buy.stripe.com/28E28s03W7XXh0MbOT0co01">Minute Cheat Sheet — $0.99</a>
+          <a class="button button-primary" href="https://buy.stripe.com/8x2dRa7woa65dOA6uz0co00">Minute Teardown — $49</a>
+        </div>
+        <p class="fine-print">The $0.99 sheet is the same quirks on one page. $49 on Stripe is a booking fee for a <a href="../teardown-sample.html">Minute Teardown</a> — not a software seat. Billshot itself has no Stripe.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-row">
+      <p>© 2026 28to3.me. Billshot is free. Source: <a href="https://github.com/Sofa-Loaf/billshot">Sofa-Loaf/billshot</a>.</p>
+      <div class="footer-links">
+        <a href="../index.html">Home</a>
+        <a href="../index.html#products">Products</a>
+        <a href="../index.html#apps">Web Apps</a>
+        <a href="../demo.html">Demo</a>
+        <a href="../teardown-sample.html">Teardown</a>
+        <a href="minute-cheat-sheet.html">Minute Cheat Sheet</a>
+        <a href="../about.html">About</a>
+        <a href="../privacy.html">Privacy</a>
+        <a href="../terms.html">Terms</a>
+        <a href="https://github.com/Sofa-Loaf/billshot">GitHub</a>
+        <a href="mailto:hello@28to3.me">hello@28to3.me</a>
+      </div>
+    </div>
+  </footer>
+  <script src="../site.js"></script>
+  <script src="billshot.js"></script>
+  <script>
+(function () {
+  var report = document.getElementById("report");
+  var linux = document.getElementById("manual-linux");
+  var windows = document.getElementById("manual-windows");
+  var macos = document.getElementById("manual-macos");
+  var total = document.getElementById("manual-total");
+  var out = document.getElementById("billshot-out");
+  var shot = document.getElementById("shot");
+  var drop = document.getElementById("shot-drop");
+  var preview = document.getElementById("shot-preview");
+  var previewImg = document.getElementById("shot-img");
+  var previewUrl = "";
+
+  function setText(id, value) {
+    var el = document.getElementById(id);
+    if (el) el.textContent = value;
+  }
+
+  function manualValues() {
+    return {
+      linux: linux.value,
+      windows: windows.value,
+      macos: macos.value,
+      total: total.value
+    };
+  }
+
+  function render() {
+    var result = window.Billshot.parse(report.value, manualValues());
+    if (out) out.classList.toggle("is-invalid", result.empty);
+
+    setText("out-title", result.empty ? "Paste a report" : result.driver.title);
+    setText("out-sub", result.empty
+      ? "Load the sample to see a mixed-OS month."
+      : result.totals.minutes + " rounded min · " + result.totals.included + " included min · " + window.Billshot.money4(result.totals.dollars) + " list");
+    setText("out-driver", result.driver.body);
+    setText("out-round-title", result.rounding.title);
+    setText("out-round-body", result.rounding.body);
+    setText("out-mult-title", result.multipliers.title);
+    setText("out-mult-body", result.multipliers.body);
+    setText("out-minutes", result.empty ? "—" : window.Billshot.formatMinutes(result.totals.minutes));
+    setText("out-included", result.empty ? "—" : window.Billshot.formatMinutes(result.totals.included));
+    setText("out-dollars", result.empty ? "—" : window.Billshot.money4(result.totals.dollars));
+    setText("out-net", result.empty ? "—" : (result.totals.net > 0 ? window.Billshot.money4(result.totals.net) : (result.reported != null ? window.Billshot.money4(result.reported) : "—")));
+    setText("out-notes", result.notes.join(" "));
+
+    var body = document.getElementById("os-body");
+    if (body) {
+      body.innerHTML = ["linux", "windows", "macos"].map(function (key) {
+        var rate = result.rates[key];
+        var row = result.os[key];
+        var cls = key === "macos" ? " class=\"macos\"" : "";
+        if (result.empty) {
+          return "<tr" + cls + "><th scope=\"row\">" + rate.label + " " + rate.multiplier + "×</th><td class=\"num\">—</td><td class=\"num\">—</td><td class=\"num\">—</td></tr>";
+        }
+        return "<tr" + cls + "><th scope=\"row\">" + rate.label + " " + rate.multiplier + "×</th><td class=\"num\">" + window.Billshot.formatMinutes(row.minutes) + "</td><td class=\"num\">" + window.Billshot.formatMinutes(row.included) + "</td><td class=\"num\">" + window.Billshot.money4(row.dollars) + "</td></tr>";
+      }).join("");
+    }
+
+    var flowWrap = document.getElementById("flow-wrap");
+    var flowBody = document.getElementById("flow-body");
+    if (flowWrap && flowBody) {
+      if (!result.workflows.length) {
+        flowWrap.hidden = true;
+        flowBody.innerHTML = "";
+      } else {
+        flowWrap.hidden = false;
+        flowBody.innerHTML = result.workflows.map(function (row) {
+          return "<tr><th scope=\"row\">" + escapeHtml(row.label) + "</th><td class=\"num\">" + window.Billshot.formatMinutes(row.minutes) + "</td><td class=\"num\">" + window.Billshot.formatMinutes(row.included) + "</td><td class=\"num\">" + window.Billshot.money4(row.dollars) + "</td></tr>";
+        }).join("");
+      }
+    }
+  }
+
+  function escapeHtml(value) {
+    return String(value).replace(/[&<>"']/g, function (ch) {
+      return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" })[ch];
+    });
+  }
+
+  function showPreview(file) {
+    if (!file || !file.type || file.type.indexOf("image/") !== 0) return;
+    if (previewUrl) URL.revokeObjectURL(previewUrl);
+    previewUrl = URL.createObjectURL(file);
+    previewImg.src = previewUrl;
+    preview.classList.remove("is-hidden");
+    document.getElementById("shot-copy").textContent = file.name + " — preview only. Type the minutes you can read.";
+    document.getElementById("manual-fields").scrollIntoView({ block: "nearest" });
+  }
+
+  document.getElementById("load-sample").addEventListener("click", function () {
+    report.value = window.Billshot.SAMPLE;
+    render();
+    out.scrollIntoView({ block: "nearest" });
+  });
+
+  document.getElementById("clear-report").addEventListener("click", function () {
+    report.value = "";
+    linux.value = "";
+    windows.value = "";
+    macos.value = "";
+    total.value = "";
+    if (previewUrl) URL.revokeObjectURL(previewUrl);
+    previewUrl = "";
+    previewImg.removeAttribute("src");
+    preview.classList.add("is-hidden");
+    shot.value = "";
+    document.getElementById("shot-copy").textContent = "Drop a billing screenshot, or choose a file. Preview only — this page does not read pixels. Type the minutes you can see.";
+    render();
+  });
+
+  document.getElementById("billshot-form").addEventListener("input", render);
+  document.getElementById("billshot-form").addEventListener("submit", function (event) {
+    event.preventDefault();
+    render();
+  });
+
+  shot.addEventListener("change", function () {
+    if (shot.files && shot.files[0]) showPreview(shot.files[0]);
+  });
+
+  ["dragenter", "dragover"].forEach(function (name) {
+    drop.addEventListener(name, function (event) {
+      event.preventDefault();
+      drop.classList.add("is-over");
+    });
+  });
+  ["dragleave", "drop"].forEach(function (name) {
+    drop.addEventListener(name, function (event) {
+      event.preventDefault();
+      drop.classList.remove("is-over");
+    });
+  });
+  drop.addEventListener("drop", function (event) {
+    var file = event.dataTransfer && event.dataTransfer.files && event.dataTransfer.files[0];
+    if (file) showPreview(file);
+  });
+
+  if (/(?:[?&#]sample(?:[=&#]|$))/.test(window.location.href)) {
+    report.value = window.Billshot.SAMPLE;
+  }
+
+  render();
+})();
+  </script>
+</body>
+</html>
