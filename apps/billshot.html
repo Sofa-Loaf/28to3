@@ -363,6 +363,10 @@
     if (file) showPreview(file);
   });
 
+  if (/(?:[?&#]sample(?:[=&#]|$))/.test(window.location.href)) {
+    report.value = window.Billshot.SAMPLE;
+  }
+
   render();
 })();
   </script>
