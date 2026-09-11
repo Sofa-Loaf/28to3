@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SophPDF Debloat web demo — 28to3.me</title>
+  <meta name="description" content="Browser mock of SophPDF Debloat. Open a sample page, annotate, fill a form, sign, and print. Easy on the eyes. $4.99 one-time from 28to3.me.">
+  <meta name="theme-color" content="#14120f">
+  <link rel="canonical" href="https://sofa-loaf.github.io/28to3/apps/sophpdf-demo.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <meta property="og:title" content="SophPDF Debloat web demo — 28to3.me">
+  <meta property="og:description" content="Interactive mock of the lite PDF editor. Open, annotate, fill, sign, print. $4.99 one-time.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sofa-loaf.github.io/28to3/apps/sophpdf-demo.html">
+  <meta property="og:image" content="https://sofa-loaf.github.io/28to3/apps/assets/sophpdf/sophpdf-editor.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,620;1,9..144,500&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:ital,wght@0,400;0,600;0,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="soph-debloat-demo.css">
+</head>
+<body class="sd-body">
+  <a class="skip-link" href="#app">Skip to editor</a>
+  <p class="sd-banner">Web demo · browser mock of the Windows app · files stay on this page · 28to3.me</p>
+
+  <header class="sd-top">
+    <a class="sd-brand" href="../index.html" aria-label="28to3.me home">
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <rect width="64" height="64" rx="16" fill="#1C1915"/>
+        <text x="32" y="41" text-anchor="middle" font-family="Georgia, serif" font-size="22" font-weight="700" fill="#F6EFE4">28</text>
+      </svg>
+      28to3.me
+    </a>
+    <nav class="sd-links" aria-label="SophPDF Debloat">
+      <a href="../sophpdf.html">Product</a>
+      <a href="sophpdf-demo.html" aria-current="page">Web demo</a>
+      <a href="soph-explorer-demo.html">Explorer demo</a>
+      <a href="../soph-explorer.html">Soph Explorer</a>
+      <a href="https://github.com/Sofa-Loaf/pdf-editor">GitHub</a>
+    </nav>
+  </header>
+
+  <section class="sd-intro">
+    <h1>SophPDF Debloat</h1>
+    <p>Open a sample page. Mark it. Fill the date. Sign. Print. Big buttons, dark chrome, the page stays easy to read. This is a browser mock of the Tauri app — not the paid Windows build.</p>
+    <div class="sd-lede-actions">
+      <a class="sd-tool" href="https://buy.stripe.com/fZu7sMaIAced6m84mr0co02">Buy — $4.99</a>
+      <a class="sd-tool" href="../sophpdf.html">Product page</a>
+    </div>
+  </section>
+
+  <div class="sd-shell">
+    <div class="sd-shot-frame" aria-hidden="true">
+      <p class="sd-shot-kicker">28to3.me · Soph* Debloat</p>
+      <p class="sd-shot-name">SophPDF Debloat</p>
+    </div>
+
+    <div class="sd-window" id="app" role="application" aria-label="SophPDF Debloat editor">
+      <div class="sd-titlebar">
+        <div class="sd-titlebar-left">
+          <svg class="sd-app-icon" viewBox="0 0 64 64" aria-hidden="true">
+            <rect width="64" height="64" rx="12" fill="#E0A05A"/>
+            <text x="32" y="42" text-anchor="middle" font-family="Georgia, serif" font-size="26" font-weight="700" fill="#1C1915">S</text>
+          </svg>
+          <p class="sd-title" id="win-title">SophPDF Debloat — invoice.pdf</p>
+        </div>
+        <div class="sd-win-btns" aria-hidden="true">
+          <button type="button" tabindex="-1">–</button>
+          <button type="button" tabindex="-1">□</button>
+          <button class="is-close" type="button" tabindex="-1">×</button>
+        </div>
+      </div>
+
+      <div class="sd-menubar">
+        <div class="sd-menu" data-menu="file">
+          <button type="button" aria-expanded="false" aria-haspopup="true">File</button>
+          <ul class="sd-menu-list">
+            <li><button type="button" data-open-dialog="open-dialog">Open sample… <span class="hint">O</span></button></li>
+            <li><button type="button" data-action="print">Print… <span class="hint">P</span></button></li>
+            <li><button type="button" data-action="export">Export… <span class="hint">E</span></button></li>
+          </ul>
+        </div>
+        <div class="sd-menu" data-menu="edit">
+          <button type="button" aria-expanded="false" aria-haspopup="true">Edit</button>
+          <ul class="sd-menu-list">
+            <li><button type="button" data-tool="annotate">Annotate</button></li>
+            <li><button type="button" data-tool="fill">Fill form</button></li>
+            <li><button type="button" data-tool="sign">Sign</button></li>
+          </ul>
+        </div>
+        <div class="sd-menu" data-menu="view">
+          <button type="button" aria-expanded="false" aria-haspopup="true">View</button>
+          <ul class="sd-menu-list">
+            <li><button type="button" data-page="1">Page 1</button></li>
+            <li><button type="button" data-page="2">Page 2</button></li>
+          </ul>
+        </div>
+        <div class="sd-menu" data-menu="help">
+          <button type="button" aria-expanded="false" aria-haspopup="true">Help</button>
+          <ul class="sd-menu-list">
+            <li><button type="button" data-action="help">What this demo does</button></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sd-toolbar" role="toolbar" aria-label="Editor tools">
+        <button class="sd-tool" type="button" data-open-dialog="open-dialog">Open</button>
+        <button class="sd-tool" type="button" data-tool="annotate" aria-pressed="false">Annotate</button>
+        <button class="sd-tool" type="button" data-tool="fill" aria-pressed="false">Fill form</button>
+        <button class="sd-tool" type="button" data-tool="sign" aria-pressed="false">Sign</button>
+        <button class="sd-tool" type="button" data-action="print">Print</button>
+        <button class="sd-tool" type="button" data-action="export">Export</button>
+        <label class="sd-annotate-hint" id="tool-hint">Click the page to highlight a line. Use Stamp for Approved.</label>
+        <div class="sd-sign-panel">
+          <input class="sd-sign-input" id="sign-name" type="text" maxlength="48" placeholder="Type your name" autocomplete="name">
+          <button class="sd-tool" type="button" data-action="apply-sign">Apply signature</button>
+          <button class="sd-tool" type="button" data-action="clear-sign">Clear</button>
+        </div>
+      </div>
+
+      <div class="sd-work">
+        <aside class="sd-side" aria-label="Pages">
+          <p class="sd-side-label">Pages</p>
+          <div class="sd-thumbs">
+            <button class="sd-thumb" type="button" data-page="1" aria-current="true">
+              <span class="sd-thumb-page" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span>1</span>
+            </button>
+            <button class="sd-thumb" type="button" data-page="2" aria-current="false">
+              <span class="sd-thumb-page" aria-hidden="true"><i></i><i></i></span>
+              <span>2</span>
+            </button>
+          </div>
+        </aside>
+
+        <div class="sd-page-stage">
+          <article class="sd-paper" id="page" data-file="invoice" data-page="1">
+            <div id="marks" aria-hidden="true"></div>
+            <div id="page-body"></div>
+          </article>
+        </div>
+      </div>
+
+      <div class="sd-statusbar">
+        <span id="status-left">Ready · invoice.pdf</span>
+        <span id="status-right">Page 1 of 2 · web demo</span>
+      </div>
+    </div>
+    <p class="sd-shot-foot">$4.99 one-time · open, annotate, fill, sign, print · 28to3.me</p>
+  </div>
+
+  <p class="sd-foot">Browser mock for meetings and try-before-buy. The Windows app is sold at <a href="https://buy.stripe.com/fZu7sMaIAced6m84mr0co02">$4.99 one-time</a>. Same family: <a href="soph-explorer-demo.html">Soph Explorer Debloat demo</a>.</p>
+
+  <div class="sd-toast" id="toast" role="status" aria-live="polite"></div>
+
+  <div class="sd-modal" id="open-dialog" hidden>
+    <div class="sd-dialog" role="dialog" aria-modal="true" aria-labelledby="open-title">
+      <h2 id="open-title">Open a sample PDF</h2>
+      <p>These files live in the demo. Nothing leaves the browser.</p>
+      <div class="sd-recent">
+        <button type="button" data-file="invoice">invoice.pdf <span class="hint">2 pages</span></button>
+        <button type="button" data-file="letter">letter-to-sign.pdf <span class="hint">1 page</span></button>
+        <button type="button" data-file="timesheet">timesheet-april.pdf <span class="hint">1 page</span></button>
+      </div>
+      <div class="sd-dialog-actions">
+        <button class="sd-tool" type="button" data-close-dialog>Close</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="sd-modal" id="print-dialog" hidden>
+    <div class="sd-dialog" role="dialog" aria-modal="true" aria-labelledby="print-title">
+      <h2 id="print-title">Print</h2>
+      <p>Print two copies — one for the file, one for the envelope. This stub opens the browser print dialog.</p>
+      <div class="sd-dialog-actions">
+        <button class="sd-tool is-on" type="button" data-action="do-print">Print page</button>
+        <button class="sd-tool" type="button" data-close-dialog>Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="sd-modal" id="export-dialog" hidden>
+    <div class="sd-dialog" role="dialog" aria-modal="true" aria-labelledby="export-title">
+      <h2 id="export-title">Export</h2>
+      <p>In the Windows app this writes a PDF to Documents. Here it is a stub — marks stay on this page.</p>
+      <div class="sd-dialog-actions">
+        <button class="sd-tool is-on" type="button" data-action="do-export">Mark as exported</button>
+        <button class="sd-tool" type="button" data-close-dialog>Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="sophpdf-demo.js"></script>
+</body>
+</html>
