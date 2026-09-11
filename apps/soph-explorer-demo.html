@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Soph Explorer Debloat web demo — 28to3.me</title>
+  <meta name="description" content="Browser mock of Soph Explorer Debloat. Lite folder tree, fast search, PDF preview on by default. Free forever from 28to3.me.">
+  <meta name="theme-color" content="#14120f">
+  <link rel="canonical" href="https://sofa-loaf.github.io/28to3/apps/soph-explorer-demo.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <meta property="og:title" content="Soph Explorer Debloat web demo — 28to3.me">
+  <meta property="og:description" content="Interactive mock of the lite Windows explorer. Fast search. PDF preview by default. Free forever.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sofa-loaf.github.io/28to3/apps/soph-explorer-demo.html">
+  <meta property="og:image" content="https://sofa-loaf.github.io/28to3/apps/assets/soph-explorer/explorer-preview.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,620;1,9..144,500&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:ital,wght@0,400;0,600;0,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="soph-debloat-demo.css">
+</head>
+<body class="sd-body">
+  <a class="skip-link" href="#app">Skip to explorer</a>
+  <p class="sd-banner">Web demo · browser mock of the Windows app · files stay on this page · free forever · 28to3.me</p>
+
+  <header class="sd-top">
+    <a class="sd-brand" href="../index.html" aria-label="28to3.me home">
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <rect width="64" height="64" rx="16" fill="#1C1915"/>
+        <text x="32" y="41" text-anchor="middle" font-family="Georgia, serif" font-size="22" font-weight="700" fill="#F6EFE4">28</text>
+      </svg>
+      28to3.me
+    </a>
+    <nav class="sd-links" aria-label="Soph Explorer Debloat">
+      <a href="../soph-explorer.html">Product</a>
+      <a href="soph-explorer-demo.html" aria-current="page">Web demo</a>
+      <a href="sophpdf-demo.html">SophPDF demo</a>
+      <a href="../sophpdf.html">SophPDF</a>
+      <a href="https://github.com/Sofa-Loaf/soph-explorer">GitHub</a>
+    </nav>
+  </header>
+
+  <section class="sd-intro">
+    <h1>Soph Explorer Debloat</h1>
+    <p>A lite folder tree. A search box that filters as you type. PDF preview on by default. This is a browser mock of the Windows explorer — free forever, no Stripe.</p>
+    <div class="sd-lede-actions">
+      <a class="sd-tool" href="https://github.com/Sofa-Loaf/soph-explorer/releases/latest">Download free (Windows)</a>
+      <a class="sd-tool" href="../soph-explorer.html">Product page</a>
+    </div>
+  </section>
+
+  <div class="sd-shell">
+    <div class="sd-shot-frame" aria-hidden="true">
+      <p class="sd-shot-kicker">28to3.me · Soph* Debloat</p>
+      <p class="sd-shot-name">Soph Explorer Debloat</p>
+    </div>
+
+    <div class="sd-window" id="app" role="application" aria-label="Soph Explorer Debloat">
+      <div class="sd-titlebar">
+        <div class="sd-titlebar-left">
+          <svg class="sd-app-icon" viewBox="0 0 64 64" aria-hidden="true">
+            <rect width="64" height="64" rx="12" fill="#E0A05A"/>
+            <text x="32" y="42" text-anchor="middle" font-family="Georgia, serif" font-size="22" font-weight="700" fill="#1C1915">Ex</text>
+          </svg>
+          <p class="sd-title" id="win-title">Soph Explorer Debloat — Documents</p>
+        </div>
+        <div class="sd-win-btns" aria-hidden="true">
+          <button type="button" tabindex="-1">–</button>
+          <button type="button" tabindex="-1">□</button>
+          <button class="is-close" type="button" tabindex="-1">×</button>
+        </div>
+      </div>
+
+      <div class="sd-menubar">
+        <div class="sd-menu" data-menu="file">
+          <button type="button" aria-expanded="false" aria-haspopup="true">File</button>
+          <ul class="sd-menu-list">
+            <li><button type="button" data-action="open-pdf">Open in SophPDF…</button></li>
+            <li><button type="button" data-folder="documents">Go to Documents</button></li>
+          </ul>
+        </div>
+        <div class="sd-menu" data-menu="view">
+          <button type="button" aria-expanded="false" aria-haspopup="true">View</button>
+          <ul class="sd-menu-list">
+            <li><button type="button" data-action="focus-search">Focus search <span class="hint">/</span></button></li>
+          </ul>
+        </div>
+        <div class="sd-menu" data-menu="go">
+          <button type="button" aria-expanded="false" aria-haspopup="true">Go</button>
+          <ul class="sd-menu-list">
+            <li><button type="button" data-folder="desktop">Desktop</button></li>
+            <li><button type="button" data-folder="documents">Documents</button></li>
+            <li><button type="button" data-folder="downloads">Downloads</button></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sd-search-row">
+        <div class="sd-nav-btns">
+          <button type="button" data-action="up" aria-label="Up one folder">↑</button>
+          <button type="button" data-folder="documents" aria-label="Documents">⌂</button>
+        </div>
+        <div class="sd-path" id="path">This PC \ Documents</div>
+        <div class="sd-search">
+          <label for="search">Search</label>
+          <input id="search" type="search" placeholder="Type a name — invoice, pdf, april…" autocomplete="off">
+        </div>
+      </div>
+
+      <div class="sd-work explorer">
+        <aside class="sd-side" aria-label="Folders">
+          <p class="sd-side-label">Folders</p>
+          <ul class="sd-tree" id="tree"></ul>
+        </aside>
+        <section class="sd-files" aria-label="Files">
+          <p class="sd-files-label" id="files-label">Documents</p>
+          <ul class="sd-file-list" id="files"></ul>
+        </section>
+        <section class="sd-preview-wrap" aria-label="Preview" id="preview"></section>
+      </div>
+
+      <div class="sd-statusbar">
+        <span id="status-left">PDF preview on · 4 files</span>
+        <span id="status-right">Free forever · web demo</span>
+      </div>
+    </div>
+    <p class="sd-shot-foot">Free forever · fast search · PDF preview on · 28to3.me</p>
+  </div>
+
+  <p class="sd-foot">Browser mock — not the Windows build. Soph Explorer Debloat is <strong>free forever</strong>. Download: <a href="https://github.com/Sofa-Loaf/soph-explorer/releases/latest">GitHub Releases</a>. Pair a PDF with <a href="sophpdf-demo.html">SophPDF Debloat</a> when you need to mark, fill, sign, or print.</p>
+
+  <div class="sd-toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="soph-explorer-demo.js"></script>
+</body>
+</html>

@@ -935,6 +935,48 @@ h3 {
   grid-template-columns: 1.1fr 0.9fr;
 }
 
+.shot-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.15rem;
+  margin: 0 0 1.15rem;
+}
+
+.shot-gallery figure {
+  margin: 0;
+}
+
+.shot-gallery a {
+  display: block;
+  overflow: hidden;
+  background: #1c1915;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+}
+
+.shot-gallery img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.shot-gallery figcaption {
+  margin: 0.55rem 0.1rem 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.try-demo {
+  margin: 0.15rem 0 0;
+}
+
+.product-card .try-demo {
+  margin-top: 0.15rem;
+}
+
 .contact-panel-3 {
   grid-template-columns: 1fr 1fr 1fr;
 }
@@ -1402,6 +1444,7 @@ pre {
   .steps,
   .pricing-grid,
   .soph-price-grid,
+  .shot-gallery,
   .soph-explorer-split,
   .stats,
   .stats-4,
