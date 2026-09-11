@@ -56,6 +56,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://sofa-loaf.github.io/28to3/apps/thanks-sophpdf.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
     <loc>https://sofa-loaf.github.io/28to3/soph-explorer.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
