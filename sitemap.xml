@@ -61,9 +61,19 @@
     <priority>0.3</priority>
   </url>
   <url>
+    <loc>https://sofa-loaf.github.io/28to3/apps/sophpdf-demo.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://sofa-loaf.github.io/28to3/soph-explorer.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sofa-loaf.github.io/28to3/apps/soph-explorer-demo.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://sofa-loaf.github.io/28to3/apps/afterglow.html</loc>
