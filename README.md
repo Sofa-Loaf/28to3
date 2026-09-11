@@ -9,7 +9,7 @@ Public landing page for **28to3.me**, the seller of **Actionscope**, **Afterglow
 | Product | What it is | Price | Source |
 | --- | --- | --- | --- |
 | [Actionscope](https://github.com/Sofa-Loaf/actionscope) | GitHub Actions minute visibility. Private repos with **macOS or a wide Windows matrix** and surprise bills. Linux-only CI and enterprise Billing API shops are out of scope. | Free Action. **$49 Stripe booking fee** for a **Minute Teardown** (one org, one week). $19 App seats later. | Public: `Sofa-Loaf/actionscope` |
-| [SophPDF Debloat](sophpdf.html) | Easy, lite PDF editor without the bloat. Everyday editing for office admins / older office workers: open, annotate, fill forms, sign, print. Same **Soph* Debloat** family as Soph Explorer Debloat. | **$29 one-time** when Stripe exists (stub/CTA only — do not invent a Payment Link). | [Sofa-Loaf/pdf-editor](https://github.com/Sofa-Loaf/pdf-editor) is **private**, so download may be limited. Landing files in that repo (`docs/landing`) are not a public URL yet. |
+| [SophPDF Debloat](sophpdf.html) | Easy, lite PDF editor without the bloat. Everyday editing for office admins / older office workers: open, annotate, fill forms, sign, print. Same **Soph* Debloat** family as Soph Explorer Debloat. | **$4.99 one-time**. Payment Link: https://buy.stripe.com/fZu7sMaIAced6m84mr0co02. Success URL: https://28to3.me/apps/thanks-sophpdf.html | [Sofa-Loaf/pdf-editor](https://github.com/Sofa-Loaf/pdf-editor) is **private**, so download may be limited. Landing files in that repo (`docs/landing`) are not a public URL yet. |
 | [Soph Explorer Debloat](soph-explorer.html) | Free, lite, fast Windows file explorer — fast search, PDF preview by default — for office users who hate Explorer bloat. Same **Soph* Debloat** family as SophPDF Debloat. | **Free forever.** No Stripe. | Public: [Sofa-Loaf/soph-explorer](https://github.com/Sofa-Loaf/soph-explorer) |
 | [Afterglow](apps/afterglow.html) | GPS trigger. Precise pin. Listen radius **~50ft / 15m**. Residue ranked by plays — never rate the place. Not reviews. Tagline: *Whispers left where you stood.* Near-black brand. Privacy: [apps/afterglow.html#privacy](apps/afterglow.html#privacy). **Android / Play first; iOS later.** Web prototype: [apps/afterglow-demo.html](apps/afterglow-demo.html). Assets: `apps/assets/afterglow/`. | **Free.** No Stripe. | Public: [Sofa-Loaf/afterglow](https://github.com/Sofa-Loaf/afterglow) |
 | [Billshot](apps/billshot.html) | Free client-side GitHub Actions usage / billing explainer. Paste a usage report (or drop a screenshot and type the minutes). Explains minute rounding (12s still bills 1 min), Linux 1× / Windows 2× / macOS 10×, and what likely drove the bill. | **Free.** No Stripe. | Public: [Sofa-Loaf/billshot](https://github.com/Sofa-Loaf/billshot). Live path: `apps/billshot.html` |
@@ -52,6 +52,7 @@ GitHub Pages is deployed from `main` by [`.github/workflows/pages.yml`](.github/
 | Jass Boxing | `apps/jass-boxing.html` |
 | Sample Minute Teardown | `teardown-sample.html` |
 | SophPDF Debloat | `sophpdf.html` |
+| SophPDF Debloat thanks / success URL | `apps/thanks-sophpdf.html` |
 | Soph Explorer Debloat | `soph-explorer.html` |
 | Afterglow | `apps/afterglow.html` |
 | Afterglow web prototype | `apps/afterglow-demo.html` |
@@ -71,7 +72,7 @@ If the first workflow run needs Pages enabled in the UI: **Settings → Pages �
 - Seller / business name on Stripe and this site: **28to3.me**
 - Org pilot checkout: https://buy.stripe.com/8x2dRa7woa65dOA6uz0co00
 - $49 is a **booking fee** for a Minute Teardown (one-week human artifact), not a software seat or App license
-- SophPDF Debloat: **$29 one-time** when a Stripe Payment Link exists. Do not invent a link; the site uses a stub/email CTA until one is pasted in.
+- SophPDF Debloat: **$4.99 one-time**. Payment Link: https://buy.stripe.com/fZu7sMaIAced6m84mr0co02. Success URL: https://28to3.me/apps/thanks-sophpdf.html
 - Soph Explorer Debloat: **free forever**. Do not add Stripe.
 - Afterglow: **free**. Do not add Stripe.
 - Billshot: **free**. Do not add Stripe. Client-side usage-report explainer only.
