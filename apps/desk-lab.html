@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Desk Lab — MSP call sheet — 28to3.me</title>
+  <meta name="description" content="Free MSP call sheet for Dell desks. Toggle OptiPlex, Precision, WD19, monitor, UPS. Labeled ports. Playbooks you can read aloud. Client-side. No Stripe.">
+  <meta name="theme-color" content="#121418">
+  <link rel="canonical" href="https://28to3.me/apps/desk-lab.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <meta property="og:title" content="Desk Lab — MSP call sheet — 28to3.me">
+  <meta property="og:description" content="What’s on this client’s desk? Click the box. Ports labeled for the ticket. Playbooks an MSP can read aloud.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://28to3.me/apps/desk-lab.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="desk-lab.css">
+</head>
+<body class="desk-lab-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="../index.html" aria-label="28to3.me home">
+        <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+          <rect width="64" height="64" rx="16" fill="#1C1915"/>
+          <text x="32" y="41" text-anchor="middle" font-family="Georgia, serif" font-size="22" font-weight="700" fill="#F6EFE4">28</text>
+        </svg>
+        28to3.me
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav id="site-nav" class="nav-links" aria-label="Primary">
+        <a href="../index.html#products">Products</a>
+        <a href="../demo.html">Demo</a>
+        <a href="../teardown-sample.html">Teardown</a>
+        <a href="../index.html#apps" aria-current="page">Web Apps</a>
+        <a href="../index.html#install">Install</a>
+        <a href="../index.html#pricing">Pricing</a>
+        <a href="../sophpdf.html">SophPDF</a>
+        <a href="../soph-explorer.html">Explorer</a>
+        <a href="../about.html">About</a>
+        <a href="../index.html#contact">Contact</a>
+        <a href="https://github.com/Sofa-Loaf/desk-lab">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero wrap" id="top">
+      <p class="eyebrow">Web Apps · MSP call sheet</p>
+      <h1>Desk Lab</h1>
+      <p class="lede">Remote or onsite. Client has a Dell desk. Toggle what is present. Click the box. Ports are ticket labels: barrel/DC-in, USB-C upstream, DP out, UPS AC out. Playbooks are the script — you read, they touch the jack.</p>
+      <p class="fine-print">ICP: MSP techs. Free. Client-side only. No account. No Stripe. Source: <a href="https://github.com/Sofa-Loaf/desk-lab">Sofa-Loaf/desk-lab</a>. Mirror: this page.</p>
+    </section>
+
+    <section class="section" id="lab" aria-labelledby="lab-heading" data-desk-lab>
+      <div class="wrap">
+        <h2 id="lab-heading" class="visually-hidden">Client desk</h2>
+        <div class="lab-shell">
+          <div class="lab-controls">
+            <form class="lab-card" id="desk-picker-form">
+              <fieldset class="picker-list" data-desk-picker>
+                <legend>What’s on this client’s desk</legend>
+                <label><input type="checkbox" name="desk-device" value="optiplex" checked> OptiPlex</label>
+                <label><input type="checkbox" name="desk-device" value="precision" checked> Precision</label>
+                <label><input type="checkbox" name="desk-device" value="wd19" checked> WD19</label>
+                <label><input type="checkbox" name="desk-device" value="monitor" checked> Monitor</label>
+                <label><input type="checkbox" name="desk-device" value="ups" checked> UPS</label>
+              </fieldset>
+            </form>
+
+            <div class="lab-card">
+              <p class="eyebrow-mini">Playbooks</p>
+              <h2>Read aloud</h2>
+              <p class="fine-print">Client does the hands. Click again to clear.</p>
+              <div class="playbook-list" data-playbooks></div>
+            </div>
+          </div>
+
+          <div class="lab-stage" data-stage>
+            <div class="coach" role="status" aria-live="polite">
+              <p class="coach-kicker" data-coach-kicker>On the call</p>
+              <p class="coach-text" data-coach-text>Toggle what is on this desk. Click a device. Ports are ticket labels. Or start a playbook and read the coach line.</p>
+              <p class="coach-ask" data-coach-ask hidden></p>
+            </div>
+
+            <div class="desk-frame">
+              <svg class="desk-svg" viewBox="0 0 1000 560" role="img" aria-labelledby="desk-title desk-desc">
+                <title id="desk-title">Client desk schematic</title>
+                <desc id="desk-desc">Clickable OptiPlex, Precision laptop, WD19 dock, Dell monitor, and UPS with labeled ports.</desc>
+                <rect class="wall" x="0" y="0" width="1000" height="560"></rect>
+                <rect class="desk-edge" x="40" y="430" width="920" height="86" rx="8"></rect>
+                <rect class="desk-top" x="48" y="188" width="904" height="250" rx="10"></rect>
+
+                <g class="cable" data-cable="dock-dp" data-needs="wd19,monitor">
+                  <path d="M500 128 L500 188 L512 412"></path>
+                  <text class="cable-label" x="508" y="200">DP / HDMI</text>
+                </g>
+                <g class="cable" data-cable="dock-hdmi" data-needs="wd19,monitor">
+                  <path d="M528 128 L528 176"></path>
+                </g>
+                <g class="cable" data-cable="dock-upstream" data-needs="wd19,precision">
+                  <path d="M470 318 L470 412"></path>
+                  <text class="cable-label" x="360" y="372">USB-C upstream</text>
+                </g>
+                <g class="cable" data-cable="dock-brick" data-needs="wd19">
+                  <path d="M620 440 L700 440 L700 478"></path>
+                  <text class="cable-label" x="626" y="428">Brick → DC-in</text>
+                </g>
+                <g class="cable" data-cable="ups-tower" data-needs="ups,optiplex">
+                  <path d="M168 478 L168 412"></path>
+                </g>
+                <g class="cable" data-cable="ups-dock" data-needs="ups,wd19">
+                  <path d="M248 500 L620 500 L620 456"></path>
+                </g>
+
+                <g class="desk-unit" data-device="monitor" role="button" tabindex="0" aria-label="Dell monitor">
+                  <rect class="bezel" x="340" y="24" width="320" height="196" rx="8"></rect>
+                  <rect class="screen" x="356" y="40" width="288" height="152"></rect>
+                  <rect class="body" x="478" y="220" width="44" height="28"></rect>
+                  <text class="label" x="364" y="62">Dell monitor</text>
+                  <text class="sublabel" x="364" y="78">Video is an IN</text>
+                  <g class="port-mark" data-port="mon-dp">
+                    <rect class="port-chip" x="368" y="188" width="70" height="18" rx="3"></rect>
+                    <text class="sublabel" x="376" y="201">DP in</text>
+                  </g>
+                  <g class="port-mark" data-port="mon-hdmi">
+                    <rect class="port-chip" x="446" y="188" width="78" height="18" rx="3"></rect>
+                    <text class="sublabel" x="454" y="201">HDMI in</text>
+                  </g>
+                  <g class="port-mark" data-port="mon-ac">
+                    <rect class="port-chip" x="532" y="188" width="70" height="18" rx="3"></rect>
+                    <text class="sublabel" x="540" y="201">IEC AC</text>
+                  </g>
+                </g>
+
+                <g class="desk-unit" data-device="precision" role="button" tabindex="0" aria-label="Precision laptop">
+                  <rect class="lid" x="356" y="248" width="288" height="78" rx="6"></rect>
+                  <rect class="base" x="356" y="328" width="288" height="52" rx="6"></rect>
+                  <text class="label" x="368" y="268">Precision</text>
+                  <text class="sublabel" x="368" y="284">TB / USB-C lands here</text>
+                  <g class="port-mark" data-port="prec-tb1">
+                    <rect class="port-chip" x="368" y="352" width="132" height="18" rx="3"></rect>
+                    <text class="sublabel" x="376" y="365">USB-C / TB upstream</text>
+                  </g>
+                  <g class="port-mark" data-port="prec-hdmi">
+                    <rect class="port-chip" x="508" y="352" width="70" height="18" rx="3"></rect>
+                    <text class="sublabel" x="516" y="365">HDMI out</text>
+                  </g>
+                </g>
+
+                <g class="desk-unit" data-device="wd19" role="button" tabindex="0" aria-label="WD19 dock">
+                  <rect class="body" x="392" y="412" width="248" height="52" rx="8"></rect>
+                  <text class="label" x="404" y="432">WD19 dock</text>
+                  <g class="port-mark" data-port="wd19-dc">
+                    <rect class="port-chip" x="404" y="438" width="88" height="18" rx="3"></rect>
+                    <text class="sublabel" x="410" y="451">Barrel/DC-in</text>
+                  </g>
+                  <g class="port-mark" data-port="wd19-upstream">
+                    <rect class="port-chip" x="498" y="438" width="62" height="18" rx="3"></rect>
+                    <text class="sublabel" x="504" y="451">USB-C up</text>
+                  </g>
+                  <g class="port-mark" data-port="wd19-dp1">
+                    <rect class="port-chip" x="566" y="438" width="62" height="18" rx="3"></rect>
+                    <text class="sublabel" x="572" y="451">DP out</text>
+                  </g>
+                </g>
+
+                <g class="desk-unit" data-device="optiplex" role="button" tabindex="0" aria-label="Dell OptiPlex">
+                  <rect class="body" x="84" y="220" width="140" height="196" rx="8"></rect>
+                  <rect class="screen" x="96" y="232" width="116" height="36"></rect>
+                  <text class="label" x="96" y="256">OptiPlex</text>
+                  <text class="sublabel" x="96" y="286">SFF tower</text>
+                  <g class="port-mark" data-port="opti-ac">
+                    <rect class="port-chip" x="96" y="300" width="88" height="18" rx="3"></rect>
+                    <text class="sublabel" x="104" y="313">IEC C13 AC</text>
+                  </g>
+                  <g class="port-mark" data-port="opti-dp">
+                    <rect class="port-chip" x="96" y="324" width="70" height="18" rx="3"></rect>
+                    <text class="sublabel" x="104" y="337">DP out</text>
+                  </g>
+                  <g class="port-mark" data-port="opti-rj45">
+                    <rect class="port-chip" x="96" y="348" width="62" height="18" rx="3"></rect>
+                    <text class="sublabel" x="104" y="361">RJ45</text>
+                  </g>
+                </g>
+
+                <g class="desk-unit" data-device="ups" role="button" tabindex="0" aria-label="UPS">
+                  <rect class="body" x="76" y="456" width="196" height="72" rx="8"></rect>
+                  <text class="label" x="88" y="478">UPS</text>
+                  <g class="port-mark" data-port="ups-switch">
+                    <rect class="port-chip" x="88" y="488" width="70" height="18" rx="3"></rect>
+                    <text class="sublabel" x="96" y="501">Switch</text>
+                  </g>
+                  <g class="port-mark" data-port="ups-out-batt">
+                    <rect class="port-chip" x="164" y="488" width="96" height="18" rx="3"></rect>
+                    <text class="sublabel" x="170" y="501">AC out (batt)</text>
+                  </g>
+                </g>
+              </svg>
+            </div>
+
+            <div class="lab-toolbar">
+              <button class="button button-primary" type="button" data-copy-ticket>Copy ticket note</button>
+              <span class="copy-status" data-copy-status></span>
+            </div>
+          </div>
+
+          <aside class="lab-detail" data-detail aria-live="polite">
+            <p class="detail-kicker">Device</p>
+            <h2>Nothing selected</h2>
+            <p>Click a box on the desk. Ports are named the way they go on the ticket: barrel/DC-in, USB-C upstream, DP out, UPS AC out.</p>
+          </aside>
+        </div>
+        <p class="lab-note">Schematic on purpose. Labels beat photoreal. Hash is shareable: desk, playbook, device, port.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-row">
+      <p>© 2026 28to3.me. Desk Lab is free. Source: <a href="https://github.com/Sofa-Loaf/desk-lab">Sofa-Loaf/desk-lab</a>.</p>
+      <div class="footer-links">
+        <a href="../index.html">Home</a>
+        <a href="../index.html#products">Products</a>
+        <a href="../index.html#apps">Web Apps</a>
+        <a href="heic-save-as.html">HEIC Save As</a>
+        <a href="billshot.html">Billshot</a>
+        <a href="../about.html">About</a>
+        <a href="../privacy.html">Privacy</a>
+        <a href="../terms.html">Terms</a>
+        <a href="https://github.com/Sofa-Loaf/desk-lab">GitHub</a>
+        <a href="mailto:hello@28to3.me">hello@28to3.me</a>
+      </div>
+    </div>
+  </footer>
+  <script src="../site.js"></script>
+  <script src="desk-lab.js"></script>
+</body>
+</html>
