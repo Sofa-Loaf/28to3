@@ -153,6 +153,7 @@ body.ag-demo {
   margin-inline: auto;
   object-fit: contain;
   object-position: center;
+  mix-blend-mode: screen;
 }
 
 .ag-tagline {

@@ -223,6 +223,7 @@ body.afterglow-page {
   object-fit: contain;
   object-position: left center;
   margin: 0 0 0.15rem;
+  mix-blend-mode: screen;
 }
 
 .afterglow-page .ag-tagline {
