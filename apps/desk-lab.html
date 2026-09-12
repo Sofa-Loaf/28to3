@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Desk Lab — MSP ticket desk — 28to3.me</title>
+  <meta name="description" content="Free MSP desk for a live ticket. Walk the client through OptiPlex, Precision, WD19, Dell monitor, and UPS. Labeled ports. Coach lines you can say out loud. No Stripe.">
+  <meta name="theme-color" content="#141512">
+  <link rel="canonical" href="https://28to3.me/apps/desk-lab.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <meta property="og:title" content="Desk Lab — MSP ticket desk — 28to3.me">
+  <meta property="og:description" content="On the call. Click the WD19, the OptiPlex, the Dell monitor, the UPS. Guided scripts: no dock power, no display, laptop not charging, UPS dead. Free. No Stripe.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://28to3.me/apps/desk-lab.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,620;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:ital,wght@0,400;0,600;0,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="desk-lab.css">
+</head>
+<body class="desk-page">
+  <a class="skip-link" href="#lab">Skip to desk</a>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="../index.html" aria-label="28to3.me home">
+        <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+          <rect width="64" height="64" rx="16" fill="#1C1915"/>
+          <text x="32" y="41" text-anchor="middle" font-family="Georgia, serif" font-size="22" font-weight="700" fill="#F6EFE4">28</text>
+        </svg>
+        28to3.me
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav id="site-nav" class="nav-links" aria-label="Primary">
+        <a href="../index.html#products">Products</a>
+        <a href="../demo.html">Demo</a>
+        <a href="../teardown-sample.html">Teardown</a>
+        <a href="../index.html#apps" aria-current="page">Web Apps</a>
+        <a href="../index.html#install">Install</a>
+        <a href="../index.html#pricing">Pricing</a>
+        <a href="../sophpdf.html">SophPDF</a>
+        <a href="../soph-explorer.html">Explorer</a>
+        <a href="../about.html">About</a>
+        <a href="../index.html#contact">Contact</a>
+        <a href="https://github.com/Sofa-Loaf/desk-lab">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero wrap" id="top">
+      <p class="eyebrow">Web Apps · MSP ticket desk</p>
+      <h1>Desk Lab</h1>
+      <p class="lede">You’re on the call. Share this page. Click what the <strong>client</strong> can see — WD19, OptiPlex, Precision, Dell monitor, UPS — then read the coach line out loud.</p>
+      <p class="fine-print">Free. Client-side only. No account. No Stripe. For techs walking a desk — not a consumer toy. Source: <a href="https://github.com/Sofa-Loaf/desk-lab">Sofa-Loaf/desk-lab</a>. Labels over photorealism.</p>
+    </section>
+
+    <section class="section section-alt" id="lab" aria-labelledby="lab-heading">
+      <div class="wrap">
+        <div class="desk-toolbar">
+          <div>
+            <h2 id="lab-heading">On this ticket</h2>
+            <p class="desk-toolbar-copy">Pick the symptom. The scene lights the part. You say the line.</p>
+          </div>
+          <div class="desk-script-row" role="toolbar" aria-label="Guided ticket scripts">
+            <button type="button" class="desk-chip" data-script="no-dock-power">No dock power</button>
+            <button type="button" class="desk-chip" data-script="no-display">No display</button>
+            <button type="button" class="desk-chip" data-script="not-charging">Laptop not charging</button>
+            <button type="button" class="desk-chip" data-script="ups-dead">UPS / outlet dead</button>
+            <button type="button" class="desk-chip desk-chip-ghost" data-panel="configure">Match their desk</button>
+          </div>
+        </div>
+
+        <div class="desk-lab" data-chassis="precision-laptop" data-dock="wd19" data-display="dell" data-power="ups">
+          <div class="desk-stage card">
+            <p class="summary-kicker" id="scene-kicker">Client desk</p>
+            <p class="desk-scene-title" id="scene-title">Click a box. Ports open on the right.</p>
+            <figure class="desk-figure">
+              <svg class="desk-scene" viewBox="0 0 1100 640" role="img" aria-labelledby="scene-title scene-desc">
+                <title>Schematic client desk</title>
+                <desc id="scene-desc">Top-down desk: Dell monitor at the back, WD19 dock, Precision laptop, OptiPlex SFF, and UPS. Each unit is a large hit target.</desc>
+                <defs>
+                  <filter id="desk-glow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="6" result="blur"/>
+                    <feMerge>
+                      <feMergeNode in="blur"/>
+                      <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                  </filter>
+                </defs>
+                <rect class="desk-wood" x="36" y="72" width="1028" height="536" rx="22"/>
+                <rect class="desk-edge" x="36" y="72" width="1028" height="28" rx="22"/>
+                <text class="desk-mute" x="56" y="92">CLIENT DESK</text>
+
+                <g class="desk-cable" aria-hidden="true">
+                  <path d="M540 250 v70"/>
+                  <path d="M520 360 h-90"/>
+                  <path d="M680 360 h90"/>
+                  <path d="M820 470 v40"/>
+                  <path d="M200 470 C200 510 300 530 420 530"/>
+                </g>
+
+                <g id="hit-monitor" class="desk-hit" data-device="monitor" tabindex="0" role="button" aria-label="Dell monitor">
+                  <rect class="hit-pad" x="330" y="108" width="400" height="168" rx="10"/>
+                  <rect class="bezel" x="352" y="120" width="356" height="118" rx="6"/>
+                  <rect class="screen" x="366" y="132" width="328" height="88" rx="3"/>
+                  <rect class="stand" x="508" y="238" width="44" height="22" rx="3"/>
+                  <rect class="foot" x="470" y="256" width="120" height="10" rx="3"/>
+                  <text class="label" x="530" y="184">DELL</text>
+                  <text class="sub" x="530" y="228">Monitor</text>
+                </g>
+
+                <g id="hit-wd19" class="desk-hit" data-device="wd19" tabindex="0" role="button" aria-label="Dell WD19 dock">
+                  <rect class="hit-pad" x="390" y="300" width="320" height="108" rx="12"/>
+                  <rect class="dock-body" x="408" y="314" width="284" height="72" rx="10"/>
+                  <rect class="port-dot callout-dot" data-port="wd19-dc" x="420" y="338" width="22" height="22" rx="11"/>
+                  <rect class="port-slot" x="454" y="342" width="28" height="14" rx="3"/>
+                  <rect class="port-slot" x="490" y="342" width="18" height="14" rx="2"/>
+                  <rect class="port-slot" x="516" y="342" width="18" height="14" rx="2"/>
+                  <rect class="port-slot" x="542" y="342" width="36" height="14" rx="2"/>
+                  <rect class="port-slot" x="586" y="342" width="16" height="14" rx="2"/>
+                  <rect class="port-slot" x="610" y="342" width="16" height="14" rx="2"/>
+                  <rect class="port-slot" x="634" y="342" width="22" height="14" rx="3"/>
+                  <text class="sub" x="550" y="396">WD19</text>
+                </g>
+
+                <g id="hit-precision" class="desk-hit" data-device="precision" tabindex="0" role="button" aria-label="Dell Precision">
+                  <rect class="hit-pad" x="56" y="292" width="300" height="196" rx="12"/>
+                  <g class="precision-laptop">
+                    <rect class="laptop-lid" x="78" y="308" width="256" height="88" rx="8"/>
+                    <rect class="screen" x="90" y="318" width="232" height="64" rx="3"/>
+                    <rect class="laptop-deck" x="78" y="400" width="256" height="70" rx="8"/>
+                    <rect class="key-row" x="96" y="414" width="220" height="28" rx="3"/>
+                    <text class="label" x="206" y="356">PRECISION</text>
+                    <text class="sub" x="206" y="456">Laptop</text>
+                  </g>
+                  <g class="precision-tower">
+                    <rect class="tower-body" x="96" y="308" width="220" height="164" rx="8"/>
+                    <rect class="vent" x="112" y="324" width="188" height="10" rx="2"/>
+                    <rect class="vent" x="112" y="342" width="188" height="10" rx="2"/>
+                    <rect class="vent" x="112" y="360" width="188" height="10" rx="2"/>
+                    <circle class="power-led" cx="126" cy="444" r="7"/>
+                    <text class="label" x="206" y="410">PRECISION</text>
+                    <text class="sub" x="206" y="452">Tower</text>
+                  </g>
+                </g>
+
+                <g id="hit-optiplex" class="desk-hit" data-device="optiplex" tabindex="0" role="button" aria-label="Dell OptiPlex">
+                  <rect class="hit-pad" x="746" y="292" width="292" height="164" rx="12"/>
+                  <rect class="sff-body" x="768" y="308" width="248" height="124" rx="8"/>
+                  <rect class="sff-face" x="768" y="308" width="36" height="124" rx="8"/>
+                  <circle class="power-led" cx="786" cy="370" r="8"/>
+                  <rect class="vent" x="820" y="328" width="176" height="8" rx="2"/>
+                  <rect class="vent" x="820" y="344" width="176" height="8" rx="2"/>
+                  <rect class="drive" x="820" y="368" width="72" height="18" rx="2"/>
+                  <text class="label" x="892" y="404">OPTIPLEX</text>
+                  <text class="sub" x="892" y="422">SFF</text>
+                </g>
+
+                <g id="hit-ups" class="desk-hit" data-device="ups" tabindex="0" role="button" aria-label="UPS">
+                  <rect class="hit-pad" x="746" y="478" width="292" height="112" rx="12"/>
+                  <rect class="ups-body" x="768" y="492" width="248" height="84" rx="8"/>
+                  <rect class="outlet" data-port="ups-battery-1" x="786" y="508" width="28" height="20" rx="3"/>
+                  <rect class="outlet" data-port="ups-battery-2" x="822" y="508" width="28" height="20" rx="3"/>
+                  <rect class="outlet" data-port="ups-battery-3" x="858" y="508" width="28" height="20" rx="3"/>
+                  <rect class="outlet surge" data-port="ups-surge-1" x="906" y="508" width="28" height="20" rx="3"/>
+                  <rect class="outlet surge" data-port="ups-surge-2" x="942" y="508" width="28" height="20" rx="3"/>
+                  <circle class="power-led" cx="790" cy="554" r="6"/>
+                  <text class="sub" x="892" y="560">UPS · battery vs surge</text>
+                </g>
+              </svg>
+            </figure>
+            <div class="desk-hits" aria-label="Devices on the desk">
+              <button type="button" class="desk-hit-btn" data-device="wd19">WD19</button>
+              <button type="button" class="desk-hit-btn" data-device="precision">Precision</button>
+              <button type="button" class="desk-hit-btn" data-device="optiplex">OptiPlex</button>
+              <button type="button" class="desk-hit-btn" data-device="monitor">Dell monitor</button>
+              <button type="button" class="desk-hit-btn" data-device="ups">UPS</button>
+              <button type="button" class="desk-hit-btn desk-hit-btn-ghost" data-panel="scene">Whole desk</button>
+            </div>
+          </div>
+
+          <aside class="desk-panel card" id="desk-panel" aria-live="polite">
+            <p class="summary-kicker" id="panel-kicker">Say this</p>
+            <h3 id="panel-title">Share the desk. Click a unit.</h3>
+            <p class="desk-coach" id="panel-coach">“Look at the left end of the WD19. Fat round plug. That’s power on the WD19 — pull that one.”</p>
+            <p class="desk-note" id="panel-note">Default desk: Precision laptop on a WD19, Dell monitor, OptiPlex SFF on the side, UPS in the path. Match their desk if this isn’t it.</p>
+            <div class="desk-ports" id="desk-ports" hidden></div>
+            <div class="desk-steps" id="desk-steps" hidden></div>
+            <form class="desk-config" id="desk-config" hidden>
+              <fieldset>
+                <legend>Chassis they called out</legend>
+                <label class="desk-choice"><input type="radio" name="chassis" value="precision-laptop" checked> Precision laptop</label>
+                <label class="desk-choice"><input type="radio" name="chassis" value="precision-tower"> Precision tower</label>
+                <label class="desk-choice"><input type="radio" name="chassis" value="optiplex-sff"> OptiPlex SFF</label>
+              </fieldset>
+              <fieldset>
+                <legend>Dock</legend>
+                <label class="desk-choice"><input type="radio" name="dock" value="wd19" checked> WD19</label>
+                <label class="desk-choice"><input type="radio" name="dock" value="none"> No dock</label>
+              </fieldset>
+              <fieldset>
+                <legend>Display</legend>
+                <label class="desk-choice"><input type="radio" name="display" value="dell" checked> Dell monitor</label>
+                <label class="desk-choice"><input type="radio" name="display" value="none"> No Dell panel</label>
+              </fieldset>
+              <fieldset>
+                <legend>Power path</legend>
+                <label class="desk-choice"><input type="radio" name="power" value="ups" checked> UPS in the path</label>
+                <label class="desk-choice"><input type="radio" name="power" value="wall"> Wall / strip only</label>
+              </fieldset>
+            </form>
+            <div class="desk-panel-actions">
+              <button type="button" class="button button-primary" id="copy-coach">Copy coach line</button>
+              <button type="button" class="button button-ghost" id="copy-ticket">Copy for ticket</button>
+            </div>
+            <p class="desk-status" id="desk-status" aria-live="polite"></p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="scripts" aria-labelledby="scripts-heading">
+      <div class="wrap desk-script-cards">
+        <p class="eyebrow">Four tickets. Same desk.</p>
+        <h2 id="scripts-heading">Scripts you can run without leaving the call.</h2>
+        <p class="section-lede">Not a shopper flow. Each script is the walk you already do — barrel first, then brick, then UPS row.</p>
+        <div class="product-grid app-grid desk-guide-grid">
+          <article class="product-card">
+            <h3>No dock power</h3>
+            <p>LEDs dark. Client swears it’s plugged in. Start at the barrel, not the USB-C.</p>
+            <p class="desk-quote">“That’s power on the WD19 — pull that one.”</p>
+            <button type="button" class="button button-ghost" data-script="no-dock-power">Run this script</button>
+          </article>
+          <article class="product-card">
+            <h3>No display</h3>
+            <p>Dock may be alive. Picture isn’t. Cable at the panel, then the other end, then input.</p>
+            <p class="desk-quote">“DP latch or HDMI — tell me which one is in the monitor.”</p>
+            <button type="button" class="button button-ghost" data-script="no-display">Run this script</button>
+          </article>
+          <article class="product-card">
+            <h3>Laptop not charging</h3>
+            <p>Precision on the WD19, battery falling. The dock needs its own brick.</p>
+            <p class="desk-quote">“USB-C under the laptop is not wall power.”</p>
+            <button type="button" class="button button-ghost" data-script="not-charging">Run this script</button>
+          </article>
+          <article class="product-card">
+            <h3>UPS / outlet dead</h3>
+            <p>Whole desk or just dock + panel. Battery row vs surge-only. Front button. Overload.</p>
+            <p class="desk-quote">“Move the WD19 brick to a battery outlet.”</p>
+            <button type="button" class="button button-ghost" data-script="ups-dead">Run this script</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="next" aria-labelledby="next-heading">
+      <div class="wrap">
+        <p class="eyebrow">Other 28to3.me tools</p>
+        <h2 id="next-heading">This page is the desk. Nothing to buy.</h2>
+        <p class="section-lede">Desk Lab has no checkout. Soft next steps if the rest of the shop is already in the ticket.</p>
+        <div class="cta-row">
+          <a class="button button-ghost" href="heic-save-as.html">HEIC Save As</a>
+          <a class="button button-ghost" href="billshot.html">Billshot</a>
+          <a class="button button-ghost" href="../index.html#apps">All web apps</a>
+          <a class="button button-primary" href="../index.html">28to3.me home</a>
+        </div>
+        <p class="fine-print">Actionscope, Afterglow, and Soph* Debloat live on the homepage. Desk Lab does not sell them.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-row">
+      <p>© 2026 28to3.me. Desk Lab is free. Source: <a href="https://github.com/Sofa-Loaf/desk-lab">Sofa-Loaf/desk-lab</a>.</p>
+      <div class="footer-links">
+        <a href="../index.html">Home</a>
+        <a href="../index.html#products">Products</a>
+        <a href="../index.html#apps">Web Apps</a>
+        <a href="heic-save-as.html">HEIC Save As</a>
+        <a href="billshot.html">Billshot</a>
+        <a href="../about.html">About</a>
+        <a href="../privacy.html">Privacy</a>
+        <a href="../terms.html">Terms</a>
+        <a href="https://github.com/Sofa-Loaf/desk-lab">GitHub</a>
+        <a href="mailto:hello@28to3.me">hello@28to3.me</a>
+      </div>
+    </div>
+  </footer>
+  <script src="../site.js"></script>
+  <script src="desk-lab.js"></script>
+</body>
+</html>
