@@ -17,6 +17,24 @@
   color: var(--ink);
 }
 
+.heic-page .hero {
+  padding: 2.1rem 0 1.35rem;
+}
+
+.heic-page h1 {
+  font-size: clamp(2.1rem, 5vw, 3.15rem);
+}
+
+.heic-page .lede {
+  margin-bottom: 0.85rem;
+  font-size: 1.12rem;
+}
+
+.heic-page .section {
+  padding-top: 1.6rem;
+  padding-bottom: 2.4rem;
+}
+
 .heic-page a {
   color: var(--copper-deep);
 }
