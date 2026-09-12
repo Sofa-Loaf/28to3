@@ -455,10 +455,10 @@
       height: "4",
       patternUnits: "userSpaceOnUse"
     });
-    grid.appendChild(svgEl("path", { d: "M 4 0 L 0 0 0 4", fill: "none", stroke: "#1c1a16", "stroke-width": "0.12" }));
+    grid.appendChild(svgEl("path", { d: "M 4 0 L 0 0 0 4", fill: "none", stroke: "#3a3228", "stroke-width": "0.1" }));
     defs.appendChild(grid);
     svg.appendChild(defs);
-    svg.appendChild(svgEl("rect", { x: "0", y: "0", width: String(stage.widthM), height: String(stage.heightM), fill: "#080808" }));
+    svg.appendChild(svgEl("rect", { x: "0", y: "0", width: String(stage.widthM), height: String(stage.heightM), fill: "#0a0a0b" }));
     svg.appendChild(svgEl("rect", { x: "0", y: "0", width: String(stage.widthM), height: String(stage.heightM), fill: "url(#ag-grid)" }));
 
     stage.landmarks.forEach(function (mark) {
@@ -466,7 +466,7 @@
         svgEl("text", {
           x: String(mark.x),
           y: String(mark.y - 1.2),
-          fill: "#5a5348",
+          fill: "#8c8070",
           "font-size": "1.5",
           "font-family": "IBM Plex Mono, ui-monospace, monospace",
           "text-anchor": "middle"
@@ -479,8 +479,8 @@
         cx: String(state.you.x),
         cy: String(state.you.y),
         r: String(RADIUS_M),
-        fill: "rgba(232, 184, 109, 0.07)",
-        stroke: "#e8b86d",
+        fill: "rgba(196, 160, 106, 0.08)",
+        stroke: "#c4a06a",
         "stroke-width": "0.28",
         "stroke-dasharray": "0.8 0.7"
       })
@@ -507,7 +507,7 @@
               cx: String(item.x),
               cy: String(item.y),
               r: "1.7",
-              fill: "rgba(232, 184, 109, 0.16)",
+              fill: "rgba(196, 160, 106, 0.16)",
               "data-pin": item.id
             })
           );
@@ -516,8 +516,8 @@
           cx: String(item.x),
           cy: String(item.y),
           r: near ? "0.85" : "0.7",
-          fill: near ? "#e8b86d" : "#3a342c",
-          stroke: near ? "#ffd4a0" : "#2a2620",
+          fill: near ? "#c4a06a" : "#3a3228",
+          stroke: near ? "#d4b484" : "#2a2620",
           "stroke-width": "0.2",
           "data-pin": item.id,
           style: "cursor:pointer"
@@ -539,7 +539,7 @@
         cx: String(state.you.x),
         cy: String(state.you.y),
         r: "2.1",
-        fill: "rgba(232, 184, 109, 0.14)"
+        fill: "rgba(196, 160, 106, 0.14)"
       })
     );
     var you = svgEl("circle", {
@@ -547,7 +547,7 @@
       cx: String(state.you.x),
       cy: String(state.you.y),
       r: "0.85",
-      fill: "#e8b86d"
+      fill: "#c4a06a"
     });
     svg.appendChild(you);
     svg.appendChild(
@@ -556,7 +556,7 @@
         cy: String(state.you.y),
         r: "1.5",
         fill: "none",
-        stroke: "rgba(232, 184, 109, 0.5)",
+        stroke: "rgba(196, 160, 106, 0.5)",
         "stroke-width": "0.2"
       })
     );
@@ -691,7 +691,7 @@
       els.hear.appendChild(img);
     } else if (item.kind === "still" || item.stillStub) {
       var stillNote = document.createElement("p");
-      stillNote.className = "ag-status";
+      stillNote.className = "ag-status ag-quiet-box";
       stillNote.textContent = "A still was left here. Sample entries have no photo file.";
       els.hear.appendChild(stillNote);
     }
@@ -705,12 +705,12 @@
       els.hear.appendChild(audio);
     } else if (item.voiceText) {
       var voiceText = document.createElement("p");
-      voiceText.className = "ag-status";
+      voiceText.className = "ag-status ag-quiet-box";
       voiceText.textContent = "Voice as text: " + item.voiceText;
       els.hear.appendChild(voiceText);
     } else if (item.kind === "voice" || item.voiceStub) {
       var voiceNote = document.createElement("p");
-      voiceNote.className = "ag-status";
+      voiceNote.className = "ag-status ag-quiet-box";
       voiceNote.textContent = "A voice was left here. Sample entries have no recording file.";
       els.hear.appendChild(voiceNote);
     }
@@ -722,7 +722,7 @@
 
     var move = document.createElement("button");
     move.type = "button";
-    move.className = "ag-btn ag-btn-quiet";
+    move.className = "ag-btn ag-btn-ghost";
     move.textContent = "Move on";
     move.addEventListener("click", function () {
       state.hearingId = null;
