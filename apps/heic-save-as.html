@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HEIC Save As — 28to3.me</title>
+  <meta name="description" content="Free client-side HEIC to JPG or PNG converter. Drop iPhone photos. Save as in this browser. No upload. No account. No Stripe.">
+  <meta name="theme-color" content="#161513">
+  <link rel="canonical" href="https://28to3.me/apps/heic-save-as.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <meta property="og:title" content="HEIC Save As — 28to3.me">
+  <meta property="og:description" content="Drop HEIC photos. Save as JPG or PNG. Free. Client-side. No Stripe.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://28to3.me/apps/heic-save-as.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,620;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:ital,wght@0,400;0,600;0,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="heic-save-as.css">
+</head>
+<body class="heic-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="../index.html" aria-label="28to3.me home">
+        <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+          <rect width="64" height="64" rx="16" fill="#1C1915"/>
+          <text x="32" y="41" text-anchor="middle" font-family="Georgia, serif" font-size="22" font-weight="700" fill="#F6EFE4">28</text>
+        </svg>
+        28to3.me
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav id="site-nav" class="nav-links" aria-label="Primary">
+        <a href="../index.html#products">Products</a>
+        <a href="../demo.html">Demo</a>
+        <a href="../teardown-sample.html">Teardown</a>
+        <a href="../index.html#apps" aria-current="page">Web Apps</a>
+        <a href="../index.html#install">Install</a>
+        <a href="../index.html#pricing">Pricing</a>
+        <a href="../sophpdf.html">SophPDF</a>
+        <a href="../soph-explorer.html">Explorer</a>
+        <a href="../about.html">About</a>
+        <a href="../index.html#contact">Contact</a>
+        <a href="https://github.com/Sofa-Loaf/heic-save-as">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero wrap" id="top">
+      <p class="eyebrow">Web Apps · 28to3.me</p>
+      <h1>HEIC Save As</h1>
+      <p class="lede">iPhone photos arrive as <strong>HEIC</strong>. This page turns them into <strong>JPG or PNG</strong> in your browser. Drop a file — or a handful — then Save as.</p>
+      <p class="fine-print">Free. Client-side only. Photos stay on this device — nothing is uploaded. No account. No Stripe. Source: <a href="https://github.com/Sofa-Loaf/heic-save-as">Sofa-Loaf/heic-save-as</a>.</p>
+    </section>
+
+    <section class="section section-alt" id="converter" aria-labelledby="converter-heading">
+      <div class="wrap heic-layout">
+        <form class="card heic-panel" id="heic-form" novalidate>
+          <h2 id="converter-heading">Convert</h2>
+          <p class="section-lede">Accepts <code>.heic</code> and <code>.heif</code>. Conversion uses heic2any in this tab.</p>
+
+          <label class="heic-drop" id="heic-drop" for="heic-files">
+            <input id="heic-files" name="heic-files" type="file" accept=".heic,.heif,.heics,image/heic,image/heif,image/heic-sequence" multiple>
+            <span class="heic-drop-title">Drop HEIC photos here</span>
+            <span class="heic-drop-copy" id="heic-drop-copy">Or choose files. One photo or a batch. They never leave this browser.</span>
+          </label>
+
+          <fieldset class="heic-field">
+            <legend>Save as</legend>
+            <div class="heic-formats" role="radiogroup" aria-label="Output format">
+              <label class="heic-choice">
+                <input type="radio" name="format" value="jpeg" checked>
+                <span>JPG</span>
+              </label>
+              <label class="heic-choice">
+                <input type="radio" name="format" value="png">
+                <span>PNG</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="heic-field" id="quality-field">
+            <label for="quality">JPG quality <span class="heic-quality-read" id="quality-read">92%</span></label>
+            <input id="quality" name="quality" type="range" min="50" max="100" step="1" value="92">
+            <p class="field-hint">Optional. Higher keeps more detail and a larger file. PNG ignores this.</p>
+          </div>
+
+          <div class="heic-toolbar">
+            <button class="button button-primary" type="button" id="convert-btn" disabled>Convert</button>
+            <button class="button button-ghost" type="button" id="download-all" disabled>Download all</button>
+            <button class="button button-ghost" type="button" id="clear-files">Clear</button>
+          </div>
+          <p class="heic-status" id="heic-status" aria-live="polite">Drop a HEIC to start.</p>
+        </form>
+
+        <div class="card heic-results" id="heic-results">
+          <p class="summary-kicker">Ready to save</p>
+          <p class="summary-total" id="results-title">No photos yet</p>
+          <p class="summary-sub" id="results-sub">Converted files show a preview and a Save as button.</p>
+          <ul class="heic-list" id="heic-list"></ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="next" aria-labelledby="next-heading">
+      <div class="wrap">
+        <p class="eyebrow">Other 28to3.me tools</p>
+        <h2 id="next-heading">This page only converts photos.</h2>
+        <p class="section-lede">HEIC Save As has no checkout. Soft next steps if you already use the rest of the shop.</p>
+        <div class="cta-row">
+          <a class="button button-ghost" href="billshot.html">Billshot</a>
+          <a class="button button-ghost" href="minutes-calculator.html">Minutes calculator</a>
+          <a class="button button-ghost" href="../index.html#apps">All web apps</a>
+          <a class="button button-primary" href="../index.html">28to3.me home</a>
+        </div>
+        <p class="fine-print">Actionscope, Afterglow, and Soph* Debloat live on the homepage. This converter does not sell them.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-row">
+      <p>© 2026 28to3.me. HEIC Save As is free. Source: <a href="https://github.com/Sofa-Loaf/heic-save-as">Sofa-Loaf/heic-save-as</a>.</p>
+      <div class="footer-links">
+        <a href="../index.html">Home</a>
+        <a href="../index.html#products">Products</a>
+        <a href="../index.html#apps">Web Apps</a>
+        <a href="billshot.html">Billshot</a>
+        <a href="../about.html">About</a>
+        <a href="../privacy.html">Privacy</a>
+        <a href="../terms.html">Terms</a>
+        <a href="https://github.com/Sofa-Loaf/heic-save-as">GitHub</a>
+        <a href="mailto:hello@28to3.me">hello@28to3.me</a>
+      </div>
+    </div>
+  </footer>
+  <script src="../site.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
+  <script src="heic-save-as.js"></script>
+</body>
+</html>
