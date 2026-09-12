@@ -258,7 +258,7 @@
         "<button type=\"button\" class=\"desk-port" + active + callout + "\" data-port-pick=\"" + port.id + "\">" +
           "<span class=\"desk-port-tag\">" + port.tag + "</span>" +
           "<strong>" + port.name + "</strong>" +
-          "<span>" + port.coach + "</span>" +
+          "<span class=\"desk-port-copy\">" + port.coach + "</span>" +
         "</button>"
       );
     }).join("");
@@ -274,7 +274,7 @@
         "<button type=\"button\" class=\"desk-step" + active + callout + "\" data-step-pick=\"" + index + "\">" +
           "<span class=\"desk-step-num\">" + (index + 1) + "/" + script.steps.length + "</span>" +
           "<strong>" + (devices[step.device] ? devices[step.device].name : step.device) + "</strong>" +
-          "<span>" + step.say + "</span>" +
+          "<span class=\"desk-step-copy\">" + step.say + "</span>" +
         "</button>"
       );
     }).join("");
@@ -428,7 +428,9 @@
   document.querySelectorAll("[data-script]").forEach(function (btn) {
     btn.addEventListener("click", function () {
       showScript(btn.getAttribute("data-script"), 0);
-      document.getElementById("desk-panel").scrollIntoView({ block: "nearest" });
+      if (window.matchMedia("(max-width: 980px)").matches) {
+        document.getElementById("desk-panel").scrollIntoView({ block: "start" });
+      }
     });
   });
 

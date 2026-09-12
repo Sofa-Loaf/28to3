@@ -86,12 +86,23 @@
   color: #ece7dc;
 }
 
+.desk-ports[hidden],
+.desk-steps[hidden],
+.desk-config[hidden] {
+  display: none !important;
+}
+
 .desk-toolbar {
+  position: sticky;
+  top: 72px;
+  z-index: 6;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 1rem 1.4rem;
-  margin-bottom: 1.15rem;
+  margin: 0 -0.35rem 1.15rem;
+  padding: 0.45rem 0.35rem 0.75rem;
+  background: rgba(20, 21, 18, 0.94);
 }
 
 .desk-toolbar h2 {
@@ -190,7 +201,7 @@
 }
 
 .desk-wood {
-  fill: #2f2b24;
+  fill: #4a4338;
 }
 
 .desk-edge {
@@ -217,9 +228,9 @@
 }
 
 .desk-hit .hit-pad {
-  fill: rgba(236, 231, 220, 0.03);
-  stroke: #6a6256;
-  stroke-width: 2;
+  fill: rgba(236, 231, 220, 0.08);
+  stroke: #b7ae9f;
+  stroke-width: 2.5;
 }
 
 .desk-hit .bezel,
@@ -229,9 +240,9 @@
 .desk-hit .laptop-lid,
 .desk-hit .laptop-deck,
 .desk-hit .tower-body {
-  fill: #1a1c1b;
-  stroke: #8a8478;
-  stroke-width: 1.5;
+  fill: #2c302d;
+  stroke: #ece7dc;
+  stroke-width: 1.75;
 }
 
 .desk-hit .sff-face {
@@ -239,7 +250,7 @@
 }
 
 .desk-hit .screen {
-  fill: #0d1c16;
+  fill: #1c4a38;
 }
 
 .desk-hit .stand,
@@ -263,7 +274,7 @@
 
 .desk-hit .port-dot,
 .desk-hit .power-led {
-  fill: #3d5a48;
+  fill: #f0c36e;
 }
 
 .desk-hit .label,
@@ -274,14 +285,15 @@
 }
 
 .desk-hit .label {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 700;
   letter-spacing: 0.08em;
+  fill: #fff7ea;
 }
 
 .desk-hit .sub {
-  font-size: 14px;
-  fill: #c4bdb0;
+  font-size: 15px;
+  fill: #ece7dc;
 }
 
 .desk-hit.is-selected .hit-pad,
@@ -414,8 +426,8 @@
   font-size: 1.02rem;
 }
 
-.desk-port span,
-.desk-step span {
+.desk-port-copy,
+.desk-step-copy {
   grid-column: 2;
   color: var(--ink-soft);
   font-size: 0.95rem;
