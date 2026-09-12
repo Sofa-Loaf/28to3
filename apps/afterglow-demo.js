@@ -5,7 +5,7 @@
    * Locked doctrine for this web prototype. Do not add a feed, likes,
    * comments, stars, place ranking, or reviews.
    * GPS is the trigger. 15 m / ~50 ft is the access gate. Pins stay exact.
-   * Plays are listen stubs; sort by plays when any nearby whisper has ≥1.
+   * Capture is 8–12s voice, a still, or one line. Plays are listen stubs.
    */
   var DOCTRINE = {
     gpsTrigger: true,
@@ -20,9 +20,19 @@
   var RADIUS_M = DOCTRINE.radiusM;
   var SNAP_M = 400;
   var LINE_MAX = 80;
+  var VOICE_MIN_S = 8;
   var VOICE_MAX_S = 12;
   var STORAGE_KEY = "afterglow-web-prototype-v1";
   var EARTH_M = 6371000;
+  var COLOR = {
+    amber: "#c4a06a",
+    amberSoft: "#d4b484",
+    amberMuted: "rgba(196, 160, 106, 0.14)",
+    tape: "#6b5340",
+    line: "#3a3228",
+    black: "#000000",
+    dust: "#8c8070"
+  };
 
   var STAGES = {
     hotel: {
@@ -228,7 +238,8 @@
     locals: [],
     plays: {},
     hearingId: null,
-    voice: { stream: null, recorder: null, chunks: [], url: "", text: "", seconds: 0, timer: null },
+    captureKind: null,
+    voice: { stream: null, recorder: null, chunks: [], url: "", text: "", seconds: 0, timer: null, pendingLeave: false },
     stillData: ""
   };
 
@@ -287,7 +298,7 @@
   function kindLabel(item) {
     if (item.kind === "voice") return "voice";
     if (item.kind === "still") return "still";
-    return "one line";
+    return "a line";
   }
 
   function loadStore() {
@@ -323,7 +334,7 @@
         })
       );
     } catch (err) {
-      setStatus("The tape is full on this browser. The line was kept without the still or voice.");
+      setStatus("The tape is full on this browser. The whisper was kept without the still or voice.");
     }
   }
 
@@ -416,6 +427,66 @@
     return STAGES[state.stageId];
   }
 
+  function showView(name) {
+    ["home", "leave", "capture", "residue"].forEach(function (id) {
+      var view = $("ag-view-" + id);
+      if (view) view.hidden = id !== name;
+    });
+    if (name === "home") window.scrollTo(0, 0);
+  }
+
+  function tapeButton(label, kind, onClick) {
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = kind === "ghost" ? "ag-tape ag-tape-ghost" : "ag-tape";
+    if (kind !== "ghost") {
+      var left = document.createElement("span");
+      left.className = "ag-reel";
+      left.setAttribute("aria-hidden", "true");
+      var right = document.createElement("span");
+      right.className = "ag-reel";
+      right.setAttribute("aria-hidden", "true");
+      btn.appendChild(left);
+      btn.appendChild(document.createTextNode(label));
+      btn.appendChild(right);
+    } else {
+      btn.textContent = label;
+    }
+    btn.addEventListener("click", onClick);
+    return btn;
+  }
+
+  function setCaptureKind(kind) {
+    state.captureKind = kind;
+    els.chooser.hidden = kind !== null;
+    els.voicePanel.hidden = kind !== "voice";
+    els.stillPanel.hidden = kind !== "still";
+    els.form.hidden = kind !== "line";
+    if (kind === "line") {
+      els.line.focus();
+      setStatus("One line. Then leave it.");
+    }
+    if (kind === "still") {
+      setStatus("A still — no face required. Then leave it.");
+    }
+  }
+
+  function resetCapture() {
+    state.captureKind = null;
+    els.line.value = "";
+    els.voiceText.value = "";
+    els.still.value = "";
+    state.stillData = "";
+    els.thumb.classList.remove("is-on");
+    els.thumb.removeAttribute("src");
+    els.lineCount.textContent = "0/" + LINE_MAX;
+    els.stillLeave.disabled = true;
+    els.voiceFallback.hidden = true;
+    stopVoice(false);
+    setCaptureKind(null);
+    setStatus("Choose one. Then leave it.");
+  }
+
   function renderSpots() {
     els.spots.innerHTML = "";
     Object.keys(STAGES).forEach(function (id) {
@@ -455,10 +526,10 @@
       height: "4",
       patternUnits: "userSpaceOnUse"
     });
-    grid.appendChild(svgEl("path", { d: "M 4 0 L 0 0 0 4", fill: "none", stroke: "#1c1a16", "stroke-width": "0.12" }));
+    grid.appendChild(svgEl("path", { d: "M 4 0 L 0 0 0 4", fill: "none", stroke: COLOR.line, "stroke-width": "0.12" }));
     defs.appendChild(grid);
     svg.appendChild(defs);
-    svg.appendChild(svgEl("rect", { x: "0", y: "0", width: String(stage.widthM), height: String(stage.heightM), fill: "#080808" }));
+    svg.appendChild(svgEl("rect", { x: "0", y: "0", width: String(stage.widthM), height: String(stage.heightM), fill: COLOR.black }));
     svg.appendChild(svgEl("rect", { x: "0", y: "0", width: String(stage.widthM), height: String(stage.heightM), fill: "url(#ag-grid)" }));
 
     stage.landmarks.forEach(function (mark) {
@@ -466,9 +537,9 @@
         svgEl("text", {
           x: String(mark.x),
           y: String(mark.y - 1.2),
-          fill: "#5a5348",
+          fill: COLOR.dust,
           "font-size": "1.5",
-          "font-family": "IBM Plex Mono, ui-monospace, monospace",
+          "font-family": "Menlo, IBM Plex Mono, ui-monospace, monospace",
           "text-anchor": "middle"
         })
       ).textContent = mark.label;
@@ -479,8 +550,8 @@
         cx: String(state.you.x),
         cy: String(state.you.y),
         r: String(RADIUS_M),
-        fill: "rgba(232, 184, 109, 0.07)",
-        stroke: "#e8b86d",
+        fill: COLOR.amberMuted,
+        stroke: COLOR.amber,
         "stroke-width": "0.28",
         "stroke-dasharray": "0.8 0.7"
       })
@@ -507,7 +578,7 @@
               cx: String(item.x),
               cy: String(item.y),
               r: "1.7",
-              fill: "rgba(232, 184, 109, 0.16)",
+              fill: COLOR.amberMuted,
               "data-pin": item.id
             })
           );
@@ -516,8 +587,8 @@
           cx: String(item.x),
           cy: String(item.y),
           r: near ? "0.85" : "0.7",
-          fill: near ? "#e8b86d" : "#3a342c",
-          stroke: near ? "#ffd4a0" : "#2a2620",
+          fill: near ? COLOR.amber : COLOR.tape,
+          stroke: near ? COLOR.amberSoft : COLOR.line,
           "stroke-width": "0.2",
           "data-pin": item.id,
           style: "cursor:pointer"
@@ -539,7 +610,7 @@
         cx: String(state.you.x),
         cy: String(state.you.y),
         r: "2.1",
-        fill: "rgba(232, 184, 109, 0.14)"
+        fill: COLOR.amberMuted
       })
     );
     var you = svgEl("circle", {
@@ -547,7 +618,7 @@
       cx: String(state.you.x),
       cy: String(state.you.y),
       r: "0.85",
-      fill: "#e8b86d"
+      fill: COLOR.amber
     });
     svg.appendChild(you);
     svg.appendChild(
@@ -556,7 +627,7 @@
         cy: String(state.you.y),
         r: "1.5",
         fill: "none",
-        stroke: "rgba(232, 184, 109, 0.5)",
+        stroke: "rgba(196, 160, 106, 0.5)",
         "stroke-width": "0.2"
       })
     );
@@ -565,36 +636,38 @@
   function renderHere() {
     var stage = currentStage();
     var count = nearby().length;
-    var source =
-      state.source === "geo"
-        ? "GPS trigger · this place, mapped onto the nearest demo pin"
-        : "demo stand-in for GPS · click the stage or pick a pin";
-    els.here.textContent =
-      "You are at " +
-      stage.name +
-      " · 15 m / ~50 ft gate · " +
-      count +
-      (count === 1 ? " whisper" : " whispers") +
-      " in earshot. Pins stay exact. " +
-      source +
-      ".";
+    var live = state.source === "geo";
+    els.geoPanel.hidden = live;
+    els.here.hidden = !live && !state.geoNote;
+    if (live) {
+      els.here.textContent = "At this pin · ~50 ft · " + stage.name.toLowerCase();
+    } else if (state.geoNote) {
+      els.here.textContent =
+        "Using sample coordinates · ~50 ft · " +
+        stage.name.toLowerCase() +
+        " · " +
+        count +
+        (count === 1 ? " whisper" : " whispers");
+    } else {
+      els.here.textContent = "Using sample coordinates · ~50 ft";
+      els.here.hidden = false;
+    }
     els.stageMeta.textContent = stage.hint + (state.geoNote ? " " + state.geoNote : "");
     if (els.geo) {
-      els.geo.classList.toggle("is-on", state.source === "geo");
-      els.geo.textContent = state.source === "geo" ? "GPS trigger · live" : "GPS trigger";
+      els.geo.classList.toggle("is-on", live);
+    }
+    if (els.leaveMeta) {
+      els.leaveMeta.textContent =
+        "GPS in the foreground. The pin is precise; about fifty feet is the gate. " +
+        stage.name +
+        ".";
     }
   }
 
   function renderList() {
     var items = nearby();
     els.list.innerHTML = "";
-    if (!items.length) {
-      els.empty.hidden = false;
-      els.empty.textContent =
-        "Nothing inside the 15 m gate. Walk closer — GPS or a click on the stage — or leave the first whisper here.";
-    } else {
-      els.empty.hidden = true;
-    }
+    els.emptyBox.hidden = !!items.length;
 
     if (els.sort) {
       var anyPlays = items.some(function (item) {
@@ -619,20 +692,19 @@
 
       var line = document.createElement("p");
       line.className = "ag-card-line";
-      line.textContent = item.line || "A residue was left at " + item.placeHint + ".";
+      line.textContent =
+        item.kind === "line" && item.line ? item.line : "at " + item.placeHint;
 
       var meta = document.createElement("p");
       meta.className = "ag-card-meta";
       meta.textContent =
-        item.placeHint +
-        " · " +
-        formatMeters(metersAway(item)) +
-        " · " +
         ageLabel(item.createdAt) +
         " · " +
+        formatMeters(metersAway(item)) +
+        (item.origin === "sample" ? " · sample" : "") +
+        " · " +
         item.plays +
-        (item.plays === 1 ? " play" : " plays") +
-        (item.origin === "sample" ? " · sample" : " · yours");
+        (item.plays === 1 ? " play" : " plays");
 
       btn.appendChild(kind);
       btn.appendChild(line);
@@ -647,13 +719,40 @@
 
   function renderHear() {
     var item = findItem(state.hearingId);
-    if (!inGate(item)) {
-      els.hear.hidden = true;
+    if (!item) {
       els.hear.innerHTML = "";
       return;
     }
 
-    els.hear.hidden = false;
+    if (!inGate(item)) {
+      els.hear.innerHTML = "";
+      var farKicker = document.createElement("p");
+      farKicker.className = "ag-kicker";
+      farKicker.textContent = "same spot";
+      var farTitle = document.createElement("p");
+      farTitle.className = "ag-display";
+      farTitle.textContent = "at " + item.placeHint;
+      var farBox = document.createElement("div");
+      farBox.className = "ag-empty-box";
+      var farBody = document.createElement("p");
+      farBody.className = "ag-empty";
+      farBody.textContent = "This whisper stays at the pin. Stand within about fifty feet.";
+      farBox.appendChild(farBody);
+      var farFoot = document.createElement("div");
+      farFoot.className = "ag-footer-actions";
+      farFoot.appendChild(
+        tapeButton("Move on", "ghost", function () {
+          state.hearingId = null;
+          showView("home");
+        })
+      );
+      els.hear.appendChild(farKicker);
+      els.hear.appendChild(farTitle);
+      els.hear.appendChild(farBox);
+      els.hear.appendChild(farFoot);
+      return;
+    }
+
     els.hear.innerHTML = "";
 
     var kicker = document.createElement("p");
@@ -662,17 +761,13 @@
 
     var title = document.createElement("p");
     title.className = "ag-hear-line";
-    title.textContent = item.line || "A residue was left at " + item.placeHint + ".";
+    title.textContent = item.line || "at " + item.placeHint;
 
     var meta = document.createElement("p");
     meta.className = "ag-card-meta";
     meta.textContent =
       "at " +
       item.placeHint +
-      " · pin " +
-      item.x.toFixed(1) +
-      "," +
-      item.y.toFixed(1) +
       " · " +
       formatMeters(metersAway(item)) +
       " · " +
@@ -690,10 +785,13 @@
       img.alt = "Still left at " + item.placeHint;
       els.hear.appendChild(img);
     } else if (item.kind === "still" || item.stillStub) {
+      var stillBox = document.createElement("div");
+      stillBox.className = "ag-empty-box";
       var stillNote = document.createElement("p");
-      stillNote.className = "ag-status";
+      stillNote.className = "ag-empty";
       stillNote.textContent = "A still was left here. Sample entries have no photo file.";
-      els.hear.appendChild(stillNote);
+      stillBox.appendChild(stillNote);
+      els.hear.appendChild(stillBox);
     }
 
     if (item.voiceUrl) {
@@ -701,34 +799,37 @@
       audio.controls = true;
       audio.src = item.voiceUrl;
       audio.style.width = "100%";
-      audio.style.margin = "0.5rem 0";
+      audio.style.margin = "0 0 16px";
       els.hear.appendChild(audio);
     } else if (item.voiceText) {
       var voiceText = document.createElement("p");
-      voiceText.className = "ag-status";
+      voiceText.className = "ag-body";
       voiceText.textContent = "Voice as text: " + item.voiceText;
       els.hear.appendChild(voiceText);
     } else if (item.kind === "voice" || item.voiceStub) {
+      var voiceBox = document.createElement("div");
+      voiceBox.className = "ag-empty-box";
       var voiceNote = document.createElement("p");
-      voiceNote.className = "ag-status";
+      voiceNote.className = "ag-empty";
       voiceNote.textContent = "A voice was left here. Sample entries have no recording file.";
-      els.hear.appendChild(voiceNote);
+      voiceBox.appendChild(voiceNote);
+      els.hear.appendChild(voiceBox);
     }
 
     var note = document.createElement("p");
-    note.className = "ag-note";
-    note.textContent = "A whisper. No comments. No likes. Not a review. Leave it as you found it.";
+    note.className = "ag-body";
+    note.textContent = "No comments. No likes. No stars. Leave it as you found it.";
     els.hear.appendChild(note);
 
-    var move = document.createElement("button");
-    move.type = "button";
-    move.className = "ag-btn ag-btn-quiet";
-    move.textContent = "Move on";
-    move.addEventListener("click", function () {
-      state.hearingId = null;
-      renderHear();
-    });
-    els.hear.appendChild(move);
+    var foot = document.createElement("div");
+    foot.className = "ag-footer-actions";
+    foot.appendChild(
+      tapeButton("Move on", "ghost", function () {
+        state.hearingId = null;
+        showView("home");
+      })
+    );
+    els.hear.appendChild(foot);
   }
 
   function render() {
@@ -759,6 +860,9 @@
     var item = findItem(id);
     if (!inGate(item)) {
       var away = item ? Math.round(metersAway(item)) : 0;
+      state.hearingId = item ? item.id : null;
+      showView("residue");
+      renderHear();
       setStatus(
         item
           ? away + " m away — outside the 15 m gate. Walk closer. The pin stays exact."
@@ -769,7 +873,7 @@
     state.plays[item.id] = playsFor(item) + 1;
     state.hearingId = item.id;
     saveStore();
-    setStatus("A whisper from the past. Then you move on.");
+    showView("residue");
     render();
   }
 
@@ -789,21 +893,23 @@
     if (pinId) {
       var pinItem = findItem(pinId);
       if (!pinItem) return;
-      if (inGate(pinItem)) {
-        hear(pinId);
-        return;
-      }
-      setStatus(
-        Math.round(metersAway(pinItem)) +
-          " m away — outside the 15 m gate. Click the stage to walk. The pin stays exact."
-      );
+      hear(pinId);
       return;
     }
     var point = pointFromEvent(event);
     if (!point) return;
     stopWatch();
     goToStage(state.stageId, { x: point.x, y: point.y }, "demo");
-    setStatus("You stood here. The 15 m gate is the access. Pins stay exact.");
+    setStatus("You stood here. About fifty feet is the access. Pins stay exact.");
+  }
+
+  function updateVoiceMeter() {
+    if (!els.recLabel) return;
+    var live = !!(state.voice.recorder && state.voice.recorder.state === "recording");
+    els.recLabel.textContent = (live ? state.voice.seconds + "s" : "ready") + " / " + VOICE_MAX_S + "s";
+    els.recLed.hidden = false;
+    els.recLed.classList.toggle("is-live", live);
+    els.voiceLeave.disabled = !live || state.voice.seconds < VOICE_MIN_S;
   }
 
   function stopVoice(keepUrl) {
@@ -823,23 +929,30 @@
         track.stop();
       });
     }
-    if (!keepUrl && state.voice.url) {
-      URL.revokeObjectURL(state.voice.url);
-      state.voice.url = "";
+    if (!keepUrl) {
+      state.voice.pendingLeave = false;
+      if (state.voice.url) {
+        URL.revokeObjectURL(state.voice.url);
+        state.voice.url = "";
+      }
     }
     state.voice.stream = null;
     state.voice.recorder = null;
     state.voice.chunks = [];
-    els.recLed.classList.remove("is-live");
-    els.recLed.hidden = true;
-    els.voiceStart.disabled = false;
-    els.voiceStop.disabled = true;
+    if (els.recLed) {
+      els.recLed.classList.remove("is-live");
+    }
+    if (els.voiceStart) els.voiceStart.disabled = false;
+    if (els.voiceLeave) els.voiceLeave.disabled = true;
+    updateVoiceMeter();
   }
 
   function startVoice() {
+    setCaptureKind("voice");
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia || typeof MediaRecorder === "undefined") {
       els.voiceFallback.hidden = false;
-      setStatus("This browser will not record. Leave the voice as text, or just the line.");
+      els.voiceLeave.hidden = true;
+      setStatus("This browser will not record. Leave the voice as text.");
       return;
     }
     navigator.mediaDevices
@@ -849,34 +962,60 @@
         state.voice.chunks = [];
         var mime = MediaRecorder.isTypeSupported("audio/webm") ? "audio/webm" : "";
         state.voice.recorder = mime ? new MediaRecorder(stream, { mimeType: mime }) : new MediaRecorder(stream);
+        var mimeType = state.voice.recorder.mimeType || "audio/webm";
         state.voice.recorder.ondataavailable = function (event) {
           if (event.data && event.data.size) state.voice.chunks.push(event.data);
         };
         state.voice.recorder.onstop = function () {
-          if (!state.voice.chunks.length) return;
-          var blob = new Blob(state.voice.chunks, { type: state.voice.recorder.mimeType || "audio/webm" });
+          if (!state.voice.chunks.length) {
+            if (state.voice.pendingLeave) {
+              state.voice.pendingLeave = false;
+              setStatus("Too short. A voice afterglow is " + VOICE_MIN_S + "–" + VOICE_MAX_S + " seconds.");
+            }
+            return;
+          }
+          var blob = new Blob(state.voice.chunks, { type: mimeType });
           if (state.voice.url) URL.revokeObjectURL(state.voice.url);
           state.voice.url = URL.createObjectURL(blob);
-          setStatus("Voice taped. Leave it with the line.");
+          if (state.voice.pendingLeave) {
+            state.voice.pendingLeave = false;
+            persistKind({
+              kind: "voice",
+              line: "",
+              voiceUrl: state.voice.url,
+              voiceText: ""
+            });
+          }
         };
         state.voice.seconds = 0;
         state.voice.recorder.start();
-        els.recLed.hidden = false;
-        els.recLed.classList.add("is-live");
         els.voiceStart.disabled = true;
-        els.voiceStop.disabled = false;
-        setStatus("Recording. Keep it short — under " + VOICE_MAX_S + "s.");
+        els.voiceLeave.hidden = false;
+        setStatus("Recording. Keep it between " + VOICE_MIN_S + "–" + VOICE_MAX_S + "s.");
+        updateVoiceMeter();
         state.voice.timer = window.setInterval(function () {
           state.voice.seconds += 1;
-          var recLabel = document.getElementById("ag-rec-label");
-          if (recLabel) recLabel.textContent = " rec " + state.voice.seconds + "s";
-          if (state.voice.seconds >= VOICE_MAX_S) stopVoice(true);
+          updateVoiceMeter();
+          if (state.voice.seconds >= VOICE_MAX_S) finishVoice();
         }, 1000);
       })
       .catch(function () {
         els.voiceFallback.hidden = false;
-        setStatus("Mic was not allowed. Leave the voice as text, or just the line.");
+        els.voiceLeave.hidden = true;
+        setStatus("Mic was not allowed. Leave the voice as text.");
       });
+  }
+
+  function finishVoice() {
+    var seconds = state.voice.seconds;
+    if (seconds < VOICE_MIN_S) {
+      state.voice.pendingLeave = false;
+      stopVoice(false);
+      setStatus("Too short. A voice afterglow is " + VOICE_MIN_S + "–" + VOICE_MAX_S + " seconds.");
+      return;
+    }
+    state.voice.pendingLeave = true;
+    stopVoice(true);
   }
 
   function readStill(file) {
@@ -884,6 +1023,7 @@
       state.stillData = "";
       els.thumb.classList.remove("is-on");
       els.thumb.removeAttribute("src");
+      els.stillLeave.disabled = true;
       return;
     }
     var reader = new FileReader();
@@ -900,38 +1040,59 @@
         state.stillData = canvas.toDataURL("image/jpeg", 0.7);
         els.thumb.src = state.stillData;
         els.thumb.classList.add("is-on");
+        els.stillLeave.disabled = false;
       };
       img.src = String(reader.result || "");
     };
     reader.readAsDataURL(file);
   }
 
-  function leaveAfterglow(event) {
-    event.preventDefault();
+  function leaveLine(event) {
+    if (event) event.preventDefault();
     var line = (els.line.value || "").trim().slice(0, LINE_MAX);
     if (!line) {
-      setStatus("One line is required. Then you can leave it.");
+      setStatus("One line. Then leave it.");
       els.line.focus();
       return;
     }
+    persistKind({ kind: "line", line: line });
+  }
+
+  function leaveVoiceText() {
     var voiceText = (els.voiceText.value || "").trim();
+    if (!voiceText) {
+      setStatus("Leave the voice as text, or record 8–12 seconds.");
+      return;
+    }
+    persistKind({ kind: "voice", line: "", voiceText: voiceText });
+  }
+
+  function leaveStill() {
+    if (!state.stillData) {
+      setStatus("A still — no face required. Then leave it.");
+      return;
+    }
+    persistKind({ kind: "still", line: "", stillData: state.stillData });
+  }
+
+  function persistKind(partial) {
     var item = {
       id: "local-" + now().toString(36) + "-" + Math.floor(Math.random() * 1000).toString(36),
       stageId: state.stageId,
       x: state.you.x,
       y: state.you.y,
-      kind: state.voice.url || voiceText ? "voice" : state.stillData ? "still" : "line",
-      line: line,
+      kind: partial.kind,
+      line: partial.line || "",
       placeHint: currentStage().name.toLowerCase(),
       plays: 0,
       createdAt: now(),
       voiceUrl: "",
-      voiceText: voiceText,
-      stillData: state.stillData
+      voiceText: partial.voiceText || "",
+      stillData: partial.stillData || ""
     };
 
-    if (state.voice.url) {
-      fetch(state.voice.url)
+    if (partial.voiceUrl) {
+      fetch(partial.voiceUrl)
         .then(function (res) {
           return res.blob();
         })
@@ -980,23 +1141,17 @@
       item.stillData = "";
       state.locals.push(item);
       saveStore();
-      setStatus("Kept the line. This browser would not hold the still or voice.");
+      setStatus("Kept the whisper. This browser would not hold the still or voice.");
       afterLeave();
       return;
     }
-    setStatus("Left. Walk away, then come back into the 15 m ring to hear it.");
+    setStatus("Left. Walk away, then come back into about fifty feet to hear it.");
     afterLeave();
   }
 
   function afterLeave() {
-    els.line.value = "";
-    els.voiceText.value = "";
-    els.still.value = "";
-    state.stillData = "";
-    els.thumb.classList.remove("is-on");
-    els.thumb.removeAttribute("src");
-    stopVoice(false);
-    state.voice.text = "";
+    resetCapture();
+    showView("home");
     render();
   }
 
@@ -1005,7 +1160,7 @@
     state.plays = {};
     state.hearingId = null;
     state.stillData = "";
-    stopVoice(false);
+    resetCapture();
     try {
       window.localStorage.removeItem(STORAGE_KEY);
     } catch (err) {
@@ -1013,6 +1168,7 @@
     }
     stopWatch();
     goToStage("hotel", STAGES.hotel.start, "demo");
+    showView("home");
     setStatus("Demo tape cleared. Sample whispers are back.");
   }
 
@@ -1081,7 +1237,7 @@
 
   function useGeo() {
     if (!navigator.geolocation) {
-      setStatus("This browser has no GPS. Click the stage — that stand-in is the trigger.");
+      setStatus("This browser has no GPS. Tap the stage — that stand-in is the trigger.");
       return;
     }
     setStatus("GPS trigger — listening for this place…");
@@ -1091,12 +1247,19 @@
         startWatch();
       },
       function () {
-        state.geoNote = "GPS was not allowed. Click the stage to stand in for the trigger.";
+        state.geoNote = "GPS was not allowed. Tap the stage to stand in for the trigger.";
         render();
-        setStatus("GPS was not allowed. A click on the stage stands in.");
+        setStatus("GPS was not allowed. A tap on the stage stands in.");
       },
       { enableHighAccuracy: true, maximumAge: 10000, timeout: 8000 }
     );
+  }
+
+  function goHome() {
+    resetCapture();
+    state.hearingId = null;
+    showView("home");
+    render();
   }
 
   function bind() {
@@ -1106,35 +1269,63 @@
     els.here = $("ag-here");
     els.list = $("ag-list");
     els.empty = $("ag-empty");
+    els.emptyBox = $("ag-empty-box");
     els.hear = $("ag-hear");
     els.status = $("ag-status");
     els.form = $("ag-form");
     els.line = $("ag-line");
     els.lineCount = $("ag-line-count");
     els.voiceStart = $("ag-voice-start");
-    els.voiceStop = $("ag-voice-stop");
+    els.voiceLeave = $("ag-voice-leave");
     els.voiceText = $("ag-voice-text");
+    els.voiceTextLeave = $("ag-voice-text-leave");
     els.voiceFallback = $("ag-voice-fallback");
+    els.voicePanel = $("ag-voice-panel");
+    els.stillPanel = $("ag-still-panel");
+    els.chooser = $("ag-chooser");
     els.recLed = $("ag-rec-led");
+    els.recLabel = $("ag-rec-label");
     els.still = $("ag-still");
+    els.stillLeave = $("ag-still-leave");
     els.thumb = $("ag-thumb");
     els.geo = $("ag-geo");
+    els.geoPanel = $("ag-geo-panel");
     els.reset = $("ag-reset");
     els.sort = $("ag-sort");
+    els.leaveMeta = $("ag-leave-meta");
 
     els.stage.addEventListener("click", onStageClick);
-    els.form.addEventListener("submit", leaveAfterglow);
+    els.form.addEventListener("submit", leaveLine);
     els.line.addEventListener("input", function () {
       els.line.value = els.line.value.slice(0, LINE_MAX);
       els.lineCount.textContent = els.line.value.length + "/" + LINE_MAX;
     });
     els.voiceStart.addEventListener("click", startVoice);
-    els.voiceStop.addEventListener("click", function () {
-      stopVoice(true);
+    els.voiceLeave.addEventListener("click", finishVoice);
+    els.voiceTextLeave.addEventListener("click", leaveVoiceText);
+    $("ag-choose-still").addEventListener("click", function () {
+      setCaptureKind("still");
     });
+    $("ag-choose-line").addEventListener("click", function () {
+      setCaptureKind("line");
+    });
+    $("ag-go-leave").addEventListener("click", function () {
+      showView("leave");
+    });
+    $("ag-go-capture").addEventListener("click", function () {
+      resetCapture();
+      showView("capture");
+    });
+    $("ag-leave-it").addEventListener("click", function () {
+      resetCapture();
+      showView("capture");
+    });
+    $("ag-leave-back").addEventListener("click", goHome);
+    $("ag-capture-back").addEventListener("click", goHome);
     els.still.addEventListener("change", function () {
       readStill(els.still.files && els.still.files[0]);
     });
+    els.stillLeave.addEventListener("click", leaveStill);
     els.geo.addEventListener("click", useGeo);
     els.reset.addEventListener("click", resetDemo);
   }
@@ -1146,12 +1337,11 @@
       state.stageId = "hotel";
       state.you = { x: 16, y: 14 };
     }
+    showView("home");
     render();
     els.lineCount.textContent = "0/" + LINE_MAX;
-    setStatus("Whispers from the past. GPS is the trigger. The 15 m gate is the access.");
-    if (!restored && navigator.geolocation) {
-      useGeo();
-    } else if (restored && state.source === "geo") {
+    setStatus("Choose one. Then leave it.");
+    if (restored && state.source === "geo") {
       startWatch();
     }
   });
