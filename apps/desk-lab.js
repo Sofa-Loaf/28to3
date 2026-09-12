@@ -113,7 +113,7 @@
       ports: ["wd19-dc"],
       cables: ["dock-brick"],
       coach: "WD19 is dark. Pull the barrel/DC-in — the brick, not USB-C. Wait 10s. Reseat.",
-      ask: "Ask: is the brick brick-LED on? Are they holding the USB-C cable or the round jack?",
+      ask: "Ask: is the brick LED on? Are they holding the USB-C cable or the round jack?",
       steps: [
         "Confirm the 180W brick LED is lit.",
         "Trace that cable to the WD19 barrel/DC-in (round jack, not USB-C).",
