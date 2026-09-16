@@ -938,6 +938,7 @@ h3 {
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   overflow: hidden;
+  min-width: 0;
   font-size: 0.78rem;
   line-height: 1.35;
 }
@@ -1093,6 +1094,7 @@ h3 {
 .cc-workspace {
   display: grid;
   grid-template-columns: 7.2rem 1fr;
+  min-width: 0;
   min-height: 0;
   background: #090d13;
 }
@@ -1128,9 +1130,11 @@ h3 {
   display: grid;
   gap: 0.5rem;
   padding: 0.6rem;
+  min-width: 0;
 }
 
 .cc-card {
+  min-width: 0;
   padding: 0.55rem 0.6rem 0.5rem;
   border: 1px solid #243140;
   border-radius: 8px;
@@ -1143,13 +1147,14 @@ h3 {
 
 .cc-card header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.45rem;
   margin-bottom: 0.35rem;
 }
 
 .cc-card h3 {
   flex: 1;
+  min-width: 0;
   margin: 0;
   font-family: var(--sans);
   font-size: 0.78rem;
@@ -1157,6 +1162,7 @@ h3 {
 }
 
 .cc-os {
+  flex: none;
   padding: 0.1rem 0.35rem;
   border: 1px solid currentColor;
   border-radius: 4px;
@@ -1164,6 +1170,7 @@ h3 {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .cc-os.linux {
@@ -1179,6 +1186,8 @@ h3 {
 .cc-card pre {
   margin: 0 0 0.4rem;
   padding: 0.4rem 0.5rem;
+  max-width: 100%;
+  min-width: 0;
   overflow-x: auto;
   border: 1px solid #243140;
   border-radius: 6px;
@@ -1203,6 +1212,7 @@ h3 {
 
 .cc-status {
   justify-content: space-between;
+  flex-wrap: wrap;
   border-bottom: 0;
   border-top: 1px solid #243140;
   color: #667687;
