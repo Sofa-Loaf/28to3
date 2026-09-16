@@ -1,6 +1,6 @@
 # 28to3.me — public product surface
 
-Public landing page for **28to3.me**, the seller of **Actionscope**, **Afterglow**, **SophPDF Debloat**, and **Soph Explorer Debloat**. Stripe should match the business / seller name **28to3.me** (not Sofa Loaf).
+Public landing page for **28to3.me**, the seller of **Actionscope**, **Afterglow**, **Command Center**, **SophPDF Debloat**, and **Soph Explorer Debloat**. Stripe should match the business / seller name **28to3.me** (not Sofa Loaf).
 
 **28to3.me is the public product surface for Sofa-Loaf ships.**
 
@@ -12,6 +12,7 @@ Public landing page for **28to3.me**, the seller of **Actionscope**, **Afterglow
 | [SophPDF Debloat](sophpdf.html) | Easy, lite PDF editor without the bloat. Everyday editing for office admins / older office workers: open, annotate, fill forms, sign, print. Same **Soph* Debloat** family as Soph Explorer Debloat. Web demo: [apps/sophpdf-demo.html](apps/sophpdf-demo.html). Screenshots: `apps/assets/sophpdf/`. Twitter handoff: `apps/assets/social/twitter-sophpdf-1.png`. | **$4.99 one-time**. Payment Link: https://buy.stripe.com/fZu7sMaIAced6m84mr0co02. Success URL: https://28to3.me/apps/thanks-sophpdf.html | Source [Sofa-Loaf/pdf-editor](https://github.com/Sofa-Loaf/pdf-editor) is **private**. Public Windows installer: [Sofa-Loaf/sophpdf-downloads/releases/latest](https://github.com/Sofa-Loaf/sophpdf-downloads/releases/latest) (tag v0.1.0 when assets land). |
 | [Soph Explorer Debloat](soph-explorer.html) | Free, lite, fast Windows file explorer — fast search, PDF preview by default — for office users who hate Explorer bloat. Same **Soph* Debloat** family as SophPDF Debloat. Web demo: [apps/soph-explorer-demo.html](apps/soph-explorer-demo.html). Screenshots: `apps/assets/soph-explorer/`. Twitter handoff: `apps/assets/social/twitter-soph-explorer-1.png`. | **Free forever.** No Stripe. Windows installer on [GitHub Releases](https://github.com/Sofa-Loaf/soph-explorer/releases/latest) (tag [v0.1.0](https://github.com/Sofa-Loaf/soph-explorer/releases/tag/v0.1.0)). | Public: [Sofa-Loaf/soph-explorer](https://github.com/Sofa-Loaf/soph-explorer) |
 | [Afterglow](apps/afterglow.html) | GPS trigger. Precise pin. Listen radius **~50ft / 15m**. Residue ranked by plays — never rate the place. Not reviews. Tagline: *Whispers left where you stood.* Near-black brand. Privacy: [apps/afterglow.html#privacy](apps/afterglow.html#privacy). **Android / Play first; iOS later.** Web prototype: [apps/afterglow-demo.html](apps/afterglow-demo.html). Assets: `apps/assets/afterglow/`. | **Free.** No Stripe. | Public: [Sofa-Loaf/afterglow](https://github.com/Sofa-Loaf/afterglow) |
+| [Command Center](apps/command-center.html) | Clipboard command palette for MSP techs. Tabs, placeholders, import/export, dark and light. Copy into SSH / RDP / iLO. Never executes remotely. Library is `localStorage` only (`command-center:document`). | **Free forever.** No Stripe. Windows installer + portable zip on [GitHub Releases](https://github.com/Sofa-Loaf/command-center/releases/latest) (tag [v0.1.0](https://github.com/Sofa-Loaf/command-center/releases/tag/v0.1.0)). Portable zip: unzip, then `START.bat` — or open `index.html`. | Public: [Sofa-Loaf/command-center](https://github.com/Sofa-Loaf/command-center). Live path: `apps/command-center.html` |
 | [Desk Lab](apps/desk-lab.html) | Free MSP call sheet for Dell desks. Toggle what’s on the client’s desk (OptiPlex, Precision, WD19, monitor, UPS). Click a device for ticket-labeled ports. Four read-aloud playbooks: dock dark, no display, laptop not charging, dead desk. | **Free.** No Stripe. | Public: [Sofa-Loaf/desk-lab](https://github.com/Sofa-Loaf/desk-lab). Live path: `apps/desk-lab.html` |
 | [HEIC Save As](apps/heic-save-as.html) | Free client-side HEIC → JPG/PNG converter. Drop `.heic` / `.heif`, pick JPG or PNG, optional quality, Save as / download. Batch if you drop more than one. | **Free.** No Stripe. | Public: [Sofa-Loaf/heic-save-as](https://github.com/Sofa-Loaf/heic-save-as). Live path: `apps/heic-save-as.html` |
 | [Billshot](apps/billshot.html) | Free client-side GitHub Actions usage / billing explainer. Paste a usage report (or drop a screenshot and type the minutes). Explains minute rounding (12s still bills 1 min), Linux 1× / Windows 2× / macOS 10×, and what likely drove the bill. | **Free.** No Stripe. | Public: [Sofa-Loaf/billshot](https://github.com/Sofa-Loaf/billshot). Live path: `apps/billshot.html` |
@@ -44,6 +45,7 @@ GitHub Pages is deployed from `main` by [`.github/workflows/pages.yml`](.github/
 | --- | --- |
 | Home | `index.html` |
 | Job Summary demo | `demo.html` |
+| Command Center | `apps/command-center.html` |
 | Desk Lab | `apps/desk-lab.html` |
 | HEIC Save As | `apps/heic-save-as.html` |
 | Billshot | `apps/billshot.html` |
@@ -85,6 +87,7 @@ If the first workflow run needs Pages enabled in the UI: **Settings → Pages �
 - $49 is a **booking fee** for a Minute Teardown (one-week human artifact), not a software seat or App license
 - SophPDF Debloat: **$4.99 one-time**. Payment Link: https://buy.stripe.com/fZu7sMaIAced6m84mr0co02. Success URL: https://28to3.me/apps/thanks-sophpdf.html. Windows installer: https://github.com/Sofa-Loaf/sophpdf-downloads/releases/latest
 - Soph Explorer Debloat: **free forever**. Do not add Stripe. Windows installer: https://github.com/Sofa-Loaf/soph-explorer/releases/latest
+- Command Center: **free forever**. Do not add Stripe. Clipboard only — never executes remotely. Download: https://github.com/Sofa-Loaf/command-center/releases/latest
 - Afterglow: **free**. Do not add Stripe.
 - Desk Lab: **free**. Do not add Stripe. MSP call sheet only — picker, labeled ports, read-aloud playbooks.
 - HEIC Save As: **free**. Do not add Stripe. Client-side HEIC → JPG/PNG only.

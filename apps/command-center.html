@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Command Center — 28to3.me</title>
+  <meta name="description" content="Command Center is a clipboard command palette for MSP techs. Tabs, placeholders, import/export, dark and light. localStorage only. Never executes remotely. Free forever — no Stripe.">
+  <meta name="theme-color" content="#f6efe4">
+  <link rel="canonical" href="https://28to3.me/apps/command-center.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <meta property="og:title" content="Command Center — 28to3.me">
+  <meta property="og:description" content="Clipboard command palette for MSP techs. Copy, paste into SSH/RDP/iLO. Never executes remotely. Dark and light. localStorage only. Free forever. No Stripe.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://28to3.me/apps/command-center.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,620;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:ital,wght@0,400;0,600;0,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="../index.html" aria-label="28to3.me home">
+        <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+          <rect width="64" height="64" rx="16" fill="#1C1915"/>
+          <text x="32" y="41" text-anchor="middle" font-family="Georgia, serif" font-size="22" font-weight="700" fill="#F6EFE4">28</text>
+        </svg>
+        28to3.me
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav id="site-nav" class="nav-links" aria-label="Primary">
+        <a href="../index.html#products">Products</a>
+        <a href="../demo.html">Demo</a>
+        <a href="../teardown-sample.html">Teardown</a>
+        <a href="../index.html#apps">Web Apps</a>
+        <a href="../index.html#install">Install</a>
+        <a href="../index.html#pricing">Pricing</a>
+        <a href="../sophpdf.html">SophPDF</a>
+        <a href="../soph-explorer.html">Explorer</a>
+        <a href="afterglow.html">Afterglow</a>
+        <a href="command-center.html" aria-current="page">Command Center</a>
+        <a href="../about.html">About</a>
+        <a href="#get">Get it</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero wrap" id="top">
+      <div class="hero-grid">
+        <div>
+          <p class="eyebrow">Sold by 28to3.me · MSP / NOC · Free forever</p>
+          <h1>Command Center</h1>
+          <p class="lede">Clipboard command palette for MSP techs. Tabs. Placeholders. Click a card, copy, paste into SSH, RDP, or iLO. Dark and light are first-class. The library stays in this browser — <code>localStorage</code> only. Never executes remotely.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="https://github.com/Sofa-Loaf/command-center/releases/latest">Download on GitHub Releases</a>
+            <a class="button button-ghost" href="https://github.com/Sofa-Loaf/command-center">Open source repo</a>
+          </div>
+          <p class="fine-print">Free forever. No Stripe. No seat. Windows installer, portable <code>.exe</code>, and portable web zip land on <a href="https://github.com/Sofa-Loaf/command-center/releases/latest">GitHub Releases</a> (tag <a href="https://github.com/Sofa-Loaf/command-center/releases/tag/v0.1.0">v0.1.0</a>) as CI uploads. Portable zip: unzip, then <code>START.bat</code> — or open <code>index.html</code>. Source: <a href="https://github.com/Sofa-Loaf/command-center">Sofa-Loaf/command-center</a>.</p>
+        </div>
+        <aside class="cc-desk" aria-label="Command Center preview">
+          <div class="cc-topbar">
+            <div class="cc-brand">
+              <span class="cc-mark" aria-hidden="true">&gt;</span>
+              <div>
+                <p class="cc-title">Command Center</p>
+                <p class="cc-sub">Clipboard command palette</p>
+              </div>
+            </div>
+            <span class="cc-safety"><i></i> Clipboard only</span>
+            <span class="cc-search" aria-hidden="true">Search <kbd>/</kbd> <kbd>Ctrl+K</kbd></span>
+            <span class="cc-theme" aria-hidden="true"><em>Dark</em> Light</span>
+          </div>
+          <div class="cc-phbar" aria-hidden="true">
+            <span class="cc-ph"><label>host</label><code>fw-east-01</code></span>
+            <span class="cc-ph"><label>ip</label><code>10.12.4.18</code></span>
+            <span class="cc-ph"><label>user</label><code>svc-noc</code></span>
+            <span class="cc-ph"><label>port</label><code>22</code></span>
+            <span class="cc-ph"><label>service</label><code>sshd</code></span>
+          </div>
+          <div class="cc-workspace">
+            <ul class="cc-tabs">
+              <li class="is-on">Diagnostics</li>
+              <li>Networking</li>
+              <li>Troubleshooting</li>
+              <li>Logs</li>
+            </ul>
+            <div class="cc-cards">
+              <article class="cc-card">
+                <header>
+                  <h3>Ping host (4 probes)</h3>
+                  <span class="cc-os linux">linux</span>
+                </header>
+                <pre>ping -c 4 fw-east-01</pre>
+                <p class="cc-copy">Copy filled</p>
+              </article>
+              <article class="cc-card is-on">
+                <header>
+                  <h3>Test-NetConnection</h3>
+                  <span class="cc-os windows">windows</span>
+                </header>
+                <pre>Test-NetConnection -ComputerName fw-east-01 -Port 22</pre>
+                <p class="cc-copy">Copy filled</p>
+              </article>
+              <article class="cc-card">
+                <header>
+                  <h3>Listening sockets</h3>
+                  <span class="cc-os linux">linux</span>
+                </header>
+                <pre>ss -tulpn</pre>
+                <p class="cc-copy">Copy raw</p>
+              </article>
+            </div>
+          </div>
+          <p class="cc-status">localStorage key <code>command-center:document</code> · Paste into SSH / RDP / iLO · offline</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="who">
+      <div class="wrap">
+        <p class="eyebrow">What it does</p>
+        <h2>Copy. Paste. Do not execute from here.</h2>
+        <p class="section-lede">Built for a ticket, a jump box, and a paste buffer. Dense NOC chrome. Dark and light. No remote shell, no cloud sync, no account.</p>
+        <div class="problem-grid">
+          <article class="card">
+            <h3>Clipboard only</h3>
+            <p>Copy filled or raw. Paste into the remote session yourself. No SSH, WinRM, or iLO execution from this app. On purpose.</p>
+          </article>
+          <article class="card">
+            <h3>Tabs and placeholders</h3>
+            <p>Diagnostics, Networking, Troubleshooting, and the rest. <code>{{host}}</code> <code>{{ip}}</code> <code>{{user}}</code> <code>{{port}}</code> plus defaults like <code>{{port:22}}</code>. Last-used values stick.</p>
+          </article>
+          <article class="card">
+            <h3>Stays in the browser</h3>
+            <p>Import JSON, text, Markdown, or YAML. Export the library or the current tab. Dark and light, persisted. Key <code>command-center:document</code>. No backend.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="get">
+      <div class="wrap">
+        <p class="eyebrow">Get it from 28to3.me</p>
+        <h2>Free forever. Download on GitHub.</h2>
+        <p class="section-lede">No Payment Link. No invented checkout. Use <a href="https://github.com/Sofa-Loaf/command-center/releases/latest">/releases/latest</a> — installer and zips populate as CI uploads. Tag <a href="https://github.com/Sofa-Loaf/command-center/releases/tag/v0.1.0">v0.1.0</a> is the first cut.</p>
+        <div class="pricing-grid soph-price-grid">
+          <article class="price-card featured">
+            <span class="badge">Free forever</span>
+            <h3>Command Center</h3>
+            <p class="price">$0</p>
+            <p class="price-note">No Stripe — not a seat, not a booking fee</p>
+            <ul>
+              <li>Clipboard command palette for MSP / field techs</li>
+              <li>Windows installer when listed; portable <code>.exe</code> beside it</li>
+              <li>Sold by 28to3.me as a free product</li>
+            </ul>
+            <a class="button button-primary" href="https://github.com/Sofa-Loaf/command-center/releases/latest">Download on GitHub Releases</a>
+          </article>
+          <article class="price-card">
+            <span class="badge">Source</span>
+            <h3>Open source + portable zip</h3>
+            <p class="price-note" style="margin-top: 0.4rem;">Same UI. Same localStorage. Same clipboard-only rule.</p>
+            <ul>
+              <li>Repo: <a href="https://github.com/Sofa-Loaf/command-center">Sofa-Loaf/command-center</a></li>
+              <li>Portable web zip: unzip, then double-click <code>START.bat</code> — or open <code>index.html</code></li>
+              <li>If Windows SmartScreen fires: More info → Run anyway</li>
+            </ul>
+            <a class="button button-ghost" href="https://github.com/Sofa-Loaf/command-center">Open source repo</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="also">
+      <div class="wrap">
+        <p class="eyebrow">Also from 28to3.me</p>
+        <h2>Desk Lab is the other MSP desk tool.</h2>
+        <p class="section-lede">Command Center is the paste buffer. <a href="desk-lab.html">Desk Lab</a> is the Dell call sheet — ports and playbooks. Both free. Both client-side. Actionscope and Soph* Debloat sit on the same seller site.</p>
+        <div class="cta-row">
+          <a class="button button-primary" href="desk-lab.html">Open Desk Lab</a>
+          <a class="button button-ghost" href="../index.html#apps">All web apps</a>
+          <a class="button button-ghost" href="../index.html#products">All products</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-row">
+      <p>© 2026 28to3.me. Command Center is free forever. Clipboard only.</p>
+      <div class="footer-links">
+        <a href="../index.html">Home</a>
+        <a href="../index.html#products">Products</a>
+        <a href="../index.html#apps">Web Apps</a>
+        <a href="../about.html">About</a>
+        <a href="command-center.html" aria-current="page">Command Center</a>
+        <a href="desk-lab.html">Desk Lab</a>
+        <a href="afterglow.html">Afterglow</a>
+        <a href="../soph-explorer.html">Soph Explorer Debloat</a>
+        <a href="../privacy.html">Privacy</a>
+        <a href="../terms.html">Terms</a>
+        <a href="https://github.com/Sofa-Loaf/command-center/releases/latest">Download</a>
+        <a href="mailto:hello@28to3.me">hello@28to3.me</a>
+      </div>
+    </div>
+  </footer>
+  <script src="../site.js"></script>
+</body>
+</html>
