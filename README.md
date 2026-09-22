@@ -16,7 +16,7 @@ Public landing page for **28to3.me**, the seller of **Actionscope**, **Afterglow
 | [Desk Lab](apps/desk-lab.html) | Free MSP call sheet for Dell desks. Toggle what’s on the client’s desk (OptiPlex, Precision, WD19, monitor, UPS). Click a device for ticket-labeled ports. Four read-aloud playbooks: dock dark, no display, laptop not charging, dead desk. | **Free.** No Stripe. | Public: [Sofa-Loaf/desk-lab](https://github.com/Sofa-Loaf/desk-lab). Live path: `apps/desk-lab.html` |
 | [HEIC Save As](apps/heic-save-as.html) | Free client-side HEIC → JPG/PNG converter. Drop `.heic` / `.heif`, pick JPG or PNG, optional quality, Save as / download. Batch if you drop more than one. | **Free.** No Stripe. | Public: [Sofa-Loaf/heic-save-as](https://github.com/Sofa-Loaf/heic-save-as). Live path: `apps/heic-save-as.html` |
 | [Billshot](apps/billshot.html) | Free client-side GitHub Actions usage / billing explainer. Paste a usage report (or drop a screenshot and type the minutes). Explains minute rounding (12s still bills 1 min), Linux 1× / Windows 2× / macOS 10×, and what likely drove the bill. | **Free.** No Stripe. | Public: [Sofa-Loaf/billshot](https://github.com/Sofa-Loaf/billshot). Live path: `apps/billshot.html` |
-| [Minute Cheat Sheet](apps/minute-cheat-sheet.html) | One-page PDF (+ print-friendly HTML) of Actions minute quirks: 12s still bills 1 rounded minute; Linux 1× / Windows 2× / macOS 10×; Job Summary columns; pin `@v0.1.3`. | **$0.99 one-time**. Stripe product name: **Minute Cheat Sheet — $0.99**. Marketing pages link Buy on Stripe only. | Product page: `apps/minute-cheat-sheet.html` |
+| [Minute Cheat Sheet](apps/minute-cheat-sheet.html) | One-page PDF of Actions minute quirks: 12s still bills 1 rounded minute; Linux 1× / Windows 2× / macOS 10×; Job Summary columns; pin `@v0.1.3`. | **$0.99 one-time**. Stripe product name: **Minute Cheat Sheet — $0.99**. After pay: Stripe Instant Download. The PDF is not on Pages. | Product page: `apps/minute-cheat-sheet.html` |
 
 - Install Actionscope (GitHub org only): `uses: Sofa-Loaf/actionscope@v0.1.3`
 - Latest Actionscope release: https://github.com/Sofa-Loaf/actionscope/releases/latest
@@ -88,7 +88,7 @@ If the first workflow run needs Pages enabled in the UI: **Settings → Pages �
 - Desk Lab: **free**. Do not add Stripe. MSP call sheet only — picker, labeled ports, read-aloud playbooks.
 - HEIC Save As: **free**. Do not add Stripe. Client-side HEIC → JPG/PNG only.
 - Billshot: **free**. Do not add Stripe. Client-side usage-report explainer only.
-- Minute Cheat Sheet: **$0.99 one-time**. Stripe product name: **Minute Cheat Sheet — $0.99**. Payment Link: https://buy.stripe.com/28E28s03W7XXh0MbOT0co01. Marketing pages link Buy on Stripe only. Do not publish the post-pay page or the PDF path.
+- Minute Cheat Sheet: **$0.99 one-time**. Stripe product name: **Minute Cheat Sheet — $0.99**. Payment Link: https://buy.stripe.com/28E28s03W7XXh0MbOT0co01. After pay, buyers download from Stripe Instant Download on the receipt. The PDF is not published on Pages.
 
 ## Local preview
 

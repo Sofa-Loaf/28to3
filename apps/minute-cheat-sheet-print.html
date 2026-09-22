@@ -4,7 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Minute Cheat Sheet — 28to3.me</title>
-  <meta name="description" content="One-page GitHub Actions minute cheat sheet from 28to3.me. 12-second jobs still bill 1 rounded minute. Linux 1×, Windows 2×, macOS 10×. Estimates, not an invoice.">
+  <meta name="description" content="Minute Cheat Sheet from 28to3.me. The full PDF is Stripe Instant Download after you pay.">
+  <meta name="robots" content="noindex">
   <meta name="theme-color" content="#f6efe4">
   <link rel="canonical" href="https://sofa-loaf.github.io/28to3/apps/minute-cheat-sheet-print.html">
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
@@ -230,7 +231,6 @@
 <body>
   <p class="screen-bar">
     <a href="minute-cheat-sheet.html">Product page</a>
-    <span>Print this page for a one-page sheet.</span>
   </p>
   <article class="sheet">
     <header class="letterhead">
@@ -243,132 +243,12 @@
       </div>
       <p class="meta">
         $0.99 one-time · seller <strong>28to3.me</strong><br>
-        Estimates, not an invoice.<br>
-        Rates dated 2026-09-05
+        Full PDF after pay
       </p>
     </header>
 
-    <p class="lede">Private-repo Actions bills are a lump sum. This page is the per-job math Actionscope writes into a Job Summary — wall, rounded minutes, SKU, list-price $, included-minute burn.</p>
-
-    <div class="grid-2">
-      <section class="quirk">
-        <h2>12 seconds still bills 1 minute</h2>
-        <p>GitHub rounds <strong>each started job up to the next whole minute</strong>. A 12-second <code>lint</code> is 1 rounded minute. This is not <code>ceil(combined wall)</code>. Jobs that never started are 0.</p>
-      </section>
-      <section class="quirk">
-        <h2>Included-minute burn</h2>
-        <p>Standard hosted runners only: <strong>Linux 1×</strong> · <strong>Windows 2×</strong> · <strong>macOS 10×</strong> per rounded minute. Larger runners cannot use included minutes (burn = 0).</p>
-      </section>
-    </div>
-
-    <div class="grid-2">
-      <section>
-        <h2>Est. $ (list) — same rates as the Action / site</h2>
-        <table class="rates">
-          <thead>
-            <tr>
-              <th scope="col">SKU</th>
-              <th scope="col">OS</th>
-              <th scope="col" class="num">Per rounded min</th>
-              <th scope="col" class="num">Included</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>actions_linux</td>
-              <td>Linux</td>
-              <td class="num">$0.0060</td>
-              <td class="num">1×</td>
-            </tr>
-            <tr>
-              <td>actions_windows</td>
-              <td>Windows</td>
-              <td class="num">$0.0100</td>
-              <td class="num">2×</td>
-            </tr>
-            <tr class="macos">
-              <td>actions_macos</td>
-              <td>macOS</td>
-              <td class="num hot">$0.0620</td>
-              <td class="num">10×</td>
-            </tr>
-          </tbody>
-        </table>
-        <p class="note">Est. $ = rounded minutes × list rate. Label it an estimate. Source: GitHub Actions runner pricing, 2026-09-05. Public repos, self-hosted, and larger-runner SKUs are out of scope here.</p>
-      </section>
-      <section>
-        <h2>How to read Job Summary columns</h2>
-        <ol>
-          <li><strong>Wall time</strong> — <code>completed_at − started_at</code> (running jobs use now).</li>
-          <li><strong>Rounded min</strong> — ceil each started job to a whole minute.</li>
-          <li><strong>Runner SKU</strong> — from job labels / runner name; match the usage-report SKU.</li>
-          <li><strong>Est. $ (list)</strong> — rounded min × documented per-minute rate. Not an invoice.</li>
-          <li><strong>Included min</strong> — plan-minute burn: Linux 1, Windows 2, macOS 10.</li>
-        </ol>
-      </section>
-    </div>
-
-    <section>
-      <h2>Worked example — same numbers as the site Job Summary demo</h2>
-      <table>
-        <thead>
-          <tr>
-            <th scope="col">Job</th>
-            <th scope="col">Wall</th>
-            <th scope="col" class="num">Rounded min</th>
-            <th scope="col">Runner SKU</th>
-            <th scope="col" class="num">Est. $ (list)</th>
-            <th scope="col" class="num">Included min</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">lint</th>
-            <td>12s</td>
-            <td class="num">1</td>
-            <td><code>actions_linux</code></td>
-            <td class="num">$0.0060</td>
-            <td class="num">1</td>
-          </tr>
-          <tr>
-            <th scope="row">test</th>
-            <td>1m 4s</td>
-            <td class="num">2</td>
-            <td><code>actions_windows</code></td>
-            <td class="num">$0.0200</td>
-            <td class="num">4</td>
-          </tr>
-          <tr class="macos">
-            <th scope="row">build</th>
-            <td>48s</td>
-            <td class="num">1</td>
-            <td><code>actions_macos</code></td>
-            <td class="num hot"><strong>$0.0620</strong></td>
-            <td class="num">10</td>
-          </tr>
-          <tr class="total">
-            <th scope="row">Total</th>
-            <td>2m 4s</td>
-            <td class="num">4</td>
-            <td></td>
-            <td class="num">$0.0880</td>
-            <td class="num">14</td>
-          </tr>
-        </tbody>
-      </table>
-      <p class="note">48s macOS is $0.0620 and 10 included minutes. Combined wall is 2m 4s; billed rounded minutes are 4 because each job ceils on its own.</p>
-    </section>
-
-    <section>
-      <h2>Pin the free Action</h2>
-      <p class="pin">- name: Actionscope<br>  uses: Sofa-Loaf/actionscope@v0.1.3</p>
-      <p class="note">The nested path <code>actionscope/action@v0.1.3</code> still works if you already pinned it. Default <code>GITHUB_TOKEN</code> is enough; lock-down workflows need <code>actions: read</code>.</p>
-    </section>
-
-    <footer class="foot">
-      <p>Need names on your org? <strong>$49</strong> books a Minute Teardown — one org, one week, one written artifact. Not a software seat. $19 App seats later, not live. <a href="https://sofa-loaf.github.io/28to3/teardown-sample.html">Sample</a> · <a href="https://sofa-loaf.github.io/28to3/">28to3.me</a></p>
-      <p>hello@28to3.me</p>
-    </footer>
+    <p class="lede">A 12-second job still bills one rounded minute. Linux, Windows, and macOS do not burn included minutes the same way. The full one-page PDF is <strong>Stripe Instant Download</strong> on your receipt after you pay. It is not hosted on this page.</p>
+    <p class="lede"><a href="https://buy.stripe.com/28E28s03W7XXh0MbOT0co01">Buy Minute Cheat Sheet — $0.99</a></p>
   </article>
 </body>
 </html>
