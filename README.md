@@ -17,6 +17,7 @@ Public landing page for **28to3.me**, the seller of **Actionscope**, **Afterglow
 | [HEIC Save As](apps/heic-save-as.html) | Free client-side HEIC → JPG/PNG converter. Drop `.heic` / `.heif`, pick JPG or PNG, optional quality, Save as / download. Batch if you drop more than one. | **Free.** No Stripe. | Public: [Sofa-Loaf/heic-save-as](https://github.com/Sofa-Loaf/heic-save-as). Live path: `apps/heic-save-as.html` |
 | [Billshot](apps/billshot.html) | Free client-side GitHub Actions usage / billing explainer. Paste a usage report (or drop a screenshot and type the minutes). Explains minute rounding (12s still bills 1 min), Linux 1× / Windows 2× / macOS 10×, and what likely drove the bill. | **Free.** No Stripe. | Public: [Sofa-Loaf/billshot](https://github.com/Sofa-Loaf/billshot). Live path: `apps/billshot.html` |
 | [Actions Bill Memo](apps/actions-bill-memo.html) | Manager-ready Billshot one-pager. Paste or screenshot framing: 12s still bills 1 rounded minute; Linux 1× / Windows 2× / macOS 10×; blank fields for org, week, and what to cut. | **$9.99 one-time**. Payment Link not created yet — placeholder on the product page (`#stripe-actions-bill-memo-pending`). Do not publish the post-pay page or the PDF path on marketing pages. | Product page: `apps/actions-bill-memo.html` |
+| [Tip](apps/tip.html) | Open-amount tip jar. Customer chooses the amount on Stripe. Tips help ship the free tools (Billshot, Command Center, Desk Lab, HEIC). | Payment Link not created. Placeholder `#stripe-tip-pending` and `TODO(stripe-tip)`. Do not invent a `buy.stripe.com` URL. Success page is `noindex` and not in the sitemap. | `apps/tip.html` |
 | [Minute Cheat Sheet](apps/minute-cheat-sheet.html) | One-page PDF of Actions minute quirks: 12s still bills 1 rounded minute; Linux 1× / Windows 2× / macOS 10×; Job Summary columns; pin `@v0.1.3`. | **$0.99 one-time**. Stripe product name: **Minute Cheat Sheet — $0.99**. After pay: Stripe Instant Download. The PDF is not on Pages. | Product page: `apps/minute-cheat-sheet.html` |
 
 - Install Actionscope (GitHub org only): `uses: Sofa-Loaf/actionscope@v0.1.3`
@@ -51,6 +52,7 @@ GitHub Pages is deployed from `main` by [`.github/workflows/pages.yml`](.github/
 | HEIC Save As | `apps/heic-save-as.html` |
 | Billshot | `apps/billshot.html` |
 | Actions Bill Memo | `apps/actions-bill-memo.html` |
+| Tip | `apps/tip.html` |
 | Minutes calculator | `apps/minutes-calculator.html` |
 | Minute Cheat Sheet | `apps/minute-cheat-sheet.html` |
 | Demo canvas | `apps/canvas.html` |
@@ -91,6 +93,7 @@ If the first workflow run needs Pages enabled in the UI: **Settings → Pages �
 - HEIC Save As: **free**. Do not add Stripe. Client-side HEIC → JPG/PNG only.
 - Billshot: **free**. Do not add Stripe. Client-side usage-report explainer only.
 - Actions Bill Memo: **$9.99 one-time**. Payment Link: not created. Placeholder `#stripe-actions-bill-memo-pending` until a real Payment Link is pasted. Do not invent a `buy.stripe.com` URL. Do not link the PDF or the post-pay page from marketing pages.
+- Tip jar: **open amount** (customer chooses on Stripe). Payment Link: not created. Placeholder `#stripe-tip-pending` and HTML comment `TODO(stripe-tip): paste buy.stripe.com Payment Link` on `apps/tip.html`. Do not invent a `buy.stripe.com` URL. When the Payment Link is created, set the success URL to `https://28to3.me/apps/thanks-tip.html`. That page is `noindex` and is not in the sitemap. No download — a tip is not a PDF.
 - Minute Cheat Sheet: **$0.99 one-time**. Stripe product name: **Minute Cheat Sheet — $0.99**. Payment Link: https://buy.stripe.com/28E28s03W7XXh0MbOT0co01. After pay, buyers download from Stripe Instant Download on the receipt. The PDF is not published on Pages.
 
 ## Local preview
