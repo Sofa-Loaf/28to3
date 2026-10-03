@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Naughty or Nice Scanner">
+  <rect width="512" height="512" fill="#123524"/>
+  <circle cx="256" cy="272" r="176" fill="#18784a" stroke="#f0c14a" stroke-width="16"/>
+  <path fill="#c0392b" d="M256 78c22 34 26 44 58 52-32 8-50 28-58 36-8-8-26-28-58-36 32-8 36-18 58-52z"/>
+  <path fill="#f0c14a" d="M228 118h56l-8 18h-40z"/>
+  <g fill="none" stroke="#fff6e4" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M256 168c46 4 70 36 72 74"/>
+    <path d="M184 242c2-38 26-70 72-74"/>
+    <path d="M256 188c36 4 54 28 56 58"/>
+    <path d="M200 246c2-30 20-54 56-58"/>
+    <path d="M256 208c26 4 40 22 42 46 2 28-10 50-30 66"/>
+    <path d="M214 254c2-24 16-42 42-46"/>
+    <path d="M256 230c16 2 26 14 26 32 0 20-12 38-26 50"/>
+    <path d="M230 262c0-18 10-30 26-32"/>
+    <path d="M270 292c-4 16-14 26-14 26s-10-10-14-26"/>
+    <path d="M214 300c10 36 24 58 42 74 18-16 32-38 42-74"/>
+    <path d="M196 292c8 52 28 88 60 110 32-22 52-58 60-110"/>
+  </g>
+</svg>
