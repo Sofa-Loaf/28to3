@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Naughty or Nice Scanner — 28to3.me</title>
+  <meta name="description" content="A pretend Christmas thumbprint scanner for kids. Press and hold the glowing pad. Works offline. Nothing is collected.">
+  <meta name="theme-color" content="#123524">
+  <link rel="canonical" href="https://28to3.me/apps/naughty-or-nice.html">
+  <link rel="icon" href="naughty-or-nice/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="naughty-or-nice/apple-touch-icon.png">
+  <link rel="manifest" href="naughty-or-nice/manifest.json">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Nice Scanner">
+  <meta property="og:title" content="Naughty or Nice Scanner — 28to3.me">
+  <meta property="og:description" content="A pretend Christmas thumbprint scanner for kids. Press and hold. Works offline. Nothing is collected.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://28to3.me/apps/naughty-or-nice.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="stylesheet" href="naughty-or-nice.css">
+</head>
+<body>
+  <div id="fx" aria-hidden="true"></div>
+  <button id="corner" type="button" aria-label="Open grown-up settings"></button>
+  <main id="main">
+    <header class="top">
+      <button id="logo" type="button" aria-label="Naughty or Nice logo. Press and hold for grown-up settings.">
+        <img src="naughty-or-nice/icon.svg" alt="" width="72" height="72">
+      </button>
+      <div>
+        <p class="eyebrow">Christmas toy</p>
+        <h1>Naughty or Nice</h1>
+        <p class="sub">Scanner</p>
+      </div>
+      <button id="mute" type="button" aria-pressed="false">Sound</button>
+    </header>
+
+    <section id="scan-screen">
+      <p id="status" role="status" aria-live="polite">Press and hold the pad</p>
+      <div class="meter" id="meter" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Scan progress">
+        <span id="meter-fill"></span>
+      </div>
+      <div class="pad-wrap">
+        <button id="pad" type="button" aria-label="Thumbprint pad. Press and hold to scan.">
+          <svg viewBox="0 0 180 220" aria-hidden="true">
+            <g fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round">
+              <path d="M90 18c38 3 58 30 60 62"/>
+              <path d="M30 80c2-32 22-59 60-62"/>
+              <path d="M90 36c30 3 46 24 48 50"/>
+              <path d="M42 86c2-26 18-47 48-50"/>
+              <path d="M90 54c22 3 34 18 35 38 1 24-8 42-24 56"/>
+              <path d="M55 92c1-20 13-35 35-38"/>
+              <path d="M90 72c14 2 22 12 22 28 0 18-10 32-22 42"/>
+              <path d="M68 100c0-16 8-26 22-28"/>
+              <path d="M102 126c-3 14-12 22-12 22s-9-8-12-22"/>
+              <path d="M58 140c8 30 20 48 32 60 12-12 24-30 32-60"/>
+              <path d="M44 132c6 42 22 72 46 90 24-18 40-48 46-90"/>
+            </g>
+          </svg>
+          <span class="scanline" aria-hidden="true"></span>
+        </button>
+      </div>
+      <p class="hint">Press and hold. This pad cannot read a real fingerprint.</p>
+    </section>
+
+    <section id="result-screen" hidden aria-live="polite">
+      <div class="art" id="art-nice" hidden>
+        <svg viewBox="0 0 160 160" aria-hidden="true">
+          <polygon points="80,6 98,56 152,56 108,88 126,142 80,110 34,142 52,88 8,56 62,56" fill="#f0c14a"/>
+        </svg>
+      </div>
+      <div class="art" id="art-naughty" hidden>
+        <svg viewBox="0 0 160 160" aria-hidden="true">
+          <path fill="#e2a45a" d="M80 14a66 66 0 1 0 46 20 20 20 0 0 1-16-8 20 20 0 0 1 6-22A66 66 0 0 0 80 14z"/>
+          <circle cx="62" cy="72" r="6" fill="#6b3a22"/>
+          <circle cx="98" cy="80" r="5" fill="#6b3a22"/>
+          <circle cx="76" cy="108" r="5" fill="#6b3a22"/>
+          <circle cx="64" cy="78" r="3" fill="#3a241c"/>
+          <circle cx="96" cy="78" r="3" fill="#3a241c"/>
+          <path d="M58 92c8 14 30 14 40 0" fill="none" stroke="#6b3a22" stroke-width="4" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h2 id="result-title"></h2>
+      <p id="result-name" hidden></p>
+      <div class="actions">
+        <button id="kidding" type="button" hidden>Just kidding, NICE!</button>
+        <button id="again" class="big" type="button">Scan again</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="credit">
+    <a href="../index.html">28to3.me</a>
+    <a href="https://buy.stripe.com/eVq5kE8As2DD9yk9GL0co04">Tip jar</a>
+  </footer>
+
+  <dialog id="parents" aria-labelledby="parents-title">
+    <h2 id="parents-title">Grown-up settings</h2>
+    <p class="parents-note">Pick what the next scan shows. Saved on this device only.</p>
+    <fieldset class="modes">
+      <legend>Next result</legend>
+      <label><input type="radio" name="mode" value="nice"> Nice</label>
+      <label><input type="radio" name="mode" value="naughty"> Naughty</label>
+      <label><input type="radio" name="mode" value="naughty-then-nice"> Naughty then Nice</label>
+      <label><input type="radio" name="mode" value="random" checked> Random</label>
+    </fieldset>
+    <label class="name-field" for="kid-name">Kid's name (optional)
+      <input id="kid-name" type="text" maxlength="40" autocomplete="off" autocapitalize="words" spellcheck="false" placeholder="Name on the nice list">
+    </label>
+    <button id="done" type="button">Done</button>
+  </dialog>
+
+  <script src="naughty-or-nice.js"></script>
+</body>
+</html>

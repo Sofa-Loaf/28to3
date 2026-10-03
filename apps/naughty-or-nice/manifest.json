@@ -1,0 +1,37 @@
+{
+  "id": "../naughty-or-nice.html",
+  "name": "Naughty or Nice Scanner",
+  "short_name": "Nice Scanner",
+  "description": "A pretend Christmas thumbprint scanner for kids. Works offline. Nothing is collected.",
+  "start_url": "../naughty-or-nice.html",
+  "scope": "../naughty-or-nice.html",
+  "display": "standalone",
+  "background_color": "#123524",
+  "theme_color": "#123524",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
