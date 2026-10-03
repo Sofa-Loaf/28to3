@@ -48,6 +48,8 @@
   var stillTime = document.getElementById("still-time");
   var caseNo = document.getElementById("case-no");
   var certDate = document.getElementById("cert-date");
+  var santaArt = document.getElementById("santa-art");
+  var santaFallback = document.getElementById("santa-fallback");
   var resultTitle = document.getElementById("result-title");
   var resultName = document.getElementById("result-name");
   var kiddingBtn = document.getElementById("kidding");
@@ -345,6 +347,7 @@
     naughtyStamp.hidden = showNice;
     stillTime.hidden = showNice;
     resultScreen.dataset.outcome = outcome;
+    showSanta(showNice);
     caseNo.textContent = currentCase;
     certDate.textContent = formatToday();
     playReveal();
@@ -368,6 +371,13 @@
       clearFx();
       chimeNaughty();
     }
+  }
+
+  function showSanta(nice) {
+    var next = nice ? "naughty-or-nice/art/santa-nice.webp" : "naughty-or-nice/art/santa-naughty.webp";
+    santaArt.hidden = false;
+    santaFallback.hidden = true;
+    if (santaArt.getAttribute("src") !== next) santaArt.setAttribute("src", next);
   }
 
   function pickOutcome(mode) {
