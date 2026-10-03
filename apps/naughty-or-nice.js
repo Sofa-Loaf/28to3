@@ -2,12 +2,13 @@
   var KEY = "naughty-or-nice";
   var HOLD_MS = 3000;
   var MODES = ["nice", "naughty", "naughty-then-nice", "random"];
-  var LINES = [
-    "Checking Santa's list...",
-    "Warming up the reindeer...",
-    "Counting cookies...",
-    "Asking the elves...",
-    "Looking for kind deeds..."
+  var LOG_LINES = [
+    "NPOS v24.12 // NORTH POLE OPERATING SYSTEM",
+    "ELF-7 AUTHENTICATING THUMBPRINT...",
+    "CROSS-CHECKING SANTA DATABASE (2,184,000,000 RECORDS)",
+    "COOKIE-SHARING INDEX: 98%",
+    "CHECKING LIST... CHECKING IT TWICE...",
+    "RESULT VERIFIED BY HEAD ELF"
   ];
 
   var settings = load();
@@ -15,7 +16,6 @@
   var activePointer = null;
   var suppressClick = false;
   var doneTimer = 0;
-  var lineTimer = 0;
   var tickTimer = 0;
   var raf = 0;
   var startedAt = 0;
@@ -24,6 +24,10 @@
   var logoStart = null;
   var cornerTaps = 0;
   var cornerTimer = 0;
+  var logStops = [];
+  var rainRaf = 0;
+  var rainColumns = [];
+  var currentCase = "";
 
   var corner = document.getElementById("corner");
   var logo = document.getElementById("logo");
@@ -35,8 +39,15 @@
   var meterFill = document.getElementById("meter-fill");
   var pad = document.getElementById("pad");
   var fx = document.getElementById("fx");
-  var artNice = document.getElementById("art-nice");
-  var artNaughty = document.getElementById("art-naughty");
+  var terminal = document.getElementById("terminal");
+  var terminalLog = document.getElementById("terminal-log");
+  var rainCanvas = document.getElementById("rain");
+  var sealWrap = document.getElementById("seal-wrap");
+  var sleigh = document.getElementById("sleigh");
+  var naughtyStamp = document.getElementById("naughty-stamp");
+  var stillTime = document.getElementById("still-time");
+  var caseNo = document.getElementById("case-no");
+  var certDate = document.getElementById("cert-date");
   var resultTitle = document.getElementById("result-title");
   var resultName = document.getElementById("result-name");
   var kiddingBtn = document.getElementById("kidding");
@@ -110,8 +121,21 @@
   }
 
   function chimeNice() {
-    [523, 659, 784, 1047].forEach(function (freq, index) {
-      window.setTimeout(function () { beep(freq, 0.16); }, index * 110);
+    var notes = [
+      [659, 0.12, 0],
+      [659, 0.12, 140],
+      [659, 0.2, 280],
+      [659, 0.12, 500],
+      [659, 0.12, 640],
+      [659, 0.2, 780],
+      [659, 0.12, 1040],
+      [784, 0.12, 1180],
+      [523, 0.14, 1320],
+      [587, 0.12, 1480],
+      [659, 0.28, 1620]
+    ];
+    notes.forEach(function (note) {
+      window.setTimeout(function () { beep(note[0], note[1]); }, note[2]);
     });
     buzz([24, 36, 24]);
   }
@@ -129,9 +153,132 @@
 
   function clearScanTimers() {
     window.clearTimeout(doneTimer);
-    window.clearInterval(lineTimer);
     window.clearInterval(tickTimer);
     window.cancelAnimationFrame(raf);
+    clearLogStops();
+    window.cancelAnimationFrame(rainRaf);
+  }
+
+  function reduceMotion() {
+    return window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  }
+
+  function clearLogStops() {
+    logStops.forEach(function (stop) { stop(); });
+    logStops = [];
+  }
+
+  function later(fn, ms) {
+    var id = window.setTimeout(fn, ms);
+    logStops.push(function () { window.clearTimeout(id); });
+  }
+
+  function every(fn, ms) {
+    var id = window.setInterval(fn, ms);
+    logStops.push(function () { window.clearInterval(id); });
+  }
+
+  function resetTerminal() {
+    clearLogStops();
+    window.cancelAnimationFrame(rainRaf);
+    rainColumns = [];
+    terminal.hidden = true;
+    terminalLog.textContent = "";
+    scanScreen.classList.remove("is-live");
+    var ctx = rainCanvas.getContext("2d");
+    if (ctx) ctx.clearRect(0, 0, rainCanvas.width, rainCanvas.height);
+  }
+
+  function resizeRain() {
+    var screen = rainCanvas.parentElement;
+    rainCanvas.width = Math.max(1, screen.clientWidth);
+    rainCanvas.height = Math.max(1, screen.clientHeight);
+    rainColumns = [];
+  }
+
+  function drawRain(move) {
+    var ctx = rainCanvas.getContext("2d");
+    var w = rainCanvas.width;
+    var h = rainCanvas.height;
+    var colW = 12;
+    var cols = Math.max(1, Math.ceil(w / colW));
+    var c;
+    var r;
+    var y;
+    if (!rainColumns.length) {
+      for (c = 0; c < cols; c += 1) rainColumns.push((c * 28) % Math.max(h, 1));
+    }
+    ctx.fillStyle = move ? "rgba(4, 18, 8, 0.28)" : "#041208";
+    ctx.fillRect(0, 0, w, h);
+    ctx.font = "12px ui-monospace, monospace";
+    ctx.fillStyle = "#39f57a";
+    for (c = 0; c < cols; c += 1) {
+      y = rainColumns[c] || 0;
+      for (r = 0; r < 7; r += 1) {
+        var yy = y - r * 14;
+        if (yy < 8 || yy > h) continue;
+        ctx.globalAlpha = move ? 1 - r / 8 : 0.75;
+        ctx.fillText((c + r) % 2 === 0 ? "0" : "1", c * colW, yy);
+      }
+      if (move) {
+        rainColumns[c] = y + 14;
+        if (rainColumns[c] > h + 16) rainColumns[c] = 0;
+      }
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  function startRain() {
+    resizeRain();
+    if (reduceMotion()) {
+      drawRain(false);
+      return;
+    }
+    function tick() {
+      if (phase !== "scanning") return;
+      drawRain(true);
+      rainRaf = window.requestAnimationFrame(tick);
+    }
+    tick();
+  }
+
+  function typeLine(line, instant) {
+    var row = document.createElement("div");
+    row.className = "log-line";
+    terminalLog.appendChild(row);
+    if (instant) {
+      row.textContent = line;
+      statusEl.textContent = line;
+      return;
+    }
+    var i = 0;
+    every(function () {
+      if (phase !== "scanning") return;
+      i += 4;
+      if (i >= line.length) {
+        row.textContent = line;
+        statusEl.textContent = line;
+        return;
+      }
+      row.textContent = line.slice(0, i);
+    }, 28);
+  }
+
+  function startTerminal() {
+    resetTerminal();
+    terminal.hidden = false;
+    scanScreen.classList.add("is-live");
+    var instant = reduceMotion();
+    window.requestAnimationFrame(function () {
+      if (phase !== "scanning") return;
+      startRain();
+    });
+    LOG_LINES.forEach(function (line, index) {
+      later(function () {
+        if (phase !== "scanning") return;
+        typeLine(line, instant);
+      }, index * 420);
+    });
   }
 
   function clearFx() {
@@ -139,7 +286,7 @@
   }
 
   function fillFx() {
-    var colors = ["#c0392b", "#f0c14a", "#fff6e4", "#1f8a4c", "#f08a80"];
+    var colors = ["#f0c14a", "#ffe08a", "#fff6e4", "#e0b03a", "#fff"];
     var piece;
     var i;
     clearFx();
@@ -165,14 +312,42 @@
     }
   }
 
+  function makeCase() {
+    var digits = "";
+    var i;
+    for (i = 0; i < 6; i += 1) digits += String(Math.floor(Math.random() * 10));
+    return "NP-" + new Date().getFullYear() + "-" + digits;
+  }
+
+  function formatToday() {
+    try {
+      return new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+    } catch (err) {
+      return new Date().toDateString();
+    }
+  }
+
+  function playReveal() {
+    sealWrap.classList.remove("is-stamping");
+    sleigh.classList.remove("go", "parked");
+    sleigh.hidden = true;
+    void sealWrap.offsetWidth;
+    sealWrap.classList.add("is-stamping");
+    sleigh.hidden = false;
+    sleigh.classList.add(reduceMotion() ? "parked" : "go");
+  }
+
   function renderOutcome(outcome) {
     var showNice = outcome === "nice";
     document.body.classList.toggle("is-nice", showNice);
     document.body.classList.toggle("is-naughty", !showNice);
-    artNice.hidden = !showNice;
-    artNaughty.hidden = showNice;
     kiddingBtn.hidden = outcome !== "naughty-then-nice";
+    naughtyStamp.hidden = showNice;
+    stillTime.hidden = showNice;
     resultScreen.dataset.outcome = outcome;
+    caseNo.textContent = currentCase;
+    certDate.textContent = formatToday();
+    playReveal();
     if (showNice) {
       resultTitle.textContent = "You're on the NICE list!";
       resultTitle.classList.remove("is-long");
@@ -218,11 +393,14 @@
     clearScanTimers();
     stopBuzz();
     pad.classList.remove("is-scanning");
+    resetTerminal();
     meterFill.style.width = "100%";
     meter.setAttribute("aria-valuenow", "100");
+    var outcome = pickOutcome(settings.mode);
+    currentCase = makeCase();
     scanScreen.hidden = true;
     resultScreen.hidden = false;
-    renderOutcome(pickOutcome(settings.mode));
+    renderOutcome(outcome);
   }
 
   function cancelScan() {
@@ -231,6 +409,7 @@
     clearScanTimers();
     stopBuzz();
     pad.classList.remove("is-scanning");
+    resetTerminal();
     resetMeter();
     statusEl.textContent = "Let go too soon. Press and hold to try again.";
   }
@@ -239,16 +418,12 @@
     if (phase !== "idle") return;
     phase = "scanning";
     pad.classList.add("is-scanning");
-    statusEl.textContent = LINES[0];
+    statusEl.textContent = LOG_LINES[0];
     resetMeter();
+    startTerminal();
     startedAt = performance.now();
     raf = window.requestAnimationFrame(frame);
     doneTimer = window.setTimeout(finishScan, HOLD_MS);
-    var line = 0;
-    lineTimer = window.setInterval(function () {
-      line = (line + 1) % LINES.length;
-      statusEl.textContent = LINES[line];
-    }, 800);
     var notes = [523, 587, 659, 698, 784];
     var step = 0;
     beep(notes[0], 0.07);
@@ -305,10 +480,13 @@
     document.body.classList.remove("is-nice", "is-naughty");
     clearFx();
     resetMeter();
-    artNice.hidden = true;
-    artNaughty.hidden = true;
+    resetTerminal();
     kiddingBtn.hidden = true;
     resultName.hidden = true;
+    naughtyStamp.hidden = true;
+    stillTime.hidden = true;
+    sleigh.hidden = true;
+    sleigh.classList.remove("go", "parked");
     statusEl.textContent = "Press and hold the pad";
     pad.focus();
   });
@@ -396,6 +574,19 @@
     if (typeof parents.close === "function") parents.close();
     else parents.removeAttribute("open");
   });
+
+  function watchArt(img, fallback) {
+    function fail() {
+      img.hidden = true;
+      fallback.hidden = false;
+    }
+    img.addEventListener("error", fail);
+    if (img.complete && img.naturalWidth === 0) fail();
+  }
+
+  watchArt(document.getElementById("elf-art"), document.getElementById("elf-fallback"));
+  watchArt(document.getElementById("seal-art"), document.getElementById("seal-fallback"));
+  watchArt(document.getElementById("santa-art"), document.getElementById("santa-fallback"));
 
   renderMute();
   syncForm();

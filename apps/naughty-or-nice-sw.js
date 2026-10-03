@@ -1,6 +1,6 @@
 /* Caches only Naughty or Nice Scanner files. Other site pages are not controlled:
    this worker is registered with scope naughty-or-nice.html. */
-var CACHE = "naughty-or-nice-v1";
+var CACHE = "naughty-or-nice-v2";
 var ASSETS = [
   "naughty-or-nice.html",
   "naughty-or-nice.css",
@@ -9,7 +9,10 @@ var ASSETS = [
   "naughty-or-nice/icon.svg",
   "naughty-or-nice/icon-192.png",
   "naughty-or-nice/icon-512.png",
-  "naughty-or-nice/apple-touch-icon.png"
+  "naughty-or-nice/apple-touch-icon.png",
+  "naughty-or-nice/art/santa.png",
+  "naughty-or-nice/art/elf-terminal.png",
+  "naughty-or-nice/art/seal.png"
 ];
 
 self.addEventListener("install", function (event) {
@@ -42,6 +45,7 @@ function isToyAsset(url) {
   return /\/naughty-or-nice\.html$/.test(url.pathname) ||
     /\/naughty-or-nice\.css$/.test(url.pathname) ||
     /\/naughty-or-nice\.js$/.test(url.pathname) ||
+    /\/naughty-or-nice\/art\/[^/]+$/.test(url.pathname) ||
     /\/naughty-or-nice\/[^/]+$/.test(url.pathname);
 }
 
