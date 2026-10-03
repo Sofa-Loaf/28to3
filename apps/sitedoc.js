@@ -899,6 +899,7 @@
       return;
     }
     setPlanBlob(file);
+    $("sd-plan-file").value = "";
     setStatus("Plan image is on the map. The grid is still there if you clear it.");
   }
 
