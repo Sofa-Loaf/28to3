@@ -1,0 +1,483 @@
+.sitedoc-page .hero {
+  padding-bottom: 0.4rem;
+}
+
+.sitedoc-page .hero h1 {
+  margin-bottom: 0.35rem;
+}
+
+.sd-tool {
+  padding-top: 0.4rem;
+}
+
+.sd-tabs {
+  position: sticky;
+  top: 72px;
+  z-index: 6;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.35rem;
+  margin: 0 0 0.75rem;
+  padding: 0.4rem 0;
+  background: rgba(246, 239, 228, 0.94);
+  backdrop-filter: blur(12px);
+}
+
+.sd-tab {
+  min-height: 44px;
+  padding: 0.45rem 0.3rem;
+  border: 1px solid #cfc2ae;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink);
+  font: 650 0.92rem/1.2 var(--sans);
+  cursor: pointer;
+}
+
+.sd-tab[aria-selected="true"] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper-2);
+}
+
+.sd-bar {
+  display: grid;
+  gap: 0.65rem;
+  margin-bottom: 0.9rem;
+  padding: 0.85rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--paper-2);
+  box-shadow: var(--shadow);
+}
+
+.sd-bar-kicker {
+  margin: 0;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.sd-filename {
+  margin: 0.15rem 0 0;
+  font-family: var(--mono);
+  font-size: 0.98rem;
+  font-weight: 500;
+  line-height: 1.35;
+  word-break: break-all;
+  color: var(--muted);
+}
+
+.sd-filename.is-ready {
+  color: var(--ink);
+}
+
+.sd-bar-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.sd-bar-actions .button {
+  flex: 1 1 12rem;
+}
+
+.sd-status {
+  margin: 0;
+  min-height: 1.4em;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+.sd-panel {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.sd-card {
+  padding: 0.95rem;
+}
+
+.sd-card h2 {
+  margin: 0 0 0.35rem;
+  font-size: 1.35rem;
+}
+
+.sd-fields {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.sd-field label,
+.sd-field legend {
+  display: block;
+  margin: 0 0 0.3rem;
+  font-weight: 650;
+}
+
+.sd-field input[type="text"],
+.sd-field input[type="number"],
+.sd-field input[type="search"],
+.sd-field select,
+.sd-field textarea,
+.sd-pin-editor input[type="text"] {
+  width: 100%;
+  min-height: 46px;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #cfc2ae;
+  border-radius: 12px;
+  background: #fffaf2;
+  color: var(--ink);
+  font: 500 1rem/1.4 var(--mono);
+}
+
+.sd-field textarea {
+  min-height: 4.5rem;
+  resize: vertical;
+  font-family: var(--sans);
+}
+
+.sd-field input:focus,
+.sd-field select:focus,
+.sd-field textarea:focus,
+.sd-pin-editor input:focus {
+  outline: 2px solid var(--copper);
+  outline-offset: 2px;
+}
+
+.sd-checks {
+  display: grid;
+  gap: 0.45rem;
+  margin-top: 0.85rem;
+}
+
+.sd-device-fields,
+.sd-pin-grid {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.sd-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  min-height: 44px;
+  font-weight: 650;
+}
+
+.sd-check input {
+  width: 1.15rem;
+  height: 1.15rem;
+  margin-top: 0.2rem;
+  accent-color: var(--copper-deep);
+}
+
+.sd-stage {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.sd-stage video,
+.sd-stage canvas {
+  width: 100%;
+  max-height: 280px;
+  border-radius: 12px;
+  background: #1c1915;
+  object-fit: contain;
+}
+
+.sd-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.sd-actions .button,
+.sd-actions .sd-file {
+  flex: 1 1 9.5rem;
+}
+
+.sd-file {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.25rem;
+  min-height: 46px;
+  font-size: 0.92rem;
+}
+
+.sd-file input {
+  max-width: 100%;
+  font: inherit;
+}
+
+.sd-gps-read,
+.sd-hint {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.sd-recent {
+  display: flex;
+  gap: 0.55rem;
+  margin: 0;
+  padding: 0.15rem 0 0.2rem;
+  overflow-x: auto;
+  list-style: none;
+}
+
+.sd-recent li {
+  flex: 0 0 7.2rem;
+}
+
+.sd-recent button {
+  display: grid;
+  gap: 0.3rem;
+  width: 100%;
+  padding: 0.3rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--paper-2);
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.sd-recent img,
+.sd-lib-card img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 8px;
+  background: #1c1915;
+}
+
+.sd-recent span,
+.sd-file-name {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  line-height: 1.3;
+  word-break: break-all;
+}
+
+.sd-library {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.sd-lib-card {
+  display: grid;
+  grid-template-columns: 6.4rem minmax(0, 1fr);
+  gap: 0.7rem;
+  padding: 0.55rem;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #fffaf2;
+}
+
+.sd-lib-card h3 {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  line-height: 1.35;
+  word-break: break-all;
+}
+
+.sd-lib-meta {
+  margin: 0.2rem 0 0.45rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.sd-lib-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.sd-lib-actions .button {
+  min-height: 40px;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.9rem;
+}
+
+.sd-map {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #fffaf2;
+  touch-action: none;
+}
+
+.sd-map.is-grid {
+  height: min(68vh, 560px);
+  min-height: 300px;
+  background-color: #fffaf2;
+  background-image:
+    linear-gradient(to right, rgba(28, 25, 21, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(28, 25, 21, 0.08) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.sd-map img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.sd-pins {
+  position: absolute;
+  inset: 0;
+}
+
+.sd-map-hint {
+  position: absolute;
+  left: 0.7rem;
+  bottom: 0.65rem;
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+  pointer-events: none;
+}
+
+.sd-pin {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  width: max-content;
+  max-width: 11rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  transform: translate(-50%, -8px);
+  cursor: grab;
+  touch-action: none;
+}
+
+.sd-pin:active {
+  cursor: grabbing;
+}
+
+.sd-pin-dot {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #fffaf2;
+  border-radius: 50%;
+  background: var(--copper);
+  box-shadow: 0 0 0 2px var(--copper-deep);
+}
+
+.sd-pin.is-selected .sd-pin-dot,
+.sd-pin.is-selected .sd-pin-thumb {
+  box-shadow: 0 0 0 3px var(--ink);
+}
+
+.sd-pin-thumb {
+  width: 46px;
+  height: 46px;
+  object-fit: cover;
+  border: 2px solid #fffaf2;
+  border-radius: 10px;
+  box-shadow: 0 0 0 2px var(--copper-deep);
+  background: #1c1915;
+}
+
+.sd-pin-label {
+  padding: 0.15rem 0.35rem;
+  border-radius: 6px;
+  background: var(--ink);
+  color: var(--paper-2);
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  line-height: 1.25;
+  word-break: break-all;
+}
+
+.sd-pin-editor {
+  display: grid;
+  gap: 0.65rem;
+  margin-top: 0.75rem;
+}
+
+.sd-pin-editor[hidden] {
+  display: none;
+}
+
+.sd-devices {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.sd-device {
+  display: grid;
+  gap: 0.65rem;
+  padding: 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #fffaf2;
+}
+
+.sd-device h3 {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 0.92rem;
+  line-height: 1.35;
+  word-break: break-all;
+}
+
+.sd-device-fields {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.sd-export ul {
+  margin: 0.4rem 0 0.8rem;
+  padding-left: 1.15rem;
+}
+
+.sd-android {
+  padding-top: 0.2rem;
+}
+
+@media (min-width: 800px) {
+  .sd-fields.two,
+  .sd-device-fields,
+  .sd-pin-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .sd-capture-grid {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    align-items: start;
+  }
+
+  .sd-capture-grid,
+  .sd-fields.two,
+  .sd-device-fields,
+  .sd-pin-grid {
+    display: grid;
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 720px) {
+  .sd-tabs {
+    top: 64px;
+  }
+
+  .sd-tab {
+    font-size: 0.82rem;
+    padding-inline: 0.15rem;
+  }
+
+  .sd-lib-card {
+    grid-template-columns: 5.2rem minmax(0, 1fr);
+  }
+}

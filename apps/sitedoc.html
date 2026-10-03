@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SiteDoc — 28to3.me</title>
+  <meta name="description" content="SiteDoc names site photos as you take them. Each file is Client-Location-Room-Device-NN, pinned on a floor plan you supply, with the uplink on the device sheet. Offline in the browser. Nothing uploads.">
+  <meta name="theme-color" content="#f6efe4">
+  <link rel="canonical" href="https://28to3.me/apps/sitedoc.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <meta property="og:title" content="SiteDoc — 28to3.me">
+  <meta property="og:description" content="Set the job once. The photo is already named, pinned, and tied to an uplink. Offline in the browser. Nothing uploads.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://28to3.me/apps/sitedoc.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,620;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:ital,wght@0,400;0,600;0,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="sitedoc.css">
+</head>
+<body class="sitedoc-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="../index.html" aria-label="28to3.me home">
+        <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+          <rect width="64" height="64" rx="16" fill="#1C1915"/>
+          <text x="32" y="41" text-anchor="middle" font-family="Georgia, serif" font-size="22" font-weight="700" fill="#F6EFE4">28</text>
+        </svg>
+        28to3.me
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav id="site-nav" class="nav-links" aria-label="Primary">
+        <a href="../index.html#products">Products</a>
+        <a href="../demo.html">Demo</a>
+        <a href="../teardown-sample.html">Teardown</a>
+        <a href="../index.html#apps" aria-current="page">Web Apps</a>
+        <a href="../index.html#install">Install</a>
+        <a href="../index.html#pricing">Pricing</a>
+        <a href="../sophpdf.html">SophPDF</a>
+        <a href="../soph-explorer.html">Explorer</a>
+        <a href="../about.html">About</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero wrap" id="top">
+      <p class="eyebrow">Web Apps · Field photos</p>
+      <h1>SiteDoc</h1>
+      <p class="lede">Set the job once. Snap the photo. The file is already named for the device, ready to pin on the floor, and ready for an uplink.</p>
+      <p class="fine-print">Offline in this browser. Nothing uploads. No account. No backend. The name is the join key: <code>Client-Location-RoomOrArea-DeviceType-NN</code>.</p>
+    </section>
+
+    <section class="section sd-tool" id="app" aria-labelledby="sitedoc-heading">
+      <div class="wrap">
+        <h2 id="sitedoc-heading" class="visually-hidden">SiteDoc job</h2>
+
+        <div class="sd-tabs" role="tablist" aria-label="SiteDoc">
+          <button class="sd-tab" type="button" role="tab" id="tab-capture" aria-controls="panel-capture" aria-selected="true" data-tab="capture">Capture</button>
+          <button class="sd-tab" type="button" role="tab" id="tab-floor" aria-controls="panel-floor" aria-selected="false" tabindex="-1" data-tab="floor">Floor</button>
+          <button class="sd-tab" type="button" role="tab" id="tab-devices" aria-controls="panel-devices" aria-selected="false" tabindex="-1" data-tab="devices">Devices</button>
+          <button class="sd-tab" type="button" role="tab" id="tab-export" aria-controls="panel-export" aria-selected="false" tabindex="-1" data-tab="export">Export</button>
+        </div>
+
+        <div class="sd-bar">
+          <div>
+            <p class="sd-bar-kicker">Next filename</p>
+            <p class="sd-filename" id="sd-filename" aria-live="polite">Set client, location, and room</p>
+          </div>
+          <div class="sd-bar-actions">
+            <button class="button button-primary" type="button" id="sd-add-device">Add this device</button>
+          </div>
+          <p class="sd-status" id="sd-status" role="status" aria-live="polite">Job stays in this browser.</p>
+        </div>
+
+        <div role="tabpanel" id="panel-capture" aria-labelledby="tab-capture" data-panel="capture">
+          <div class="sd-capture-grid sd-panel">
+            <div class="card sd-card">
+              <h2>Job</h2>
+              <p class="sd-hint">Sticky for this site. Room and area are one field. Device type is a fixed list. NN is two digits.</p>
+              <div class="sd-fields">
+                <div class="sd-field">
+                  <label for="sd-client">Client / ticket</label>
+                  <input id="sd-client" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="28to3">
+                </div>
+                <div class="sd-field">
+                  <label for="sd-location">Location</label>
+                  <input id="sd-location" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="CharlesStreet">
+                </div>
+                <div class="sd-field">
+                  <label for="sd-room">Room / area</label>
+                  <input id="sd-room" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="ServerRoom">
+                </div>
+                <div class="sd-field">
+                  <label for="sd-type">Device type</label>
+                  <select id="sd-type">
+                    <option>Switch</option>
+                    <option>WAP</option>
+                    <option>Server</option>
+                    <option>Computer</option>
+                    <option>Firewall</option>
+                    <option>UPS</option>
+                    <option>PatchPanel</option>
+                    <option>Camera</option>
+                    <option>IDF</option>
+                    <option>MDF</option>
+                    <option>Rack</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+                <div class="sd-field">
+                  <label for="sd-number">Number</label>
+                  <input id="sd-number" type="number" min="1" max="99" step="1" inputmode="numeric" value="1">
+                </div>
+                <div class="sd-field">
+                  <label for="sd-note">Shot note <span class="sd-hint">(optional)</span></label>
+                  <input id="sd-note" type="text" autocomplete="off" placeholder="Front of the rack">
+                </div>
+              </div>
+              <div class="sd-checks">
+                <label class="sd-check"><input id="sd-auto" type="checkbox" checked> Auto-increment number after save</label>
+                <label class="sd-check"><input id="sd-caption" type="checkbox"> Burn filename and GPS onto the photo</label>
+              </div>
+            </div>
+
+            <div class="card sd-card">
+              <h2>Shutter</h2>
+              <p class="sd-hint">Rear camera when this phone allows it. Gallery is the fallback. Save still works if GPS is denied.</p>
+              <div class="sd-stage">
+                <video id="sd-video" autoplay muted playsinline hidden></video>
+                <canvas id="sd-preview" hidden></canvas>
+              </div>
+              <div class="sd-actions">
+                <button class="button button-primary" type="button" id="sd-shutter">Shutter</button>
+                <button class="button button-ghost" type="button" id="sd-camera">Start rear camera</button>
+                <label class="sd-file">Gallery or camera
+                  <input id="sd-file" type="file" accept="image/*" capture="environment">
+                </label>
+                <button class="button button-ghost" type="button" id="sd-save" disabled>Save shot</button>
+                <button class="button button-ghost" type="button" id="sd-gps">Use GPS</button>
+              </div>
+              <p class="sd-gps-read" id="sd-gps-read">No GPS fix yet. If location is denied, the photo still saves.</p>
+            </div>
+          </div>
+
+          <div class="card sd-card">
+            <h2>Recent</h2>
+            <ul class="sd-recent" id="sd-recent"></ul>
+            <p class="sd-hint" id="sd-recent-empty">Saved shots show up here.</p>
+          </div>
+
+          <div class="card sd-card">
+            <h2>Library</h2>
+            <div class="sd-field">
+              <label for="sd-filter">Filter</label>
+              <input id="sd-filter" type="search" autocomplete="off" placeholder="Name, room, note, device">
+            </div>
+            <div class="sd-library" id="sd-library"></div>
+            <p class="sd-hint" id="sd-library-empty">No photos yet.</p>
+          </div>
+        </div>
+
+        <div role="tabpanel" id="panel-floor" aria-labelledby="tab-floor" data-panel="floor" hidden>
+          <div class="card sd-card">
+            <h2>Floor</h2>
+            <p class="sd-hint">Upload a plan you already have, or leave the blank grid. SiteDoc does not draw a building plan. Tap to drop the current device. Drag a pin to move it. The pin label is the filename stem. WAP pins show the photo.</p>
+            <div class="sd-actions">
+              <label class="sd-file">Plan image
+                <input id="sd-plan-file" type="file" accept="image/*">
+              </label>
+              <button class="button button-ghost" type="button" id="sd-grid">Use blank grid</button>
+            </div>
+            <div class="sd-map is-grid" id="sd-map">
+              <img id="sd-plan" alt="Uploaded floor plan" hidden>
+              <div class="sd-pins" id="sd-pins"></div>
+              <p class="sd-map-hint" id="sd-map-hint">Blank grid. Tap to drop the current device.</p>
+            </div>
+            <div class="sd-pin-editor" id="sd-pin-editor" hidden>
+              <p class="sd-bar-kicker">Pin</p>
+              <p class="sd-filename is-ready" id="sd-pin-stem"></p>
+              <div class="sd-pin-grid">
+                <div class="sd-field">
+                  <label for="sd-pin-uplink-port">Uplink port</label>
+                  <input id="sd-pin-uplink-port" type="text" autocomplete="off" data-pin-field="uplinkPort" placeholder="Gi1/0/24">
+                </div>
+                <div class="sd-field">
+                  <label for="sd-pin-uplink-to">Uplink to</label>
+                  <input id="sd-pin-uplink-to" type="text" autocomplete="off" data-pin-field="uplinkDevice" list="sd-device-list" placeholder="Device stem">
+                </div>
+                <div class="sd-field">
+                  <label for="sd-pin-remote-port">Remote port</label>
+                  <input id="sd-pin-remote-port" type="text" autocomplete="off" data-pin-field="remotePort" placeholder="eth0">
+                </div>
+              </div>
+              <button class="button button-ghost" type="button" id="sd-pin-remove">Remove pin</button>
+            </div>
+          </div>
+        </div>
+
+        <div role="tabpanel" id="panel-devices" aria-labelledby="tab-devices" data-panel="devices" hidden>
+          <div class="card sd-card">
+            <h2>Device sheet</h2>
+            <p class="sd-hint">Same names as the photos and the pins. Depends-on is a comma list, for example <code>UPS-01</code>. Add the current capture name with one button.</p>
+            <div class="sd-devices" id="sd-devices"></div>
+            <p class="sd-hint" id="sd-devices-empty">No devices yet.</p>
+          </div>
+        </div>
+
+        <div role="tabpanel" id="panel-export" aria-labelledby="tab-export" data-panel="export" hidden>
+          <div class="card sd-card sd-export">
+            <h2>Export</h2>
+            <p class="sd-hint">A zip of <code>manifest.json</code> plus the JPEGs, named with the contract. Nothing is uploaded.</p>
+            <ul>
+              <li id="sd-export-job">Job fields in the manifest</li>
+              <li id="sd-export-counts">0 photos · 0 pins · 0 devices</li>
+            </ul>
+            <button class="button button-primary" type="button" id="sd-export">Download zip</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt sd-android" id="android">
+      <div class="wrap">
+        <p class="eyebrow">Later</p>
+        <h2>Android, not this page</h2>
+        <p class="section-lede">A later Android build would use <code>CAMERA</code> and <code>ACCESS_FINE_LOCATION</code> in the foreground, and save through MediaStore into <code>Pictures/SiteDoc/&lt;job&gt;</code>. No broad storage permission. There is no native app and no Expo project here.</p>
+      </div>
+    </section>
+  </main>
+
+  <datalist id="sd-device-list"></datalist>
+
+  <footer class="site-footer">
+    <div class="wrap footer-row">
+      <p>© 2026 28to3.me. SiteDoc stays in this browser. Nothing uploads.</p>
+      <div class="footer-links">
+        <a href="../index.html">Home</a>
+        <a href="../index.html#products">Products</a>
+        <a href="../index.html#apps">Web Apps</a>
+        <a href="sitedoc.html" aria-current="page">SiteDoc</a>
+        <a href="desk-lab.html">Desk Lab</a>
+        <a href="command-center.html">Command Center</a>
+        <a href="../about.html">About</a>
+        <a href="tip.html">Tip</a>
+        <a href="../privacy.html">Privacy</a>
+        <a href="../terms.html">Terms</a>
+        <a href="mailto:hello@28to3.me">hello@28to3.me</a>
+      </div>
+    </div>
+  </footer>
+  <script src="../site.js"></script>
+  <script src="sitedoc.js"></script>
+</body>
+</html>
