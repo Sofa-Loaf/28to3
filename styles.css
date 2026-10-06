@@ -1412,6 +1412,36 @@ pre {
   text-transform: uppercase;
 }
 
+.badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.55rem;
+}
+
+.badge-row .badge {
+  margin-bottom: 0;
+}
+
+.badge-demo {
+  background: #f6e2d0;
+  color: var(--copper-deep);
+}
+
+.badge-row .badge-demo {
+  padding: 0.12rem 0.42rem;
+  font-size: 0.68rem;
+}
+
+.footer-links .badge-demo {
+  margin: 0 0 0 0.35rem;
+  padding: 0.05rem 0.34rem;
+  font-size: 0.62rem;
+  line-height: 1.35;
+  vertical-align: 0.12em;
+}
+
 .contact-panel {
   display: grid;
   grid-template-columns: 1fr 1fr;
