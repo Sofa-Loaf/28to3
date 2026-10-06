@@ -16,6 +16,7 @@ Public landing page for **28to3.me**, the seller of **Actionscope**, **Afterglow
 | [Desk Lab](apps/desk-lab.html) | Free MSP call sheet for Dell desks. Toggle what’s on the client’s desk (OptiPlex, Precision, WD19, monitor, UPS). Click a device for ticket-labeled ports. Four read-aloud playbooks: dock dark, no display, laptop not charging, dead desk. | **Free.** No Stripe. | Public: [Sofa-Loaf/desk-lab](https://github.com/Sofa-Loaf/desk-lab). Live path: `apps/desk-lab.html` |
 | [SiteDoc](apps/sitedoc.html) | Field photos named `Client-Location-RoomOrArea-DeviceType-NN`, pinned on an uploaded plan or a blank grid, with uplinks on a device sheet. Zip export is `manifest.json` plus the JPEGs. Offline in the browser. Nothing uploads. Android later, not started: `CAMERA`, `ACCESS_FINE_LOCATION` foreground, MediaStore `Pictures/SiteDoc/{job}`, no broad storage permission. | **Free.** No Stripe. | Live path: `apps/sitedoc.html` |
 | [Naughty or Nice Scanner](apps/naughty-or-nice.html) | Free Christmas thumbprint toy for kids. Press and hold a glowing pad for about 3 seconds. Nice shows snow and confetti. Naughty is gentle and funny, with an optional just-kidding reveal. Parent controls (logo long-press, or three taps in the corner) pick the next result and an optional name, saved in `localStorage`. Installable. Offline after the first load. Nothing collected. | **Free.** No Stripe checkout. The page links the existing tip jar only. | Live path: `apps/naughty-or-nice.html` |
+| [Lie Detector Scanner](apps/lie-detector.html) | Free pretend thumbprint lie detector for kids. Press and hold the pad for about 3 seconds. A magnifying glass and a wobbly Truth-o-Meter play along. Truth gets a ding and stars. A lie gets a cartoon zap (not real electricity). Parent controls (logo long-press, or three taps in the corner) pick Truth, Lie, or Random, plus an optional name, saved in `localStorage`. Mute is saved. Installable. Offline after the first load. Nothing collected. | **Free.** No Stripe checkout. The page links the existing tip jar only. | Live path: `apps/lie-detector.html` |
 | [HEIC Save As](apps/heic-save-as.html) | Free client-side HEIC → JPG/PNG converter. Drop `.heic` / `.heif`, pick JPG or PNG, optional quality, Save as / download. Batch if you drop more than one. | **Free.** No Stripe. | Public: [Sofa-Loaf/heic-save-as](https://github.com/Sofa-Loaf/heic-save-as). Live path: `apps/heic-save-as.html` |
 | [Billshot](apps/billshot.html) | Free client-side GitHub Actions usage / billing explainer. Paste a usage report (or drop a screenshot and type the minutes). Explains minute rounding (12s still bills 1 min), Linux 1× / Windows 2× / macOS 10×, and what likely drove the bill. | **Free.** No Stripe. | Public: [Sofa-Loaf/billshot](https://github.com/Sofa-Loaf/billshot). Live path: `apps/billshot.html` |
 | [Actions Bill Memo](apps/actions-bill-memo.html) | Manager-ready Billshot one-pager. Paste or screenshot framing: 12s still bills 1 rounded minute; Linux 1× / Windows 2× / macOS 10×; blank fields for org, week, and what to cut. | **$0.99 one-time**. Payment Link: https://buy.stripe.com/8x29AUcQIdih25S6uz0co06. Do not publish the post-pay page or the PDF path on marketing pages. | Product page: `apps/actions-bill-memo.html` |
@@ -61,6 +62,7 @@ GitHub Pages is deployed from `main` by [`.github/workflows/pages.yml`](.github/
 | Demo canvas | `apps/canvas.html` |
 | Jass Boxing | `apps/jass-boxing.html` |
 | Naughty or Nice Scanner | `apps/naughty-or-nice.html` |
+| Lie Detector Scanner | `apps/lie-detector.html` |
 | Sample Minute Teardown | `teardown-sample.html` |
 | SophPDF Debloat | `sophpdf.html` |
 | SophPDF Debloat web demo | `apps/sophpdf-demo.html` |
@@ -96,6 +98,7 @@ If the first workflow run needs Pages enabled in the UI: **Settings → Pages �
 - Desk Lab: **free**. Do not add Stripe. MSP call sheet only — picker, labeled ports, read-aloud playbooks.
 - SiteDoc: **free**. Do not add Stripe. Browser prototype only — named photos, floor pins, device sheet, zip export. Nothing uploads.
 - Naughty or Nice Scanner: **free**. Do not add a price. Optional tip uses the existing tip jar Payment Link only.
+- Lie Detector Scanner: **free**. Do not add a price. Optional tip uses the existing tip jar Payment Link only.
 - HEIC Save As: **free**. Do not add Stripe. Client-side HEIC → JPG/PNG only.
 - Billshot: **free**. Do not add Stripe. Client-side usage-report explainer only.
 - Actions Bill Memo: **$0.99 one-time**. Payment Link: https://buy.stripe.com/8x29AUcQIdih25S6uz0co06. Success URL: `https://28to3.me/apps/thanks-bill-memo.html`. That page is `noindex` and is not in the sitemap. Do not link the PDF or the post-pay page from marketing pages.
