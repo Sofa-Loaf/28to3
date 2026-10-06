@@ -1,6 +1,6 @@
 /* Caches only Naughty or Nice Scanner files. Other site pages are not controlled:
    this worker is registered with scope naughty-or-nice.html. */
-var CACHE = "naughty-or-nice-v3";
+var CACHE = "naughty-or-nice-v4";
 var ASSETS = [
   "naughty-or-nice.html",
   "naughty-or-nice.css",
