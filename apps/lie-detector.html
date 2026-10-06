@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Lie Detector Scanner — 28to3.me</title>
+  <meta name="description" content="A pretend thumbprint lie detector for kids. Press and hold the pad. Works offline. Nothing is collected.">
+  <meta name="theme-color" content="#241b4a">
+  <link rel="canonical" href="https://28to3.me/apps/lie-detector.html">
+  <link rel="icon" href="lie-detector/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="lie-detector/apple-touch-icon.png">
+  <link rel="manifest" href="lie-detector/manifest.json">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Lie Detector">
+  <meta property="og:title" content="Lie Detector Scanner — 28to3.me">
+  <meta property="og:description" content="A pretend thumbprint lie detector for kids. Press and hold. Works offline. Nothing is collected.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://28to3.me/apps/lie-detector.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="stylesheet" href="lie-detector.css">
+</head>
+<body>
+  <div id="fx" aria-hidden="true"></div>
+  <div id="flash" aria-hidden="true"></div>
+  <button id="corner" type="button" aria-label="Open grown-up settings"></button>
+  <main id="main">
+    <header class="top">
+      <button id="logo" type="button" aria-label="Lie Detector logo. Press and hold for grown-up settings.">
+        <img src="lie-detector/icon.svg" alt="" width="72" height="72">
+      </button>
+      <div>
+        <p class="eyebrow">Pretend toy</p>
+        <h1>Lie Detector</h1>
+        <p class="sub">Scanner</p>
+      </div>
+      <button id="mute" type="button" aria-pressed="false">Sound</button>
+    </header>
+
+    <section id="scan-screen">
+      <p id="status" role="status" aria-live="polite">Press and hold the pad</p>
+      <div class="meter-box" id="meter-box">
+        <div class="meter-top">
+          <span>Truth-o-Meter</span>
+          <span class="led" aria-hidden="true"></span>
+        </div>
+        <div class="paper">
+          <canvas id="graph" width="640" height="220" aria-hidden="true"></canvas>
+        </div>
+      </div>
+      <div class="pad-wrap">
+        <button id="pad" type="button" aria-label="Thumbprint pad. Press and hold to scan.">
+          <svg class="print" viewBox="0 0 180 220" aria-hidden="true">
+            <g fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round">
+              <path d="M90 18c38 3 58 30 60 62"/>
+              <path d="M30 80c2-32 22-59 60-62"/>
+              <path d="M90 36c30 3 46 24 48 50"/>
+              <path d="M42 86c2-26 18-47 48-50"/>
+              <path d="M90 54c22 3 34 18 35 38 1 24-8 42-24 56"/>
+              <path d="M55 92c1-20 13-35 35-38"/>
+              <path d="M90 72c14 2 22 12 22 28 0 18-10 32-22 42"/>
+              <path d="M68 100c0-16 8-26 22-28"/>
+              <path d="M102 126c-3 14-12 22-12 22s-9-8-12-22"/>
+              <path d="M58 140c8 30 20 48 32 60 12-12 24-30 32-60"/>
+              <path d="M44 132c6 42 22 72 46 90 24-18 40-48 46-90"/>
+            </g>
+          </svg>
+          <svg id="glass" class="glass" viewBox="0 0 120 120" aria-hidden="true">
+            <path d="M78 78 L108 112" stroke="#c4840d" stroke-width="14" stroke-linecap="round"/>
+            <path d="M78 78 L108 112" stroke="#f6c445" stroke-width="7" stroke-linecap="round"/>
+            <circle cx="52" cy="52" r="36" fill="rgba(255,255,255,0.28)" stroke="#3a2a10" stroke-width="8"/>
+            <circle cx="52" cy="52" r="28" fill="none" stroke="#f6c445" stroke-width="4"/>
+            <path d="M32 40 q10 -14 22 -4" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+          <div id="bolt" hidden>
+            <svg viewBox="0 0 100 160" aria-hidden="true">
+              <polygon points="58,6 22,74 46,74 30,154 86,62 54,62" fill="#ffe14a" stroke="#3d2b08" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+              <circle cx="78" cy="28" r="7" fill="#fff8d0" stroke="#3d2b08" stroke-width="3"/>
+            </svg>
+          </div>
+        </button>
+      </div>
+      <p class="hint">Press and hold. Pretend only — it cannot read a fingerprint, and the zap is not electricity.</p>
+    </section>
+
+    <section id="result-screen" hidden aria-live="polite">
+      <article class="result-card" id="result-card">
+        <p class="dept">Truth-o-Meter</p>
+        <h2 id="result-title"></h2>
+        <p id="result-extra" hidden></p>
+        <p id="result-name" hidden></p>
+      </article>
+      <div class="actions">
+        <button id="again" class="big" type="button">Scan again</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="credit">
+    <a href="../index.html">28to3.me</a>
+    <a href="https://buy.stripe.com/eVq5kE8As2DD9yk9GL0co04">Tip jar</a>
+  </footer>
+
+  <dialog id="parents" aria-labelledby="parents-title">
+    <h2 id="parents-title">Grown-up settings</h2>
+    <p class="parents-note">Pick what the next scan shows. Saved on this device only.</p>
+    <fieldset class="modes">
+      <legend>Next result</legend>
+      <label><input type="radio" name="mode" value="truth"> Truth</label>
+      <label><input type="radio" name="mode" value="lie"> Lie</label>
+      <label><input type="radio" name="mode" value="random" checked> Random</label>
+    </fieldset>
+    <label class="name-field" for="kid-name">Kid's name (optional)
+      <input id="kid-name" type="text" maxlength="40" autocomplete="off" autocapitalize="words" spellcheck="false" placeholder="Name on the result">
+    </label>
+    <button id="done" type="button">Done</button>
+  </dialog>
+
+  <script src="lie-detector.js"></script>
+</body>
+</html>
