@@ -56,16 +56,33 @@
   var againBtn = document.getElementById("again");
   var parents = document.getElementById("parents");
   var nameInput = document.getElementById("kid-name");
+  var toyInputs = [
+    document.getElementById("toy-1"),
+    document.getElementById("toy-2"),
+    document.getElementById("toy-3")
+  ];
+  var toyList = document.getElementById("toy-list");
+  var toyHeading = document.getElementById("toy-heading");
+  var toysEl = document.getElementById("toys");
   var doneBtn = document.getElementById("done");
 
+  function cleanText(value, max) {
+    return String(value || "").replace(/[\u0000-\u001F]/g, "").trim().slice(0, max);
+  }
+
   function load() {
-    var data = { mode: "random", name: "", muted: false };
+    var data = { mode: "random", name: "", toys: ["", "", ""], muted: false };
     try {
       var raw = localStorage.getItem(KEY);
       if (!raw) return data;
       var parsed = JSON.parse(raw);
       if (MODES.indexOf(parsed.mode) !== -1) data.mode = parsed.mode;
-      if (typeof parsed.name === "string") data.name = parsed.name.trim().slice(0, 40);
+      if (typeof parsed.name === "string") data.name = cleanText(parsed.name, 40);
+      if (Array.isArray(parsed.toys)) {
+        data.toys = [0, 1, 2].map(function (index) {
+          return cleanText(parsed.toys[index], 40);
+        });
+      }
       data.muted = !!parsed.muted;
     } catch (err) {}
     return data;
@@ -87,6 +104,44 @@
     var input = document.querySelector('input[name="mode"][value="' + settings.mode + '"]');
     if (input) input.checked = true;
     nameInput.value = settings.name;
+    toyInputs.forEach(function (input, index) {
+      input.value = settings.toys[index] || "";
+    });
+  }
+
+  function readToys() {
+    settings.toys = toyInputs.map(function (input) {
+      return cleanText(input.value, 40);
+    });
+  }
+
+  function renderToyList(approved) {
+    var filled = settings.toys.filter(function (toy) { return toy; });
+    toysEl.replaceChildren();
+    if (!filled.length) {
+      toyList.hidden = true;
+      toyList.classList.remove("is-approved", "is-hold");
+      return;
+    }
+    toyHeading.textContent = settings.name ? "Santa's List for " + settings.name : "Santa's List";
+    toyList.hidden = false;
+    toyList.classList.toggle("is-approved", approved);
+    toyList.classList.toggle("is-hold", !approved);
+    filled.forEach(function (toy, index) {
+      var item = document.createElement("li");
+      var mark = document.createElement("span");
+      var name = document.createElement("span");
+      var status = document.createElement("span");
+      item.style.setProperty("--i", String(index));
+      mark.className = "check";
+      mark.textContent = "✓";
+      name.className = "toy-name";
+      name.textContent = toy;
+      status.className = "toy-status";
+      status.textContent = approved ? "Approved for delivery" : "On hold... still time to earn them!";
+      item.append(mark, name, status);
+      toysEl.appendChild(item);
+    });
   }
 
   function beep(freq, dur) {
@@ -371,6 +426,7 @@
       clearFx();
       chimeNaughty();
     }
+    renderToyList(showNice);
   }
 
   function showSanta(nice) {
@@ -403,6 +459,7 @@
     clearScanTimers();
     stopBuzz();
     pad.classList.remove("is-scanning");
+    document.body.classList.remove("is-scanning");
     resetTerminal();
     meterFill.style.width = "100%";
     meter.setAttribute("aria-valuenow", "100");
@@ -419,6 +476,7 @@
     clearScanTimers();
     stopBuzz();
     pad.classList.remove("is-scanning");
+    document.body.classList.remove("is-scanning");
     resetTerminal();
     resetMeter();
     statusEl.textContent = "Let go too soon. Press and hold to try again.";
@@ -428,6 +486,7 @@
     if (phase !== "idle") return;
     phase = "scanning";
     pad.classList.add("is-scanning");
+    document.body.classList.add("is-scanning");
     statusEl.textContent = LOG_LINES[0];
     resetMeter();
     startTerminal();
@@ -487,8 +546,9 @@
     resultScreen.hidden = true;
     delete resultScreen.dataset.outcome;
     scanScreen.hidden = false;
-    document.body.classList.remove("is-nice", "is-naughty");
+    document.body.classList.remove("is-nice", "is-naughty", "is-scanning");
     clearFx();
+    toyList.hidden = true;
     resetMeter();
     resetTerminal();
     kiddingBtn.hidden = true;
@@ -570,17 +630,29 @@
   });
 
   nameInput.addEventListener("input", function () {
-    settings.name = nameInput.value.trim().slice(0, 40);
+    settings.name = cleanText(nameInput.value, 40);
     save();
   });
   nameInput.addEventListener("blur", function () {
     nameInput.value = settings.name;
   });
 
+  toyInputs.forEach(function (input) {
+    input.addEventListener("input", function () {
+      readToys();
+      save();
+    });
+    input.addEventListener("blur", function () {
+      readToys();
+      save();
+    });
+  });
+
   doneBtn.addEventListener("click", function () {
-    settings.name = nameInput.value.trim().slice(0, 40);
-    save();
+    settings.name = cleanText(nameInput.value, 40);
     nameInput.value = settings.name;
+    readToys();
+    save();
     if (typeof parents.close === "function") parents.close();
     else parents.removeAttribute("open");
   });
@@ -597,6 +669,10 @@
   watchArt(document.getElementById("elf-art"), document.getElementById("elf-fallback"));
   watchArt(document.getElementById("seal-art"), document.getElementById("seal-fallback"));
   watchArt(document.getElementById("santa-art"), document.getElementById("santa-fallback"));
+
+  document.addEventListener("visibilitychange", function () {
+    document.body.classList.toggle("page-hidden", document.hidden);
+  });
 
   renderMute();
   syncForm();
