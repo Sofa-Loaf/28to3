@@ -433,6 +433,17 @@ h1 {
 
 .parents-note { margin: 0 0 12px; font-size: 0.95rem; }
 
+.parents-tip {
+  margin: 0 0 12px;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.parents-tip a {
+  color: inherit;
+  text-decoration: underline;
+}
+
 .modes {
   display: grid;
   gap: 8px;

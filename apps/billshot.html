@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; frame-src 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Billshot — GitHub Actions usage explainer — 28to3.me</title>
   <meta name="description" content="Free client-side GitHub Actions usage explainer. Paste a usage report. See why 12 seconds still bills 1 minute, Linux 1× / Windows 2× / macOS 10×, and what drove the bill.">
@@ -196,11 +198,11 @@
         </div>
         <div class="cta-row" style="margin-top: 1.2rem;">
           <a class="button button-ghost" href="../index.html#install">Actionscope @v0.1.3</a>
-          <a class="button button-ghost" href="actions-bill-memo.html">Actions Bill Memo — $0.99</a>
-          <a class="button button-ghost" href="https://buy.stripe.com/28E28s03W7XXh0MbOT0co01">Minute Cheat Sheet — $0.99</a>
+          <a class="button button-ghost" href="actions-bill-memo.html">Actions Bill Memo — free</a>
+          <a class="button button-ghost" href="minute-cheat-sheet.html">Minute Cheat Sheet — free</a>
           <a class="button button-primary" href="https://buy.stripe.com/8x2dRa7woa65dOA6uz0co00">Minute Teardown — $49</a>
         </div>
-        <p class="fine-print">The $0.99 Actions Bill Memo is the same framing on one page a manager can forward, with blanks for org, week, and what to cut. The $0.99 sheet is the minute quirks. $49 on Stripe is a booking fee for a <a href="../teardown-sample.html">Minute Teardown</a> — not a software seat. Billshot itself has no Stripe.</p>
+        <p class="fine-print">The Actions Bill Memo is free — the same framing on one page a manager can forward, with blanks for org, week, and what to cut. The cheat sheet is free. <a href="https://buy.stripe.com/eVq5kE8As2DD9yk9GL0co04">Tip if it saved you money.</a> Optional supporters: memo <a href="https://buy.stripe.com/8x29AUcQIdih25S6uz0co06">$0.99</a>, sheet <a href="https://buy.stripe.com/28E28s03W7XXh0MbOT0co01">$0.99</a>. $49 on Stripe is a booking fee for a <a href="../teardown-sample.html">Minute Teardown</a> — not a software seat. Billshot itself has no Stripe.</p>
       </div>
     </section>
   </main>
@@ -227,151 +229,7 @@
   </footer>
   <script src="../site.js"></script>
   <script src="billshot.js"></script>
-  <script>
-(function () {
-  var report = document.getElementById("report");
-  var linux = document.getElementById("manual-linux");
-  var windows = document.getElementById("manual-windows");
-  var macos = document.getElementById("manual-macos");
-  var total = document.getElementById("manual-total");
-  var out = document.getElementById("billshot-out");
-  var shot = document.getElementById("shot");
-  var drop = document.getElementById("shot-drop");
-  var preview = document.getElementById("shot-preview");
-  var previewImg = document.getElementById("shot-img");
-  var previewUrl = "";
+  <script src="billshot-page.js"></script>
 
-  function setText(id, value) {
-    var el = document.getElementById(id);
-    if (el) el.textContent = value;
-  }
-
-  function manualValues() {
-    return {
-      linux: linux.value,
-      windows: windows.value,
-      macos: macos.value,
-      total: total.value
-    };
-  }
-
-  function render() {
-    var result = window.Billshot.parse(report.value, manualValues());
-    if (out) out.classList.toggle("is-invalid", result.empty);
-
-    setText("out-title", result.empty ? "Paste a report" : result.driver.title);
-    setText("out-sub", result.empty
-      ? "Load the sample to see a mixed-OS month."
-      : result.totals.minutes + " rounded min · " + result.totals.included + " included min · " + window.Billshot.money4(result.totals.dollars) + " list");
-    setText("out-driver", result.driver.body);
-    setText("out-round-title", result.rounding.title);
-    setText("out-round-body", result.rounding.body);
-    setText("out-mult-title", result.multipliers.title);
-    setText("out-mult-body", result.multipliers.body);
-    setText("out-minutes", result.empty ? "—" : window.Billshot.formatMinutes(result.totals.minutes));
-    setText("out-included", result.empty ? "—" : window.Billshot.formatMinutes(result.totals.included));
-    setText("out-dollars", result.empty ? "—" : window.Billshot.money4(result.totals.dollars));
-    setText("out-net", result.empty ? "—" : (result.totals.net > 0 ? window.Billshot.money4(result.totals.net) : (result.reported != null ? window.Billshot.money4(result.reported) : "—")));
-    setText("out-notes", result.notes.join(" "));
-
-    var body = document.getElementById("os-body");
-    if (body) {
-      body.innerHTML = ["linux", "windows", "macos"].map(function (key) {
-        var rate = result.rates[key];
-        var row = result.os[key];
-        var cls = key === "macos" ? " class=\"macos\"" : "";
-        if (result.empty) {
-          return "<tr" + cls + "><th scope=\"row\">" + rate.label + " " + rate.multiplier + "×</th><td class=\"num\">—</td><td class=\"num\">—</td><td class=\"num\">—</td></tr>";
-        }
-        return "<tr" + cls + "><th scope=\"row\">" + rate.label + " " + rate.multiplier + "×</th><td class=\"num\">" + window.Billshot.formatMinutes(row.minutes) + "</td><td class=\"num\">" + window.Billshot.formatMinutes(row.included) + "</td><td class=\"num\">" + window.Billshot.money4(row.dollars) + "</td></tr>";
-      }).join("");
-    }
-
-    var flowWrap = document.getElementById("flow-wrap");
-    var flowBody = document.getElementById("flow-body");
-    if (flowWrap && flowBody) {
-      if (!result.workflows.length) {
-        flowWrap.hidden = true;
-        flowBody.innerHTML = "";
-      } else {
-        flowWrap.hidden = false;
-        flowBody.innerHTML = result.workflows.map(function (row) {
-          return "<tr><th scope=\"row\">" + escapeHtml(row.label) + "</th><td class=\"num\">" + window.Billshot.formatMinutes(row.minutes) + "</td><td class=\"num\">" + window.Billshot.formatMinutes(row.included) + "</td><td class=\"num\">" + window.Billshot.money4(row.dollars) + "</td></tr>";
-        }).join("");
-      }
-    }
-  }
-
-  function escapeHtml(value) {
-    return String(value).replace(/[&<>"']/g, function (ch) {
-      return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" })[ch];
-    });
-  }
-
-  function showPreview(file) {
-    if (!file || !file.type || file.type.indexOf("image/") !== 0) return;
-    if (previewUrl) URL.revokeObjectURL(previewUrl);
-    previewUrl = URL.createObjectURL(file);
-    previewImg.src = previewUrl;
-    preview.classList.remove("is-hidden");
-    document.getElementById("shot-copy").textContent = file.name + " — preview only. Type the minutes you can read.";
-    document.getElementById("manual-fields").scrollIntoView({ block: "nearest" });
-  }
-
-  document.getElementById("load-sample").addEventListener("click", function () {
-    report.value = window.Billshot.SAMPLE;
-    render();
-    out.scrollIntoView({ block: "nearest" });
-  });
-
-  document.getElementById("clear-report").addEventListener("click", function () {
-    report.value = "";
-    linux.value = "";
-    windows.value = "";
-    macos.value = "";
-    total.value = "";
-    if (previewUrl) URL.revokeObjectURL(previewUrl);
-    previewUrl = "";
-    previewImg.removeAttribute("src");
-    preview.classList.add("is-hidden");
-    shot.value = "";
-    document.getElementById("shot-copy").textContent = "Drop a billing screenshot, or choose a file. Preview only — this page does not read pixels. Type the minutes you can see.";
-    render();
-  });
-
-  document.getElementById("billshot-form").addEventListener("input", render);
-  document.getElementById("billshot-form").addEventListener("submit", function (event) {
-    event.preventDefault();
-    render();
-  });
-
-  shot.addEventListener("change", function () {
-    if (shot.files && shot.files[0]) showPreview(shot.files[0]);
-  });
-
-  ["dragenter", "dragover"].forEach(function (name) {
-    drop.addEventListener(name, function (event) {
-      event.preventDefault();
-      drop.classList.add("is-over");
-    });
-  });
-  ["dragleave", "drop"].forEach(function (name) {
-    drop.addEventListener(name, function (event) {
-      event.preventDefault();
-      drop.classList.remove("is-over");
-    });
-  });
-  drop.addEventListener("drop", function (event) {
-    var file = event.dataTransfer && event.dataTransfer.files && event.dataTransfer.files[0];
-    if (file) showPreview(file);
-  });
-
-  if (/(?:[?&#]sample(?:[=&#]|$))/.test(window.location.href)) {
-    report.value = window.Billshot.SAMPLE;
-  }
-
-  render();
-})();
-  </script>
 </body>
 </html>

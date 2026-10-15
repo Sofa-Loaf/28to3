@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; frame-src 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Naughty or Nice Scanner — 28to3.me</title>
   <meta name="description" content="A pretend Christmas thumbprint scanner for kids. Press and hold the glowing pad. Works offline. Nothing is collected.">
@@ -229,7 +231,6 @@
 
   <footer class="credit">
     <a href="../index.html">28to3.me</a>
-    <a href="https://buy.stripe.com/eVq5kE8As2DD9yk9GL0co04">Tip jar</a>
   </footer>
 
   <dialog id="parents" aria-labelledby="parents-title">
@@ -258,6 +259,7 @@
         <input id="toy-3" type="text" maxlength="40" autocomplete="off" spellcheck="false" placeholder="One more toy">
       </label>
     </fieldset>
+    <p class="parents-tip">Optional, for grown-ups. <a href="https://buy.stripe.com/eVq5kE8As2DD9yk9GL0co04" rel="noopener noreferrer">Tip jar</a></p>
     <button id="done" type="button">Done</button>
   </dialog>
 
