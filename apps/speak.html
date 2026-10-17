@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="referrer" content="no-referrer">
+  <meta name="theme-color" content="#000000">
+  <title>Speak — 28to3.me</title>
+  <meta name="description" content="Large-type text to speech for someone who cannot talk. Works offline. Nothing is collected.">
+  <link rel="canonical" href="https://28to3.me/apps/speak.html">
+  <link rel="icon" href="speak-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="speak-192.png">
+  <link rel="manifest" href="speak.webmanifest">
+  <link rel="stylesheet" href="speak.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <p class="eyebrow">28to3.me</p>
+      <h1>Speak</h1>
+      <p class="lede">Tap a phrase or type. This phone says it out loud.</p>
+    </header>
+
+    <p class="note">If you hear nothing, turn up media volume and tap Test.</p>
+    <p id="no-speech" class="warn" hidden>Speech is not available in this browser. You can still type and use Show text so someone can read the screen.</p>
+
+    <div class="layout">
+      <section class="composer" aria-label="Type a message">
+        <label class="field" for="text">Message</label>
+        <textarea id="text" rows="4" placeholder="Type what you want to say" autocomplete="off" autocapitalize="sentences"></textarea>
+        <p id="live-banner" class="live-banner" hidden></p>
+        <div class="speak-row">
+          <button id="speak" class="speak" type="button">SPEAK</button>
+          <button id="stop" class="stop" type="button">STOP</button>
+        </div>
+        <button id="show-text" class="ghost" type="button">Show text</button>
+        <p id="status" class="status" role="status" aria-live="polite"></p>
+      </section>
+
+      <section class="phrases" aria-labelledby="phrases-title">
+        <div class="section-head">
+          <h2 id="phrases-title">Quick phrases</h2>
+          <button id="edit-toggle" type="button" aria-pressed="false">Edit</button>
+        </div>
+        <div id="phrase-grid" class="phrase-grid"></div>
+        <div id="phrase-editor" class="editor" hidden>
+          <div class="add-row">
+            <label class="field" for="new-phrase">New phrase</label>
+            <input id="new-phrase" type="text" maxlength="160" autocomplete="off" autocapitalize="sentences" placeholder="Add your own">
+            <button id="add-phrase" type="button">Add</button>
+          </div>
+          <ul id="phrase-list" class="edit-list"></ul>
+          <button id="reset-phrases" class="ghost" type="button">Reset to defaults</button>
+        </div>
+      </section>
+
+      <section class="history" aria-labelledby="history-title">
+        <div class="section-head">
+          <h2 id="history-title">History</h2>
+          <button id="clear-history" type="button">Clear</button>
+        </div>
+        <p id="history-empty" class="empty">Nothing spoken yet.</p>
+        <ul id="history-list" class="history-list"></ul>
+      </section>
+
+      <section class="settings" aria-labelledby="settings-title">
+        <h2 id="settings-title">Settings</h2>
+        <label class="field" for="voice">Voice</label>
+        <select id="voice">
+          <option value="">Default</option>
+        </select>
+        <label class="slider" for="rate">
+          <span>Speed <span id="rate-value">1.0</span></span>
+          <input id="rate" type="range" min="0.5" max="1.5" step="0.1" value="1">
+        </label>
+        <label class="slider" for="pitch">
+          <span>Pitch <span id="pitch-value">1.0</span></span>
+          <input id="pitch" type="range" min="0.5" max="2" step="0.1" value="1">
+        </label>
+        <label class="check" for="show-when-speaking">
+          <input id="show-when-speaking" type="checkbox">
+          <span>Show text when speaking</span>
+        </label>
+        <button id="test" type="button">Test</button>
+      </section>
+    </div>
+
+  </div>
+
+  <footer class="site-footer">
+    <div class="wrap footer-row">
+      <p>© 2026 28to3.me. Speak stays on this phone. Nothing is uploaded.</p>
+      <div class="footer-links">
+        <a href="../index.html">Home</a>
+        <a href="../index.html#apps">Web Apps</a>
+        <a href="../about.html">About</a>
+        <a href="../privacy.html">Privacy</a>
+        <a href="../terms.html">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <button id="text-board" class="board" type="button" hidden>
+    <span id="board-text" class="board-text"></span>
+    <span class="board-hint">Tap to close</span>
+  </button>
+
+  <script src="speak.js"></script>
+</body>
+</html>
