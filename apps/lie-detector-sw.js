@@ -1,6 +1,6 @@
 /* Caches only Lie Detector Scanner files. Other site pages are not controlled:
    this worker is registered with scope lie-detector.html. */
-var CACHE = "lie-detector-v1";
+var CACHE = "lie-detector-v2";
 var ASSETS = [
   "lie-detector.html",
   "lie-detector.css",
@@ -45,6 +45,23 @@ function isToyAsset(url) {
     /\/lie-detector\/[^/]+$/.test(url.pathname);
 }
 
+function isHtmlNavigation(request, url) {
+  return request.mode === "navigate" ||
+    request.destination === "document" ||
+    /\.html$/.test(url.pathname);
+}
+
+function putInCache(request, response) {
+  if (!response || !response.ok) return;
+  var copy = response.clone();
+  var stored = request.mode === "navigate"
+    ? new Request(request.url, { method: "GET" })
+    : request;
+  caches.open(CACHE).then(function (cache) {
+    return cache.put(stored, copy);
+  }).catch(function () {});
+}
+
 self.addEventListener("fetch", function (event) {
   if (event.request.method !== "GET") return;
   var url;
@@ -55,15 +72,33 @@ self.addEventListener("fetch", function (event) {
   }
   if (!isToyAsset(url)) return;
 
+  if (isHtmlNavigation(event.request, url)) {
+    event.respondWith(
+      fetch(event.request).then(function (response) {
+        if (response && response.ok) {
+          putInCache(event.request, response);
+          return response;
+        }
+        return caches.match(event.request, { ignoreSearch: true }).then(function (cached) {
+          return cached || response;
+        });
+      }).catch(function () {
+        return caches.match(event.request, { ignoreSearch: true }).then(function (cached) {
+          if (cached) return cached;
+          return new Response("Offline", {
+            status: 503,
+            headers: { "Content-Type": "text/plain; charset=utf-8" }
+          });
+        });
+      })
+    );
+    return;
+  }
+
   event.respondWith(
     caches.match(event.request, { ignoreSearch: true }).then(function (cached) {
       var network = fetch(event.request).then(function (response) {
-        if (response && response.ok) {
-          var copy = response.clone();
-          caches.open(CACHE).then(function (cache) {
-            cache.put(event.request, copy);
-          });
-        }
+        putInCache(event.request, response);
         return response;
       }).catch(function () {
         return cached;
