@@ -107,7 +107,7 @@
 
     listEl.innerHTML = items.map(function (item, index) {
       var thumb = item.previewUrl
-        ? "<img class=\"heic-thumb\" alt=\"\" src=\"" + item.previewUrl + "\">"
+        ? "<img class=\"heic-thumb\" alt=\"\" src=\"" + escapeHtml(item.previewUrl) + "\">"
         : "<div class=\"heic-thumb is-empty\">" + (item.error ? "Couldn’t convert" : "Waiting") + "</div>";
       var meta = item.error
         ? item.error

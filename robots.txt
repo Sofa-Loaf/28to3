@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://sofa-loaf.github.io/28to3/sitemap.xml
+Sitemap: https://28to3.me/sitemap.xml
