@@ -39,8 +39,8 @@ The GitHub org **Sofa-Loaf** appears only in repository URLs and the Action inst
 
 | URL | Status |
 | --- | --- |
-| https://sofa-loaf.github.io/28to3/ | GitHub Pages (this repo) |
-| https://28to3.me | Custom domain — **DNS / Cloudflare out of scope** (ops sets records separately) |
+| https://sofa-loaf.github.io/28to3/ | GitHub Pages origin. It redirects to https://28to3.me/ |
+| https://28to3.me | Public site. Canonical and Open Graph URLs use this host |
 
 ## Pages
 
